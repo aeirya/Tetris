@@ -1,0 +1,22 @@
+GAME DESIGN:
+tetrimino rotation:
+https://strategywiki.org/wiki/Tetris/Rotation_systems#Nintendo_rotation_syste
+https://gamedev.stackexchange.com/questions/17974/how-to-rotate-blocks-in-tetris
+
+FRAMERATE LOCK:
+https://stackoverflow.com/questions/771206/how-do-i-cap-my-framerate-at-60-fps-in-java
+https://www.geeksforgeeks.org/synchronized-in-java/
+https://gafferongames.com/post/fix_your_timestep/
+
+https://howtodoinjava.com/java/multi-threading/wait-notify-and-notifyall-methods/
+
+SWING:
+event driven programming:
+https://www.cs.helsinki.fi/u/vihavain/k07/Java/slides/Java_9.pdf
+https://study.com/academy/lesson/event-driven-programming-in-java-definition-components.html
+
+DEBUGGING:
+https://www.journaldev.com/12850/java-9-private-methods-interfaces
+http://tutorials.jenkov.com/java/interfaces.html
+
+
