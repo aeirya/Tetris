@@ -14,9 +14,38 @@ SWING:
 event driven programming:
 https://www.cs.helsinki.fi/u/vihavain/k07/Java/slides/Java_9.pdf
 https://study.com/academy/lesson/event-driven-programming-in-java-definition-components.html
+invoke later:
+https://stackoverflow.com/questions/22534356/java-awt-eventqueue-invokelater-explained
+https://www.codota.com/code/java/methods/java.awt.EventQueue/invokeLater
+
+multithreading?
+https://www.geeksforgeeks.org/swingworker-in-java/
+https://www.reddit.com/r/gamedev/comments/gtnvi/how_to_multithreading_a_java_game/
+https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html
+http://www.java-gaming.org/index.php/topic,32465
+https://dzone.com/articles/multi-threading-java-swing
+
+waiting:
+https://stackoverflow.com/questions/4912165/whats-the-best-alternative-to-wait-notify-for-low-level-synchronization
+https://howtodoinjava.com/java/multi-threading/how-to-use-locks-in-java-java-util-concurrent-locks-lock-tutorial-and-example/
+http://tutorials.jenkov.com/java-concurrency/locks.htm
+l
+swing worker:
+https://stackoverflow.com/questions/11897647/should-i-use-swingutilities-invokelater-inside-of-swingworker-doinbackground
+https://www.oracle.com/technical-resources/articles/javase/swingworker.html
+https://kodejava.org/how-do-i-use-swingworker-to-perform-background-tasks/
+https://stackabuse.com/how-to-use-threads-in-java-swing/
+
+lambda expressions:
+https://stackoverflow.com/questions/4685563/how-to-pass-a-function-as-a-parameter-in-java
+https://techndeck.com/how-to-pass-function-as-a-parameter-in-a-method-in-java-8/
+https://www.informit.com/articles/article.aspx?p=2171751&seqNum=3
 
 DEBUGGING:
 https://www.journaldev.com/12850/java-9-private-methods-interfaces
 http://tutorials.jenkov.com/java/interfaces.html
 
+
+stupid:
+https://www.javatpoint.com/java-list
 
