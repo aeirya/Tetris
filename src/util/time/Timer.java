@@ -24,6 +24,10 @@ public class Timer {
         tm.queue(function);
     }
 
+    public void flush() {
+        tm.flush();
+    }
+
     private long getTime() {
         return System.currentTimeMillis();
     }

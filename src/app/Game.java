@@ -25,8 +25,9 @@ public class Game {
     
     // runs on a loop by the tetris class
     public void update() {
+        util.log.GameLogger.log("looping");
         timer.queue(gameGraphics::redraw);
+        timer.flush();
         timer.holdOn();
-        Tetris.quitGame();
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 
-public class TaskManagerWorker extends SwingWorker<Long,Runnable>{
+public class TaskManagerWorker extends SwingWorker<Timer,Runnable>{
 
     Timer timer;
     List<Runnable> tasks;
@@ -17,12 +17,12 @@ public class TaskManagerWorker extends SwingWorker<Long,Runnable>{
     }
 
     @Override
-    protected Long doInBackground() throws Exception {
+    protected Timer doInBackground() throws Exception {
         timer = new Timer();
         for (Runnable task : tasks) {
             publish(task);
         }
-        return timer.delta();
+        return timer;
     }
     
     @Override

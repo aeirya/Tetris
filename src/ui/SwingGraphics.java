@@ -4,7 +4,7 @@ public class SwingGraphics implements IGameGraphics {
 
     @Override
     public void paint() {
-        util.log.GameLogger.log("Painting");
+        // util.log.GameLogger.log("Painting");
     }
 
     private void doSomeProcess() {

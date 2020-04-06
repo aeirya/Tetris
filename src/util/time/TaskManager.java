@@ -11,25 +11,22 @@ public class TaskManager {
 
     private final List<Runnable> tasks = new ArrayList<>();
     private boolean isWorkerIdle = true;
-    private long queueTime = 0;
-
-    private void queue(Runnable function, boolean silent) {
-        addTask(function);
-        if (!silent) wake();      
-    }
+    private Timer workerTimer;
 
     public void queue(Runnable function) {
-        queue(function,false);
+        addTask(function);
     }
 
     private void addTask(Runnable function) {
         tasks.add(function);
     }
 
+    public void flush() {
+        wake();
+    }
+
     public long getRunningTime() {
-        long q = queueTime;
-        queueTime = 0;
-        return q;
+        return workerTimer.delta();
     }
 
     private void wake() {
@@ -39,11 +36,10 @@ public class TaskManager {
     }
 
     private void executeTasks() {
-        final SwingWorker<Long, Runnable> worker = new TaskManagerWorker(tasks, this::tmwOnDone);
+        final SwingWorker<Timer, Runnable> worker = new TaskManagerWorker(tasks, this::tmwOnDone);
         worker.execute();
-
         try {
-            queueTime += (long) worker.get();
+            workerTimer = worker.get();
         } catch (InterruptedException | ExecutionException e) {
             util.log.GameLogger.interrupted();
             Thread.currentThread().interrupt();
@@ -55,5 +51,4 @@ public class TaskManager {
         isWorkerIdle = true;
         wake();
     }
-    
 }
