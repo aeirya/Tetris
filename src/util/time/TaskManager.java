@@ -28,9 +28,6 @@ public class TaskManager {
     public void backgroundProcess(Runnable func) {
         final NormalWorker worker = new NormalWorker(func);
         worker.execute();
-        while (!worker.isDone()) {
-            //
-        }
     }
 
     public long getRunningTime() {

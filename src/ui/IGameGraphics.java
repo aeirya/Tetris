@@ -15,8 +15,10 @@ public interface IGameGraphics {
     default void setup(GameSettings settings) {
         Dimension screensize = settings.getScreenSize();
         setupFrame(screensize);
+        setupLayoutManager(screensize);
     }
 
+    void setupLayoutManager(Dimension size);
     void setupFrame(Dimension size);
     void paint();
     void refresh();

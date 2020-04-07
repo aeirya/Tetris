@@ -15,6 +15,7 @@ public class SwingGraphics implements IGameGraphics {
 
     private final JFrame frame = new JFrame();
     private final JPanel mainPanel = new JPanel();
+    private Architect arch;
 
     @Override
     public void paint() {
@@ -37,8 +38,11 @@ public class SwingGraphics implements IGameGraphics {
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainPanel.setBackground(new Color(20,20,20));
-        mainPanel.setLayout(new GridLayout(3,2));
         mainPanel.add(new JButton("HI"));
         frame.setVisible(true);
     }
+
+    public void setupLayoutManager(Dimension size) {
+        arch = new Architect(size);
+    }    
 }

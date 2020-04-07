@@ -15,13 +15,35 @@ import java.util.Properties;
 import util.time.Timer;
 
 public class GameSettings {
+
+    static final String PATH_TO_SETTINGS = "game.settings";
     final String[] propertyNames = { "user name", "screen size", "background color" };
     List<String> propertyVariables = new LinkedList<>();
     Properties properties = new Properties();
-    static final String PATH_TO_SETTINGS = "game.settings";
+    Dimension screenSize;
 
     public GameSettings() {
-        new Timer().meteredStart(this::loadGameSettings);
+        final Timer timer = new Timer();
+        timer.backgroundProcess(this::getReady);
+    }
+
+    private void getReady() {
+        loadGameSettings();
+        applyGameSettings();
+    }
+
+    private Dimension readScreenSize() {
+        final String[] size = properties.getProperty("screen size").split("x");
+        return new Dimension(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
+    }
+
+    public Dimension getScreenSize() {
+        return this.screenSize;
+    }
+
+    private void applyGameSettings() {
+        screenSize = readScreenSize();
+        //read username, and background color
     }
 
     private void loadGameSettings() {
@@ -39,11 +61,6 @@ public class GameSettings {
         } catch (final IOException e) {
             util.log.GameLogger.log("IOException");
         }
-    }
-
-    public Dimension getScreenSize() {
-        final String[] size = properties.getProperty("screen size").split("x");
-        return new Dimension(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
     }
 
     private void saveGameSettings() {

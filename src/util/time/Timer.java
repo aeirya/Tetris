@@ -6,6 +6,8 @@ public class Timer {
     
     final TaskManager tm = new TaskManager();
 
+	public Object timer;
+
     public Timer() {
         tick();
     }
@@ -30,7 +32,7 @@ public class Timer {
         flush();
     }
 
-    public void waitFor(Runnable function) {
+    public void backgroundProcess(Runnable function) {
         tm.backgroundProcess(function);
     }
 
