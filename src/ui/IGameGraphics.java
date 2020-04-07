@@ -8,17 +8,18 @@ public interface IGameGraphics {
 
     default void redraw() {
         paint();
+        refresh();
         onDone();
     }
 
     default void setup(GameSettings settings) {
         Dimension screensize = settings.getScreenSize();
-        setupFrame(screensize);        
+        setupFrame(screensize);
     }
 
     void setupFrame(Dimension size);
-
     void paint();
+    void refresh();
 
     default void onDone() {
         GameTimer.getInstance().resume();

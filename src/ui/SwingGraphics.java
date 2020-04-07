@@ -1,5 +1,6 @@
 package ui;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -7,15 +8,25 @@ import javax.swing.WindowConstants;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
 
 public class SwingGraphics implements IGameGraphics {
 
     private final JFrame frame = new JFrame();
-    private final JPanel panel = new JPanel();
+    private final JPanel mainPanel = new JPanel();
 
     @Override
     public void paint() {
-        //
+        System.out.println("paint :p");
+        for (int i=0; i<2; i++) {
+            // mainPanel.add(new JButton(String.valueOf(i)));
+            mainPanel.add(new JPanel());
+        }
+    }
+    
+    public void refresh() {
+        mainPanel.validate();
     }
 
     //creates the window, adds the main panel to it.
@@ -23,10 +34,11 @@ public class SwingGraphics implements IGameGraphics {
         frame.setTitle("Tetris ^v^");
         frame.setSize(size);
         frame.setLocationRelativeTo(null);
-        panel.setBackground(new Color(20,20,20));
-        frame.setLayout(new BorderLayout());
-        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mainPanel.setBackground(new Color(20,20,20));
+        mainPanel.setLayout(new GridLayout(3,2));
+        mainPanel.add(new JButton("HI"));
         frame.setVisible(true);
     }
 }

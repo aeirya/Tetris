@@ -1,5 +1,9 @@
 package models.tetriminos;
 
-public class Tetrimino {
+import models.GameObject;
 
+public class Tetrimino  {
+    GameObject body;
+    // Shape shape;
+    
 }
