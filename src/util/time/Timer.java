@@ -24,6 +24,16 @@ public class Timer {
         tm.queue(function);
     }
 
+    /** Queue with flush */
+    public void autoQueue(Runnable function) {
+        queue(function);
+        flush();
+    }
+
+    public void waitFor(Runnable function) {
+        tm.backgroundProcess(function);
+    }
+
     public void flush() {
         tm.flush();
     }

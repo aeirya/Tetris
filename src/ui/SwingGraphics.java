@@ -3,17 +3,15 @@ package ui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class SwingGraphics implements IGameGraphics {
 
     private final JFrame frame = new JFrame();
     private final JPanel panel = new JPanel();
-    @Override
-    public void setup() {
-        setupFrame();
-    }
 
     @Override
     public void paint() {
@@ -21,9 +19,9 @@ public class SwingGraphics implements IGameGraphics {
     }
 
     //creates the window, adds the main panel to it.
-    private void setupFrame() {
+    public void setupFrame(Dimension size) {
         frame.setTitle("Tetris ^v^");
-        frame.setSize(800,600);
+        frame.setSize(size);
         frame.setLocationRelativeTo(null);
         panel.setBackground(new Color(20,20,20));
         frame.setLayout(new BorderLayout());

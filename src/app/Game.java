@@ -12,6 +12,7 @@ public class Game {
     private static final Game instance = new Game();
     private final IGameGraphics gameGraphics = new SwingGraphics();
     private final GameTimer timer = GameTimer.getInstance();
+    private final GameSettings settings = new GameSettings();
 
     private Game() {}
 
@@ -20,7 +21,7 @@ public class Game {
     }
 
     public void start() {
-        gameGraphics.setup();
+        gameGraphics.setup(settings);
     }
     
     // runs on a loop by the tetris class

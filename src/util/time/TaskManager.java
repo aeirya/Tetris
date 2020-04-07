@@ -25,6 +25,14 @@ public class TaskManager {
         wake();
     }
 
+    public void backgroundProcess(Runnable func) {
+        final NormalWorker worker = new NormalWorker(func);
+        worker.execute();
+        while (!worker.isDone()) {
+            //
+        }
+    }
+
     public long getRunningTime() {
         return workerTimer.delta();
     }
@@ -36,7 +44,7 @@ public class TaskManager {
     }
 
     private void executeTasks() {
-        final SwingWorker<Timer, Runnable> worker = new TaskManagerWorker(tasks, this::tmwOnDone);
+        final SwingWorker<Timer, Runnable> worker = new QueueWorker(tasks, this::tmwOnDone);
         worker.execute();
         try {
             workerTimer = worker.get();

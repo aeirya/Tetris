@@ -4,14 +4,14 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 
-public class TaskManagerWorker extends SwingWorker<Timer,Runnable>{
+public class QueueWorker extends SwingWorker<Timer,Runnable>{
 
     Timer timer;
     List<Runnable> tasks;
     Runnable onDone;
     long counter = 0;
 
-    public TaskManagerWorker(List<Runnable> tasks, Runnable onDone) {
+    public QueueWorker(List<Runnable> tasks, Runnable onDone) {
         this.tasks = tasks;
         this.onDone = onDone;
     }
