@@ -30,15 +30,15 @@ public class GameSettings {
         try {
             final InputStream inStream = new FileInputStream(PATH_TO_SETTINGS);
             properties.load(inStream);
+            for( String name : propertyNames) {
+                propertyVariables.add(properties.getProperty(name));
+            }
         } catch (FileNotFoundException e) {
             final String[] s = {"Player", "1368x720", "20:20:20"};
             propertyVariables = Arrays.asList(s);
             saveGameSettings();
         } catch (IOException e) {
             util.log.GameLogger.log("IOException");
-        }
-            for( String name : propertyNames) {
-            propertyVariables.add(properties.getProperty(name));
         }
     }
     
