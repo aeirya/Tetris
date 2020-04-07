@@ -20,7 +20,7 @@ public class Game {
     }
 
     public void start() {
-        //Load some stuff maybe?
+        gameGraphics.setup();
     }
     
     // runs on a loop by the tetris class

@@ -9,6 +9,8 @@ public interface IGameGraphics {
         onDone();
     }
 
+    void setup();
+
     void paint();
 
     default void onDone() {

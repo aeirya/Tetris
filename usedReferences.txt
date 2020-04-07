@@ -49,3 +49,6 @@ http://tutorials.jenkov.com/java/interfaces.html
 stupid:
 https://www.javatpoint.com/java-list
 
+SAVING FILE:
+https://stackoverflow.com/questions/4017137/how-do-i-save-preference-user-settings-in-java
+

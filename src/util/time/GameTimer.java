@@ -3,7 +3,7 @@ package util.time;
 public class GameTimer {
     final Timer timer = new Timer();
     final Lock lock = new Lock();
-    static final long INTERVAL = 1000 / 60 * 10;
+    static final long INTERVAL = 1000 / 60 * 50;
     static final GameTimer instance = new GameTimer();
 
     private GameTimer() {
@@ -22,7 +22,6 @@ public class GameTimer {
     }
 
     private long calcWaitTime() {
-        util.log.GameLogger.log(String.valueOf(timer.tm.getRunningTime()));
         long l = INTERVAL - timer.tm.getRunningTime();
         return l > 0 ? l : 0;
     }
