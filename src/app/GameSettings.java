@@ -21,8 +21,6 @@ public class GameSettings {
     static final String PATH_TO_SETTINGS = "game.settings";
 
     public GameSettings() {
-        // new Timer().autoQueue(this::loadGameSettings);
-        new File(PATH_TO_SETTINGS).delete();
         new Timer().meteredStart(this::loadGameSettings);
     }
 
@@ -30,42 +28,45 @@ public class GameSettings {
         try {
             final InputStream inStream = new FileInputStream(PATH_TO_SETTINGS);
             properties.load(inStream);
-            for( String name : propertyNames) {
+            for( final String name : propertyNames) {
                 propertyVariables.add(properties.getProperty(name));
             }
-        } catch (FileNotFoundException e) {
-            final String[] s = {"Player", "1368x720", "20:20:20"};
+            inStream.close();
+        } catch (final FileNotFoundException e) {
+            final String[] s = { "Player", "600x800", "20:20:20" };
             propertyVariables = Arrays.asList(s);
             saveGameSettings();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             util.log.GameLogger.log("IOException");
         }
     }
-    
+
     public Dimension getScreenSize() {
-        String[] size = properties.getProperty("screen size").split("x");
+        final String[] size = properties.getProperty("screen size").split("x");
         return new Dimension(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
     }
 
     private void saveGameSettings() {
-        for(int i=0; i<propertyNames.length ;i++) {
-            properties.setProperty( propertyNames[i], propertyVariables.get(i)); 
+        for (int i = 0; i < propertyNames.length; i++) {
+            properties.setProperty(propertyNames[i], propertyVariables.get(i));
         }
         final File file = new File(PATH_TO_SETTINGS);
-        if(!file.exists()) {
+        if (!file.exists()) {
             try {
                 final boolean result = file.createNewFile();
-                if(!result) util.log.GameLogger.log("Can't Create Settings File");
-            } catch (IOException e) {
+                if (!result)
+                    util.log.GameLogger.log("Can't Create Settings File");
+            } catch (final IOException e) {
                 ioError();
             }
         }
         try {
             final OutputStream out = new FileOutputStream(PATH_TO_SETTINGS);
             properties.store(out, "");
-        } catch (FileNotFoundException e) {
+            out.close();
+        } catch (final FileNotFoundException e) {
             //
-        } catch (IOException e) {
+        } catch (final IOException e) {
             ioError();
         }
     }

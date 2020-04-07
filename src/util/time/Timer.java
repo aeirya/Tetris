@@ -10,10 +10,10 @@ public class Timer {
         tick();
     }
 
-    /** Runs the function and returns the time cost
-     * @deprecated use queue instead
+    /** Runs the function and returns the time cost.
+     *  use queue instead
      */
-    @Deprecated(forRemoval = false)
+    // @Deprecated(forRemoval = false)
     public long meteredStart(Runnable function) {
         tick();
         function.run();
