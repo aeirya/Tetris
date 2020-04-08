@@ -24,6 +24,7 @@ https://www.reddit.com/r/gamedev/comments/gtnvi/how_to_multithreading_a_java_gam
 https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html
 http://www.java-gaming.org/index.php/topic,32465
 https://dzone.com/articles/multi-threading-java-swing
+http://www.learn4master.com/design-pattern/java-singleton-pattern
 
 waiting:
 https://stackoverflow.com/questions/4912165/whats-the-best-alternative-to-wait-notify-for-low-level-synchronization

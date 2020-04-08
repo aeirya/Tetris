@@ -15,8 +15,6 @@ public class SwingGraphics implements IGameGraphics {
 
     private final JFrame frame = new JFrame();
     private final JPanel mainPanel = new JPanel();
-    
-    private Architect arch;
 
     public void start() {
         frame.setVisible(true);
@@ -39,7 +37,7 @@ public class SwingGraphics implements IGameGraphics {
     }
 
     public void setupLayoutManager(Dimension size) {
-        arch = new Architect(size);
+        Architect.getInstance().updateNumbers(size);
         mainPanel.setLayout(new java.awt.BorderLayout());
         GamePanel gamePanel = new GamePanel();
         mainPanel.add(gamePanel, BorderLayout.CENTER);

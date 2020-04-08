@@ -9,14 +9,18 @@ import java.awt.Point;
 
 /** Calculates size of boxes and generates objects */
 public class Architect {
-    
-    static SizeManager sizes = new SizeManager();
 
-    public Architect(Dimension size) {
-        updateNumbers(size);
-    }  
+    private final SizeManager sizes = new SizeManager();
     
-    private void updateNumbers(Dimension size) {
+    private static class ArchitictHolder {
+        public static final Architect instance = new Architect();
+    }
+
+    public static Architect getInstance() {
+        return ArchitictHolder.instance;
+    }
+
+    public void updateNumbers(Dimension size) {
         sizes.calculate(size.width, size.height);
     }
     
@@ -45,10 +49,10 @@ public class Architect {
         }
     }
 
-    class Box implements Drawable {
+    public class Box implements Drawable {
 
         Point p = new Point(100,100);
-
+        
         public void draw(Graphics g) {
             g.setColor(new Color(200,30,30));
             int x = (int) p.getX();
