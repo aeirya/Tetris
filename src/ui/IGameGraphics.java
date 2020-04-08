@@ -16,8 +16,10 @@ public interface IGameGraphics {
         Dimension screensize = settings.getScreenSize();
         setupFrame(screensize);
         setupLayoutManager(screensize);
+        start();
     }
 
+    void start();
     void setupLayoutManager(Dimension size);
     void setupFrame(Dimension size);
     void paint();

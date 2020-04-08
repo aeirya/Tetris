@@ -1,6 +1,10 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+
+import javax.swing.JPanel;
+import java.awt.Graphics;
 
 /** Calculates size of boxes and generates objects */
 public class Architect {
@@ -15,11 +19,10 @@ public class Architect {
         mgr.calculate(size.width, size.height);
     }
     
-    /** Generate numbers needed */
-    public void calculate(int w, int h) {
-        // ?
+    public Box genBox() {
+        return new Box(); 
     }
-    
+
     class SizeManager {
         
         static final int NCOLUMNS = 12;
@@ -38,6 +41,22 @@ public class Architect {
 
         public Dimension getBoxDim() {
             return boxDimension;
+        }
+    }
+
+    class Box extends JPanel {
+
+        private static final long serialVersionUID = -8277876715945647393L;
+
+        public Box() {
+            this.setBackground(new Color(200,0,0));
+            this.setPreferredSize(mgr.boxDimension);
+       }
+
+        @Override
+        protected void printComponent(Graphics g) {
+            super.printComponent(g);
+        
         }
     }
 }

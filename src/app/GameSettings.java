@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
-import util.time.Timer;
 
 public class GameSettings {
 
@@ -23,8 +22,7 @@ public class GameSettings {
     Dimension screenSize;
 
     public GameSettings() {
-        final Timer timer = new Timer();
-        timer.backgroundProcess(this::getReady);
+        this.getReady();
     }
 
     private void getReady() {
