@@ -8,7 +8,6 @@ public interface IGameGraphics {
 
     default void redraw() {
         paint();
-        refresh();
         onDone();
     }
 
@@ -23,7 +22,6 @@ public interface IGameGraphics {
     void setupLayoutManager(Dimension size);
     void setupFrame(Dimension size);
     void paint();
-    void refresh();
 
     default void onDone() {
         GameTimer.getInstance().resume();

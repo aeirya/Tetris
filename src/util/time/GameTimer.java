@@ -3,7 +3,7 @@ package util.time;
 public class GameTimer {
     final Timer timer = new Timer();
     final Lock lock = new Lock();
-    static final long INTERVAL = 1000 / 60 * 50;
+    static final long INTERVAL = 1000 / 1;
     static final GameTimer instance = new GameTimer();
 
     private GameTimer() {

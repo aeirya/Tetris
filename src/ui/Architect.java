@@ -2,21 +2,22 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import models.Drawable;
 
-import javax.swing.JPanel;
 import java.awt.Graphics;
+import java.awt.Point;
 
 /** Calculates size of boxes and generates objects */
 public class Architect {
     
-    final SizeManager mgr = new SizeManager();
+    static SizeManager sizes = new SizeManager();
 
     public Architect(Dimension size) {
         updateNumbers(size);
     }  
     
     private void updateNumbers(Dimension size) {
-        mgr.calculate(size.width, size.height);
+        sizes.calculate(size.width, size.height);
     }
     
     public Box genBox() {
@@ -25,9 +26,9 @@ public class Architect {
 
     class SizeManager {
         
-        static final int NCOLUMNS = 12;
-        static final int NROWS = 21;
-        final Dimension boxDimension = new Dimension();
+        private static final int NCOLUMNS = 12;
+        private static final int NROWS = 21;
+        private final Dimension boxDimension = new Dimension();
 
         public void calculate(int sw, int sh) {
             boxDimension.setSize(calculateBoxSize(sw, sh));
@@ -44,19 +45,17 @@ public class Architect {
         }
     }
 
-    class Box extends JPanel {
+    class Box implements Drawable {
 
-        private static final long serialVersionUID = -8277876715945647393L;
+        Point p = new Point(100,100);
 
-        public Box() {
-            this.setBackground(new Color(200,0,0));
-            this.setPreferredSize(mgr.boxDimension);
-       }
-
-        @Override
-        protected void printComponent(Graphics g) {
-            super.printComponent(g);
-        
+        public void draw(Graphics g) {
+            g.setColor(new Color(200,30,30));
+            int x = (int) p.getX();
+            int y = (int) p.getY();
+            int width = (int) sizes.getBoxDim().getWidth();
+            int height = (int) sizes.getBoxDim().getHeight();
+            g.fillRect(x, y, width, height);
         }
     }
 }
