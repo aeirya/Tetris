@@ -40,8 +40,8 @@ public class SwingGraphics implements IGameGraphics {
         Architect.getInstance().updateNumbers(size);
         mainPanel.setLayout(new java.awt.BorderLayout());
         GamePanel gamePanel = new GamePanel();
-        mainPanel.add(gamePanel, BorderLayout.CENTER);
+        gamePanel.addToPanel(mainPanel, BorderLayout.CENTER);
         SidePanel sidePanel = new SidePanel();
-        mainPanel.add(sidePanel, BorderLayout.LINE_END);
+        sidePanel.addTo(mainPanel, BorderLayout.LINE_END);
     }
 }

@@ -24,8 +24,8 @@ public class Architect {
         sizes.calculate(size.width, size.height);
     }
     
-    public Box genBox() {
-        return new Box(); 
+    public Box genBox(int x, int y) {
+        return new Box(x,y); 
     }
 
     class SizeManager {
@@ -51,14 +51,20 @@ public class Architect {
 
     public class Box implements Drawable {
 
-        Point p = new Point(100,100);
+        private int x;
+        private int y;
+        private int width;
+        private int height;
+
+        public Box(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
         
         public void draw(Graphics g) {
+            width = (int) sizes.getBoxDim().getWidth();
+            height = (int) sizes.getBoxDim().getHeight();
             g.setColor(new Color(200,30,30));
-            int x = (int) p.getX();
-            int y = (int) p.getY();
-            int width = (int) sizes.getBoxDim().getWidth();
-            int height = (int) sizes.getBoxDim().getHeight();
             g.fillRect(x, y, width, height);
         }
     }

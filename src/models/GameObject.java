@@ -8,12 +8,21 @@ public class GameObject implements Fallable {
     public GameObject() {
         //
     }
+
+    private void move(int dx, int dy) {
+        x += dx;
+        y += dy;
+    }
     
     public void fall() {
-        y-=1;
+        move(0, 1);
     }
 
-    public void move() {
-        //
+    public void moveLeft() {
+        move(-1,0);
+    }
+
+    public void moveRight() {
+        move(1,0);
     }
 }

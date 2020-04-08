@@ -1,8 +1,12 @@
 package models.tetriminos;
 
+import models.Drawable;
 import models.GameObject;
+import models.Shape;
 
-public class Tetrimino  {
-    GameObject body;
-    // Shape shape;
-}
+// public interface Tetrimino extends Drawable {
+//     GameObject body;
+//     Shape shape;
+
+
+// }

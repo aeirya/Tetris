@@ -7,16 +7,14 @@ import javax.swing.JPanel;
 
 import ui.Architect;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends Panel {
 
     public GamePanel() {
-        setBackground(new Color(30,30,35));
+        setBackground(30,30,35);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Architect.getInstance().genBox().draw(g);
-    }
-
+	@Override
+	public void draw(Graphics g) {
+		
+	}
 }
