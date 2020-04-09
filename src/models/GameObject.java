@@ -1,28 +1,21 @@
 package models;
 
-public class GameObject implements Fallable {
+public class GameObject implements IGameObject {
 
-    int x=0;
-    int y=0;
+    private int x=0;
+    private int y=0;
+    private IGameObject[] kids = new GameObject[4];
 
-    public GameObject() {
-        //
+    public GameObject(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    private void move(int dx, int dy) {
+    public void move(int dx, int dy) {
         x += dx;
         y += dy;
-    }
-    
-    public void fall() {
-        move(0, 1);
-    }
-
-    public void moveLeft() {
-        move(-1,0);
-    }
-
-    public void moveRight() {
-        move(1,0);
+        for(IGameObject go : kids) {
+            go.move(dx, dy);
+        }
     }
 }

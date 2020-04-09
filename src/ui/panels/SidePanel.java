@@ -2,8 +2,6 @@ package ui.panels;
 
 import java.awt.Graphics;
 
-import javax.swing.JPanel;
-
 public class SidePanel extends Panel {
 
     public SidePanel() {
@@ -13,6 +11,6 @@ public class SidePanel extends Panel {
 
     @Override
     public void draw(Graphics g) {
-        
+        //
     }
 }

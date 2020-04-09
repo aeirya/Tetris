@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import models.Drawable;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
+
 import java.awt.Point;
 
 /** Calculates size of boxes and generates objects */
@@ -53,8 +56,6 @@ public class Architect {
 
         private int x;
         private int y;
-        private int width;
-        private int height;
 
         public Box(int x, int y) {
             this.x = x;
@@ -62,10 +63,19 @@ public class Architect {
         }
         
         public void draw(Graphics g) {
-            width = (int) sizes.getBoxDim().getWidth();
-            height = (int) sizes.getBoxDim().getHeight();
-            g.setColor(new Color(200,30,30));
+            Graphics2D g2 = (Graphics2D) g;
+            int width = (int) sizes.getBoxDim().getWidth();
+            int height = (int) sizes.getBoxDim().getHeight();
+            Color c = new Color(170,30,30);
+            g.setColor(c);
             g.fillRect(x, y, width, height);
+            g2.setStroke(new BasicStroke(3));
+            g2.setColor(c.brighter());
+            g2.drawLine(x, y, x+width, y);
+            g2.drawLine(x, y, x, y+height);
+            g2.setColor(c.darker());
+            g2.drawLine(x, y+height, x+width, y+height);
+            g2.drawLine(x+width, y, x+width, y+height);
         }
     }
 }

@@ -42,6 +42,6 @@ public class SwingGraphics implements IGameGraphics {
         GamePanel gamePanel = new GamePanel();
         gamePanel.addToPanel(mainPanel, BorderLayout.CENTER);
         SidePanel sidePanel = new SidePanel();
-        sidePanel.addTo(mainPanel, BorderLayout.LINE_END);
+        sidePanel.addToPanel(mainPanel, BorderLayout.LINE_END);
     }
 }

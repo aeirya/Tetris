@@ -5,9 +5,8 @@ import java.awt.Rectangle;
 
 import ui.Architect.Box;
 
-public class Shape {
+public class Shape implements IShape {
 
-    private Box[] boxes;
     protected Coordinate[] coordinates;
 
     public void rotate() {
