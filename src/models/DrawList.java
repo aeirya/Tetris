@@ -12,6 +12,10 @@ public class DrawList implements Drawable {
         list = new ArrayList<>();
     }
 
+    public DrawList(List<Drawable> list) {
+        this.list = list;
+    }
+
     public void add(Drawable item) {
         list.add(item);
     }
@@ -19,6 +23,12 @@ public class DrawList implements Drawable {
     public void add(Drawable[] list) {
         for (Drawable d : list) {
             add(d);
+        }
+    }
+
+    public void add(List<?> list) {
+        for (Object d : list) {
+            add((Drawable)d);
         }
     }
 

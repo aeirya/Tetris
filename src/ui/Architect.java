@@ -24,7 +24,7 @@ public class Architect {
     }
 
     public void updateNumbers(Dimension size) {
-        sizes.calculate(size.width, size.height);
+        sizes.calculate(size.width, (int) (0.97 * size.height));
     }
     
     public Box genBox(int x, int y) {
@@ -69,7 +69,7 @@ public class Architect {
             this(0,0);
         }
 
-        public Box(int x, int y, Color c) {
+        private Box(int x, int y, Color c) {
             super(x, y);
             this.c = c;
         }
@@ -112,7 +112,7 @@ public class Architect {
 
         @Override
         public IGameObject copy() {
-            return new Box(x, y);
+            return new Box(x, y, c);
         }
     }
 }

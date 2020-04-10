@@ -21,9 +21,6 @@ public class Shape implements IShape {
     /** It has the ability to rotate, and has a method for Shape, getting coordinates at the same time */
     protected static class ShapeCoordinate extends Coordinate {
 
-        private int x;
-        private int y;
-
         public ShapeCoordinate(int x, int y) {
             super(x,y);
         }

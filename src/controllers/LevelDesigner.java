@@ -23,8 +23,7 @@ public class LevelDesigner implements Drawable {
 
     public Box[] spawnWall() {
         List<Coordinate> cList = new ArrayList<>();
-        // Box sample = new Box(200,200,200);
-        Box sample = arch.genBox();
+        Box sample = arch.new Box(100, 100, 100);
         for (int i = 0; i < N_ROW; i++) {
             cList.add(new Coordinate(0,i));
             cList.add(new Coordinate(N_COL-1, i));

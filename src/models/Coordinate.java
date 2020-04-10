@@ -2,8 +2,8 @@ package models;
 
 public class Coordinate {
         
-    private int x = 0;
-    private int y = 0;
+    protected int x = 0;
+    protected int y = 0;
 
     public Coordinate() {
         this(0,0);

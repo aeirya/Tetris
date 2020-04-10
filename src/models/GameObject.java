@@ -21,8 +21,7 @@ public class GameObject implements IGameObject {
         x += dx;
         y += dy;
         if (kid!=null) {
-            System.out.println("movign the kid");
-            kid.move(x, y);
+            kid.move(dx, dy);
         }
     }
 
