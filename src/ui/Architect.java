@@ -35,10 +35,10 @@ public class Architect {
         return genBox(0,0);
     }
 
-    class SizeManager {
+    public static class SizeManager {
         
-        private static final int NCOLUMNS = 12;
-        private static final int NROWS = 21;
+        public static final int NCOLUMNS = 12;
+        public static final int NROWS = 21;
         private final Dimension boxDimension = new Dimension();
 
         public void calculate(int sw, int sh) {
@@ -67,6 +67,16 @@ public class Architect {
 
         public Box() {
             this(0,0);
+        }
+
+        public Box(int x, int y, Color c) {
+            super(x, y);
+            this.c = c;
+        }
+
+        public Box(int r, int g, int b) {
+            super(0,0);
+            this.c = new Color(r,g,b);
         }
         
         public void draw(Graphics g) {
