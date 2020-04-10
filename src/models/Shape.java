@@ -1,34 +1,21 @@
 package models;
 
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import models.tetriminos.Tetrimino;
-import ui.Architect.Box;
-
 public class Shape implements IShape {
 
     protected ShapeCoordinate[] coordinates;
-    private boolean isChanged  = true;
 
     public void rotate() {
         for (ShapeCoordinate c : coordinates) {
             c.rotate();
         }
-        isChanged = true;
     }
 
-    public Drawable[] applyShape(IGameObject object) {
-        if (isChanged) {
-            List<Drawable> result = new ArrayList<>();
-            for (Coordinate c : coordinates) {
-                object.copy().move(c);
-            }
-            isChanged = false;
+    public DrawList applyShape(IGameObject object) {
+        DrawList result = new DrawList();
+        for (Coordinate c : coordinates) {
+            result.add((Drawable)object.updatedCoordinates(c));
         }
+        return result;
     }
 
     /** Return's the i'th box */
@@ -66,5 +53,4 @@ public class Shape implements IShape {
             return "(" + x + "," + y + ")";
         }
     }
-
 }

@@ -31,6 +31,10 @@ public class Architect {
         return new Box(x,y); 
     }
 
+    public Box genBox() {
+        return genBox(0,0);
+    }
+
     class SizeManager {
         
         private static final int NCOLUMNS = 12;
@@ -56,6 +60,10 @@ public class Architect {
 
         public Box(int x, int y) {
             super(x,y);
+        }
+
+        public Box() {
+            this(0,0);
         }
         
         public void draw(Graphics g) {

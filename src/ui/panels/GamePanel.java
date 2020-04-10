@@ -1,24 +1,19 @@
 package ui.panels;
 
-import java.awt.Color;
 import java.awt.Graphics;
-
-import javax.swing.JPanel;
-
-import ui.Architect;
-import ui.Architect.Box;
+import models.TetriminoGenerator;
+import models.tetriminos.Tetrimino;
 
 public class GamePanel extends Panel {
 
-    private final Architect arch = Architect.getInstance();
-    Box box;
+    Tetrimino t;
 
     public GamePanel() {
         setBackground(30,30,35);
+        t = TetriminoGenerator.random(2,2);
     }
 
-	@Override
     public void draw(Graphics g) {
-        //
+        t.draw(g);
 	}
 }

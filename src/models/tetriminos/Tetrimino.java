@@ -1,44 +1,50 @@
 package models.tetriminos;
 
-import models.Coordinate;
+import models.DrawList;
 import models.Drawable;
 import models.GameObject;
 import models.IGameObject;
 import models.IShape;
-import ui.Architect.Box;;
-
 import java.awt.Graphics;
+import ui.Architect;
 
-public abstract class Tetrimino implements ITetrimono {
+public class Tetrimino implements IGameObject, Drawable {
     
     IGameObject body;
     IShape shape;
+    DrawList leonardoDaVinci;
 
-    protected Tetrimino() {
-        body.addComponents(objects);
+    public Tetrimino(IShape shape, int x, int y) {
+        this.shape = shape;
+        this.body = new GameObject(Architect.getInstance().genBox(), x, y);
+        update();
     }
 
-    private Box[] generatePixels() {
-        
+    private Tetrimino(IShape shape, IGameObject body) {
+        this.shape = shape;
+        this.body = body;
+        update();
     }
 
     public void rotate() {
         shape.rotate();
+        update();
     }
 
-    public void moveLeft() {
-        body.moveLeft();
+    public void move(int dx, int dy) {
+        body.move(dx, dy);
+        update();
     }
 
-    public void moveRight() {
-        body.moveRight();
-    }
-
-    public void fall() {
-        body.fall();
+    private void update() {
+        leonardoDaVinci = shape.applyShape(body);
     }
 
     public void draw(Graphics g) {
-        body.copy().move(c);
+        leonardoDaVinci.draw(g);
+    }
+
+    public IGameObject copy() {
+        return new Tetrimino(shape, body);
     }
 }

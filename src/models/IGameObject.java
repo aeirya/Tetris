@@ -4,8 +4,11 @@ public interface IGameObject {
     
     void move(int x, int y);
 
-    default void move(Coordinate c) {
-        move(c.getX(), c.getY());
+    /** Returns a clone of game object which has moved to the coordinate c */
+    default IGameObject updatedCoordinates(Coordinate c) {
+        IGameObject go = copy();
+        go.move(c.getX(), c.getY());
+        return go;
     }
 
     default void moveLeft() {
@@ -19,12 +22,6 @@ public interface IGameObject {
     default void fall() {
         move(0, 1);
     }
-
-    IGameObject[] getChildren();
-
-    void addComponents(IGameObject... objects);
-
-    void sumCoordinate(Coordinate c);
 
     IGameObject copy();
 }
