@@ -3,12 +3,12 @@ package ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import models.Drawable;
+import models.GameObject;
+import models.IGameObject;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.BasicStroke;
-
-import java.awt.Point;
 
 /** Calculates size of boxes and generates objects */
 public class Architect {
@@ -52,14 +52,10 @@ public class Architect {
         }
     }
 
-    public class Box implements Drawable {
-
-        private int x;
-        private int y;
+    public class Box extends GameObject implements Drawable {
 
         public Box(int x, int y) {
-            this.x = x;
-            this.y = y;
+            super(x,y);
         }
         
         public void draw(Graphics g) {
@@ -70,12 +66,17 @@ public class Architect {
             g.setColor(c);
             g.fillRect(x, y, width, height);
             g2.setStroke(new BasicStroke(3));
-            g2.setColor(c.brighter());
-            g2.drawLine(x, y, x+width, y);
-            g2.drawLine(x, y, x, y+height);
             g2.setColor(c.darker());
             g2.drawLine(x, y+height, x+width, y+height);
             g2.drawLine(x+width, y, x+width, y+height);
+            g2.setStroke(new BasicStroke(2));
+            g2.setColor(c.brighter());
+            g2.drawLine(x, y, x+width, y);
+            g2.drawLine(x, y, x, y+height);
+        }
+
+        public IGameObject copy() {
+            return new Box(x, y);
         }
     }
 }

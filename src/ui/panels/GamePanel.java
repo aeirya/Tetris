@@ -15,11 +15,10 @@ public class GamePanel extends Panel {
 
     public GamePanel() {
         setBackground(30,30,35);
-        box = arch.genBox(100,200);
     }
 
 	@Override
-public void draw(Graphics g) {
-        box.draw(g);
+    public void draw(Graphics g) {
+        //
 	}
 }
