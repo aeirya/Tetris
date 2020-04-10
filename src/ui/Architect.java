@@ -76,19 +76,28 @@ public class Architect {
             int y = this.y*height;
             g.setColor(c);
             g.fillRect(x, y, width, height);
-            drawBorders(x,y,width,height,g);
+            drawBorders(x+2, y+2, width-4, height-4, 2, g);
+            drawBorders(x,y,width,height, 2, g);
         }
         
-        private void drawBorders(int x, int y, int width, int height, Graphics g) {
+        private void drawBorders(int x, int y, int width, int height, int w, Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
-            g2.setStroke(new BasicStroke(3));
             g2.setColor(c.darker());
-            g2.drawLine(x, y+height, x+width, y+height);
-            g2.drawLine(x+width, y, x+width, y+height);
-            g2.setStroke(new BasicStroke(2));
+            drawVerticalLine(x+width-w, y, height, w, g2);
+            drawHorizonalLine(x, y+height-w, width, w, g2);
             g2.setColor(c.brighter());
-            g2.drawLine(x, y, x+width, y);
-            g2.drawLine(x, y, x, y+height);
+            drawHorizonalLine(x, y+w, width, w, g2);
+            drawVerticalLine(x+w, y, width, w, g2);
+        }
+        
+        private void drawVerticalLine(int x, int y, int length, int w, Graphics2D g) {
+            g.setStroke(new BasicStroke((w*2)));
+            g.drawLine(x, y+w, x, y-w+length);
+        }
+        
+        private void drawHorizonalLine(int x, int y, int length, int w, Graphics2D g) {
+            g.setStroke(new BasicStroke((w*2)));
+            g.drawLine(x+w, y, x+length-w, y);
         }
 
         @Override

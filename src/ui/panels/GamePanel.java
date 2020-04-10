@@ -15,7 +15,7 @@ public class GamePanel extends Panel {
     }
 
     public void draw(Graphics g) {
-        t.fall();
+        // t.fall();
         // t.moveRight();
         t.draw(g);
 	}
