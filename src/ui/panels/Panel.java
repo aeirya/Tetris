@@ -23,7 +23,7 @@ public abstract class Panel implements IPanel {
 
 	@Override
 	public void addToPanel(JPanel container, Object constraints) {
-		container.add(pane, constraints);
+        container.add(pane, constraints);
     }
     
     protected void setBackground(int r, int g, int b) {

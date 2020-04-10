@@ -16,6 +16,12 @@ public class DrawList implements Drawable {
         list.add(item);
     }
 
+    public void add(Drawable[] list) {
+        for (Drawable d : list) {
+            add(d);
+        }
+    }
+
     public void draw(Graphics g) {
         for (Drawable d : list) {
             d.draw(g);

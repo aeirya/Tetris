@@ -1,6 +1,7 @@
 package ui;
 
 import app.GameSettings;
+import controllers.GameState;
 
 import java.awt.Dimension;
 import util.time.GameTimer;
@@ -23,6 +24,7 @@ public interface IGameGraphics {
     void setupLayoutManager(Dimension size);
     void setupFrame(Dimension size);
     void paint();
+    void update(GameState state);
 
     default void onDone() {
         GameTimer.getInstance().resume();
