@@ -17,6 +17,10 @@ public abstract class Panel implements IPanel {
         }
     };
 
+    protected Panel(int w, int h) {
+        setPreferredSize(w, h);
+    }
+
 	@Override
 	public void addToPanel(JPanel container, Object constraints) {
 		container.add(pane, constraints);

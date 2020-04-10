@@ -37,11 +37,13 @@ public class SwingGraphics implements IGameGraphics {
     }
 
     public void setupLayoutManager(Dimension size) {
-        Architect.getInstance().updateNumbers(size);
+        int gameX = (int)(size.width * 0.75);
+        int gameY = size.height;
+        Architect.getInstance().updateNumbers(new Dimension(gameX, gameY));
+        GamePanel gamePanel = new GamePanel(gameX, gameY);
+        SidePanel sidePanel = new SidePanel(size.width-gameX, size.height);
         mainPanel.setLayout(new java.awt.BorderLayout());
-        GamePanel gamePanel = new GamePanel();
         gamePanel.addToPanel(mainPanel, BorderLayout.CENTER);
-        SidePanel sidePanel = new SidePanel();
         sidePanel.addToPanel(mainPanel, BorderLayout.LINE_END);
     }
 }

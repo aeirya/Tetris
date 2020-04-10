@@ -58,8 +58,11 @@ public class Architect {
 
     public class Box extends GameObject implements Drawable {
 
+        private Color c;
+
         public Box(int x, int y) {
             super(x,y);
+            c = new Color(170,30,30);
         }
 
         public Box() {
@@ -67,12 +70,17 @@ public class Architect {
         }
         
         public void draw(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g;
             int width = (int) sizes.getBoxDim().getWidth();
             int height = (int) sizes.getBoxDim().getHeight();
-            Color c = new Color(170,30,30);
+            int x = this.x*width;
+            int y = this.y*height;
             g.setColor(c);
             g.fillRect(x, y, width, height);
+            drawBorders(x,y,width,height,g);
+        }
+        
+        private void drawBorders(int x, int y, int width, int height, Graphics g) {
+            Graphics2D g2 = (Graphics2D) g;
             g2.setStroke(new BasicStroke(3));
             g2.setColor(c.darker());
             g2.drawLine(x, y+height, x+width, y+height);
@@ -83,6 +91,7 @@ public class Architect {
             g2.drawLine(x, y, x, y+height);
         }
 
+        @Override
         public IGameObject copy() {
             return new Box(x, y);
         }

@@ -4,7 +4,7 @@ public class GameObject implements IGameObject {
 
     protected int x=0;
     protected int y=0;
-    private IGameObject kid;
+    private IGameObject kid = null;
 
     public GameObject(int x, int y) {
         this.x = x;
@@ -19,7 +19,10 @@ public class GameObject implements IGameObject {
 
     public void move(int dx, int dy) {
         x += dx;
-        y += dy;  
+        y += dy;
+        if (kid!=null) {
+            kid.move(x, y);
+        }
     }
 
     public IGameObject copy() {

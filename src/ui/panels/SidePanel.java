@@ -4,9 +4,9 @@ import java.awt.Graphics;
 
 public class SidePanel extends Panel {
 
-    public SidePanel() {
+    public SidePanel(int w, int h) {
+        super(w, h);
         setBackground(30, 30, 60);
-        setPreferredSize(200,0);
     }
 
     @Override

@@ -18,11 +18,6 @@ public class Shape implements IShape {
         return result;
     }
 
-    /** Return's the i'th box */
-    public Coordinate getCoordinate(int i) {
-        return i < coordinates.length ? coordinates[i] : new Coordinate();
-    }
- 
     /** It has the ability to rotate, and has a method for Shape, getting coordinates at the same time */
     protected static class ShapeCoordinate extends Coordinate {
 
@@ -44,13 +39,9 @@ public class Shape implements IShape {
         public static ShapeCoordinate[] makeList(int... list) {
             ShapeCoordinate[] c = new ShapeCoordinate[list.length / 2];
             for (int i = 0; i < list.length; i += 2) {
-                c[i / 2] = new ShapeCoordinate(i, i + 1);
+                c[i / 2] = new ShapeCoordinate(list[i], list[i + 1]);
             }
             return c;
-        }
-
-        public String toString() {
-            return "(" + x + "," + y + ")";
         }
     }
 }
