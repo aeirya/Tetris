@@ -1,12 +1,13 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.awt.Graphics;
 
 public class DrawList implements Drawable {
 
-    List<Drawable> list;
+    private List<Drawable> list;
 
     public DrawList() {
         list = new ArrayList<>();
@@ -31,6 +32,12 @@ public class DrawList implements Drawable {
             add((Drawable)d);
         }
     }
+
+    public void removeAll(Collection<?> c) {
+        list.removeAll(c);
+    }
+
+    // public void replace()
 
     public void draw(Graphics g) {
         for (Drawable d : list) {

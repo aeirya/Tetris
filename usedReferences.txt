@@ -54,3 +54,7 @@ SAVING FILE:
 https://stackoverflow.com/questions/4017137/how-do-i-save-preference-user-settings-in-java
 https://www.javatpoint.com/how-to-create-a-file-in-java
 https://alvinalexander.com/java/java-file-exists-directory-exists/
+
+Generics:
+https://stackoverflow.com/questions/51740237/why-type-bound-mismatch-the-type-extends-t-is-not-a-valid-substitute-for-the
+

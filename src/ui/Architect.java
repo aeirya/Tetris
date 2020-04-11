@@ -69,7 +69,7 @@ public class Architect {
             this(0,0);
         }
 
-        private Box(int x, int y, Color c) {
+        public Box(int x, int y, Color c) {
             super(x, y);
             this.c = c;
         }

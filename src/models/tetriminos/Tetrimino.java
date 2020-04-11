@@ -7,12 +7,19 @@ import models.IGameObject;
 import models.IShape;
 import java.awt.Graphics;
 import ui.Architect;
+import java.awt.Color;
 
 public class Tetrimino implements IGameObject, Drawable {
     
     IGameObject body;
     IShape shape;
     DrawList leonardoDaVinci;
+
+    public Tetrimino(IShape shape, int x, int y, Color color) {
+        this(shape, 
+            Architect.getInstance().new Box(x,y,color)
+        );
+    }
 
     public Tetrimino(IShape shape, int x, int y) {
         this.shape = shape;
