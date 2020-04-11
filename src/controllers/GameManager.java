@@ -6,13 +6,12 @@ import java.util.List;
 import models.DrawList;
 import models.tetriminos.Tetrimino;
 
-public class GameManager implements IInputParser {
+public class GameManager implements ICommandReceiver {
 
     private final LevelDesigner level = new LevelDesigner();
     private DrawList gamePanelList = new DrawList();
     private List<Tetrimino> tetriminos= new ArrayList<>();
     private Tetrimino current = null;
-    private Input input;
     
     List<Tetrimino> spawnedMinos;
 
@@ -45,12 +44,8 @@ public class GameManager implements IInputParser {
         }
     }
 
-	public void addKeyListener(Input input) {
-        this.input = input;
-	}
-
     @Override
     public void receiveCommand(ICommand cmd) {
-        // this.
+        cmd.act(current);
     }
 }

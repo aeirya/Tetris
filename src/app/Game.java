@@ -26,14 +26,13 @@ public class Game {
 
     public void start() {
         gameGraphics.setup(settings);
-        final Input input = new Input();
+        final Input input = new Input(manager);
         gameGraphics.addKeyListener(input);
-        manager.addKeyListener(input);
     }
     
     // runs on a loop by the tetris class
     public void update() {
-        // util.log.GameLogger.log("looping");
+        util.log.GameLogger.log("tick");
         GameState state = manager.update();
         gameGraphics.update(state);
         timer.queue(gameGraphics::redraw);

@@ -2,35 +2,36 @@ package controllers;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import models.tetriminos.Tetrimino;
 
 public class Input implements KeyListener {
 
-    private boolean hasEvent = false;
+    private ICommandReceiver executer;
 
-
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        System.out.println( e.isActionKey() );
-        
+    public Input(ICommandReceiver ip) {
+        executer = ip;
     }
     
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        System.out.println(e.getKeyChar());
-        System.out.println( e.isActionKey() );
-        
+        executer.receiveCommand( parse(e) );
     }
     
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        
+    private ICommand parse(KeyEvent e) {
+        switch(e.getKeyChar()) {
+            case 'a':
+            return Tetrimino::moveLeft;
+            case 'd':
+            return Tetrimino::moveRight;
+            default:
+            case 'w':
+            return Tetrimino::rotate;
+        }
     }
 
-    public boolean hasEvent() {
-        return hasEvent; 
-    }
+    @Override
+    public void keyReleased(KeyEvent e) { /* */ }
+    
+    @Override
+    public void keyTyped(KeyEvent e) { /* */ }
 }

@@ -1,5 +1,5 @@
 package controllers;
 
-public interface IInputParser {
+public interface ICommandReceiver {
     void receiveCommand(ICommand cmd);
 }
