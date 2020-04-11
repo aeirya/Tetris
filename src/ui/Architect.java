@@ -88,6 +88,7 @@ public class Architect {
             g.fillRect(x, y, width, height);
             drawBorders(x+2, y+2, width-4, height-4, 2, g);
             drawBorders(x,y,width,height, 2, g);
+            drawPokerface(x, y, width, height, g);
         }
         
         private void drawBorders(int x, int y, int width, int height, int w, Graphics g) {
@@ -108,6 +109,18 @@ public class Architect {
         private void drawHorizonalLine(int x, int y, int length, int w, Graphics2D g) {
             g.setStroke(new BasicStroke((w*2)));
             g.drawLine(x+w, y, x+length-w, y);
+        }
+
+        private void drawPokerface(int x, int y, int width, int height, Graphics g) {
+            Graphics2D g2 = ((Graphics2D) g);
+            g2.setStroke(new BasicStroke(2)); 
+            final int x1 = (int)(x+0.35*width);
+            final int x2 = (int)(x+(1-0.35)*width);
+            final int y1 = (int)(y+0.45*height);
+            final int y2 = (int)(y+0.60*height);
+            g2.drawOval(x1, y1, 1,1);
+            g2.drawOval(x2, y1, 1,1);
+            g2.drawLine(x1, y2, x2, y2);
         }
 
         @Override
