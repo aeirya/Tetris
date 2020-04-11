@@ -72,7 +72,7 @@ public class TetriminoGenerator {
 
     public enum TColor {
 
-        RED, GREEN, BLUE, YELLOW, CYAN, PURPLE, BACKGROUND_BLACK, RANDOM;
+        RED, GREEN, BLUE, YELLOW, CYAN, PURPLE, BACKGROUND_BLACK, WALL_GREY, RANDOM;
 
         private static int a = 150;
         private static int b = 50;
@@ -94,6 +94,8 @@ public class TetriminoGenerator {
                 return new Color(a,a,b);
                 case BACKGROUND_BLACK:
                 return new Color(40,40,45);
+                case WALL_GREY:
+                return new Color(100, 100, 100);
                 case RANDOM:
                 int a = rand.nextInt(256);
                 int b = rand.nextInt(256);

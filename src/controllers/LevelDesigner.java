@@ -42,7 +42,7 @@ public class LevelDesigner implements Drawable {
 
     public Box[] spawnWall() {
         List<Coordinate> cList = new ArrayList<>();
-        Box sample = arch.new Box(100, 100, 100);
+        Box sample = arch.new Box(TColor.WALL_GREY, false);
         for (int i = 0; i < N_ROW; i++) {
             cList.add(new Coordinate(0,i));
             cList.add(new Coordinate(N_COL-1, i));

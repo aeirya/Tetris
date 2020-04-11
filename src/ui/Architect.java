@@ -60,7 +60,7 @@ public class Architect {
     public class Box extends GameObject implements Drawable {
 
         private Color c;
-        private boolean drawPokerface = false;
+        private boolean isSimple = true;
 
         public Box(int x, int y) {
             super(x,y);
@@ -69,6 +69,12 @@ public class Architect {
 
         public Box() {
             this(0,0);
+        }
+
+        public Box(int x, int y, Color c, boolean isSimple) {
+            super(x, y);
+            this.c = c;
+            this.isSimple = isSimple;
         }
 
         public Box(int x, int y, Color c) {
@@ -83,7 +89,7 @@ public class Architect {
 
         public Box(TColor c, boolean isSimple) {
             this(0,0,TColor.get(c));
-            drawPokerface = !isSimple;
+            this.isSimple = isSimple;
         }
         
         public void draw(Graphics g) {
@@ -95,7 +101,7 @@ public class Architect {
             g.fillRect(x, y, width, height);
             drawBorders(x+2, y+2, width-4, height-4, 2, g);
             drawBorders(x,y,width,height, 2, g);
-            if (drawPokerface) {
+            if (!isSimple) {
                 drawPokerface(x, y, width, height, g);
             }
         }
@@ -134,7 +140,7 @@ public class Architect {
 
         @Override
         public IGameObject copy() {
-            return new Box(x, y, c);
+            return new Box(x, y, c, isSimple);
         }
     }
 }
