@@ -5,6 +5,7 @@ import controllers.GameState;
 
 import java.awt.Dimension;
 import util.time.GameTimer;
+import java.awt.event.KeyListener;
 
 public interface IGameGraphics {
 
@@ -25,6 +26,8 @@ public interface IGameGraphics {
     void setupFrame(Dimension size);
     void paint();
     void update(GameState state);
+
+    void addKeyListener(KeyListener l);
 
     default void onDone() {
         GameTimer.getInstance().resume();

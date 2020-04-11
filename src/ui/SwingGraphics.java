@@ -12,6 +12,7 @@ import ui.panels.SidePanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.KeyListener;
 
 public class SwingGraphics implements IGameGraphics {
 
@@ -57,5 +58,10 @@ public class SwingGraphics implements IGameGraphics {
 
     private void updateGamePanel(DrawList list) {
         gamePanel.update(list);
+    }
+
+    public void addKeyListener(KeyListener l) {
+        mainPanel.addKeyListener(l);
+        mainPanel.requestFocusInWindow();
     }
 }

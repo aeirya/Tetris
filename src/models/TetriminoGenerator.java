@@ -71,24 +71,40 @@ public class TetriminoGenerator {
     }
 
     public enum TColor {
-        RED, GREEN, BLUE, YELLOW, CYAN, PURPLE;
+
+        RED, GREEN, BLUE, YELLOW, CYAN, PURPLE, RANDOM;
+
+        private static int a = 150;
+        private static int b = 50;
 
         public static Color get(TColor color) {
             switch (color) {
                 default:
                 case RED:
-                return new Color(170,30,30);
+                return new Color(a,b,b);
                 case GREEN:
-                return new Color(30,170,30);
+                return new Color(b,a,b);
                 case BLUE:
-                return new Color(30,30,170);
+                return new Color(b,b,a);
                 case PURPLE:
-                return new Color(170,30,170);
+                return new Color(a,b,a);
                 case CYAN:
-                return new Color(30,170,170);
+                return new Color(b,a,a);
                 case YELLOW:
-                return new Color(170,170,30);
+                return new Color(a,a,b);
+                case RANDOM:
+                int a = rand.nextInt(256);
+                int b = rand.nextInt(256);
+                int c = rand.nextInt(256);
+                util.log.GameLogger.log("Generated color: "+a+","+","+b+","+c);
+                return new Color(a,b,c);
             }
+        } 
+
+        //for testing
+        public static void setColorTone(int a, int b) {
+            TColor.a = a;
+            TColor.b = b;
         }
     }
 }

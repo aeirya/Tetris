@@ -7,6 +7,8 @@ import java.util.Random;
 import models.Coordinate;
 import models.Drawable;
 import models.TetriminoGenerator;
+import models.TetriminoGenerator.TColor;
+import models.TetriminoGenerator.TetriminoShape;
 import models.tetriminos.Tetrimino;
 import ui.Architect;
 import ui.Architect.Box;
@@ -51,6 +53,24 @@ public class LevelDesigner implements Drawable {
         int x = rand.nextInt(N_COL-3)+1;
         int y = -1;
         return TetriminoGenerator.random(x, y);
+    }
+
+    public List<Tetrimino> spawnAllMinosTest() {
+        List<Tetrimino> result = new ArrayList<>();
+        int[] x = { 2, 7 };
+        boolean a = false;
+        int[] y = { 1, 5, 9, 15, 19, 25 };
+        int c = 0;
+        for (int i=0; i<8; i++) {
+            result.add (
+                TetriminoGenerator.create(TetriminoShape.values()[rand.nextInt(TetriminoShape.values().length)],
+                a ? x[0] : x[1], y[c] + 1
+                , TColor.RANDOM)
+            );
+            a = !a;
+            if(!a) c = ++c % 4;
+        }
+        return result;
     }
 
     public void draw(Graphics g) {
