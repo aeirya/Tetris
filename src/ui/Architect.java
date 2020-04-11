@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import models.Drawable;
 import models.GameObject;
 import models.IGameObject;
+import models.TetriminoGenerator.TColor;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -59,6 +60,7 @@ public class Architect {
     public class Box extends GameObject implements Drawable {
 
         private Color c;
+        private boolean drawPokerface = false;
 
         public Box(int x, int y) {
             super(x,y);
@@ -78,6 +80,11 @@ public class Architect {
             super(0,0);
             this.c = new Color(r,g,b);
         }
+
+        public Box(TColor c, boolean isSimple) {
+            this(0,0,TColor.get(c));
+            drawPokerface = !isSimple;
+        }
         
         public void draw(Graphics g) {
             int width = (int) sizes.getBoxDim().getWidth();
@@ -88,7 +95,9 @@ public class Architect {
             g.fillRect(x, y, width, height);
             drawBorders(x+2, y+2, width-4, height-4, 2, g);
             drawBorders(x,y,width,height, 2, g);
-            drawPokerface(x, y, width, height, g);
+            if (drawPokerface) {
+                drawPokerface(x, y, width, height, g);
+            }
         }
         
         private void drawBorders(int x, int y, int width, int height, int w, Graphics g) {

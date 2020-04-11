@@ -30,6 +30,16 @@ public class LevelDesigner implements Drawable {
         wall = spawnWall();
     }
 
+    public Box[] generateBoxes(Box sample, List<Coordinate> cList) {
+        Box[] list = new Box[cList.size()];
+        int i = 0;
+        for (Coordinate c : cList) {
+            list[i] = (Box)sample.updatedCoordinates(c);
+            i+=1;
+        }
+        return list;
+    }
+
     public Box[] spawnWall() {
         List<Coordinate> cList = new ArrayList<>();
         Box sample = arch.new Box(100, 100, 100);
@@ -40,13 +50,19 @@ public class LevelDesigner implements Drawable {
         for (int i = 1; i < N_COL-1; i++) {
             cList.add(new Coordinate(i,N_ROW-1));
         }
-        Box[] list = new Box[cList.size()];
-        int i = 0;
-        for (Coordinate c : cList) {
-            list[i] = (Box)sample.updatedCoordinates(c);
-            i+=1;
+        return generateBoxes(sample, cList);
+    }
+
+    public Box[] spawnBackgroundPixels() {
+        List<Coordinate> list = new ArrayList<>();
+        for (int i = 1; i < N_COL-1; i++) {
+            for (int j=0; j< N_ROW-1; j++) {
+                list.add(new Coordinate(i,j));
+            }
         }
-        return list;
+        
+        Box sample = arch.new Box(TColor.BACKGROUND_BLACK, true);
+        return generateBoxes(sample, list);
     }
 
     public Tetrimino spawnTetrimino() {

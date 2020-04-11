@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.DrawList;
-import models.TetriminoGenerator.TColor;
 import models.tetriminos.Tetrimino;
 
 public class GameManager implements IInputParser {
@@ -19,24 +18,19 @@ public class GameManager implements IInputParser {
 
     public GameManager() {
         gamePanelList.add(level.spawnWall());
+        gamePanelList.add(level.spawnBackgroundPixels());
+
     }
     
     private Tetrimino spawn() {
         Tetrimino spawned = level.spawnTetrimino();
-        spawnedMinos = level.spawnAllMinosTest();
-        gamePanelList.add(spawnedMinos);
-        // tetriminos.add(spawned);
-        // gamePanelList.add(spawned);
-        // tetriminos.addAll(minos);
+        tetriminos.add(spawned);
+        gamePanelList.add(spawned);
         return spawned;
     }
 
     public GameState update() {
         if (current==null) current = spawn();
-        gamePanelList.removeAll(spawnedMinos);
-        spawnedMinos= level.spawnAllMinosTest();
-        gamePanelList.add(spawnedMinos);
-        
         current.fall();
         return updatedGameState();
     }
