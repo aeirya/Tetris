@@ -46,7 +46,6 @@ public class GameTimer {
 
     
     public boolean isTickTime() {
-        // System.out.println(frameCounter);
         if (GAME_SPEED * frameCounter >= FPS) {
             frameCounter=0;
             util.log.GameLogger.log("tick");

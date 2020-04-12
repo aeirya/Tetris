@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import models.tetriminos.Tetrimino;
@@ -27,6 +26,10 @@ public class Level {
         return level;
     }
 
+    public boolean checkCollision(Tetrimino t) {
+        return t.collides(staticBoxes);
+    }
+
     private void digest(List<Box> items) {
         for (Box box : items) {
             box.addTo(staticBoxes);
@@ -35,9 +38,5 @@ public class Level {
 
     public Tetrimino spawnTetrimino() {
         return builder.spawnTetrimino();
-    }
-
-    public Box[][] getBoxes() {
-        return staticBoxes;
     }
 }

@@ -1,6 +1,5 @@
 package models.tetriminos;
 
-import models.Coordinate;
 import models.DrawList;
 import models.Drawable;
 import models.GameObject;

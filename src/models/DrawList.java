@@ -3,9 +3,6 @@ package models;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import ui.Architect.Box;
-
 import java.awt.Graphics;
 
 public class DrawList implements Drawable {

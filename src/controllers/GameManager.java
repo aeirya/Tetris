@@ -1,11 +1,8 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import models.DrawList;
 import models.Drawable;
-import models.GameObject;
 import models.tetriminos.Tetrimino;
 
 public class GameManager implements ICommandReceiver {
@@ -13,7 +10,9 @@ public class GameManager implements ICommandReceiver {
     private final Level level = new Level();
     private DrawList gamePanelList = new DrawList();
     private Tetrimino current = null;
-    private int collisionCounter = 0;
+    private final Lock inputLock = new Lock(4);
+    private final Lock fallLock = new Lock(2);
+
     List<Tetrimino> aspawnedMinos;
 
     public GameManager() {
@@ -27,17 +26,24 @@ public class GameManager implements ICommandReceiver {
     }
 
     public GameState update(boolean isTick) {
-        if ( current == null ) current = spawn();
+        if ( current == null ) {
+            current = spawn();
+            fallLock.unlock();
+        }
         if (isTick) {
-            InputLock.unlock();
-            applyGravity();
-            if (current.collides(level.getBoxes())) {
+            fallLock.unlock(); //in case there were bugs
+            inputLock.unlock();
+            if (fallLock.isUnlocked()) { 
+                applyGravity();
+            }
+            if (level.checkCollision(current)) {
+                fallLock.report();
                 util.log.GameLogger.debug("fell!");
                 current.revert();
             }
         }
-        else if (current.collides(level.getBoxes())) {
-            InputLock.reportCollision();
+        else if (level.checkCollision(current)) {
+            inputLock.report();
             util.log.GameLogger.debug("collision!");
             current.revert();
         }
@@ -55,24 +61,28 @@ public class GameManager implements ICommandReceiver {
 
     @Override
     public void receiveCommand(ICommand cmd) {
-        if (InputLock.isUnlocked()){
+        if (inputLock.isUnlocked()){
             cmd.act(current);
+            fallLock.unlock();
         }
     }
 
-    private static class InputLock {
+    public static class Lock {
+        
+        private int counter = 0;
+        private int limit = 1;
 
-        private static int collisionCount = 0;
+        public Lock(int limit) {
+            this.limit = limit;
+        } 
 
-        private InputLock() {} 
-
-        public static void reportCollision() { 
-            collisionCount += 1;
+        public void report() { 
+            counter += 1;
         }
 
-        public static boolean isUnlocked() { return collisionCount < 3; }
+        public boolean isUnlocked() { return counter < limit; }
 
-        public static void unlock() { collisionCount = 0; }
+        public void unlock() { counter = 0; }
     }
 }
 
