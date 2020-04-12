@@ -6,8 +6,6 @@ public class Timer {
     
     final TaskManager tm = new TaskManager();
 
-	public Object timer;
-
     public Timer() {
         tick();
     }

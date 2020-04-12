@@ -28,17 +28,20 @@ public class GameManager implements ICommandReceiver {
         return spawned;
     }
 
-    public GameState update() {
-        if (current==null) current = spawn();
-        current.fall();
+    public GameState update(boolean isTick) {
+        if ( current == null ) current = spawn();
+        if (isTick) {
+            applyGravity();
+        }
         return updatedGameState();
     }
     
     private GameState updatedGameState() {
         return new GameState(gamePanelList);
     }
-
+    
     private void applyGravity() {
+        // current.fall();
         for (Tetrimino t : tetriminos) {
             t.fall();
         }

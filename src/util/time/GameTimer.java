@@ -2,9 +2,13 @@ package util.time;
 
 public class GameTimer {
     final Timer timer = new Timer();
+    final Timer tickTimer = new Timer();
     final Lock lock = new Lock();
-    static final long INTERVAL = 1000 / 1;
+    static final int FPS = 60;
+    static final long INTERVAL = 1000/FPS;
+    static final float GAME_SPEED = 3.0f;
     static final GameTimer instance = new GameTimer();
+    private int frameCounter = 0;
 
     private GameTimer() {
     }
@@ -38,5 +42,15 @@ public class GameTimer {
 
     public void resume() {
         lock.unlock();
+    }
+
+    public boolean isTickTime() {
+        if (GAME_SPEED * frameCounter >= FPS) {
+            frameCounter=0;
+            util.log.GameLogger.log("tick");
+            return true;
+        }
+        frameCounter++;
+        return false;
     }
 }
