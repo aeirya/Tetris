@@ -14,7 +14,7 @@ public class GameManager implements ICommandReceiver {
     private DrawList gamePanelList = new DrawList();
     private Tetrimino current = null;
     
-    List<Tetrimino> spawnedMinos;
+    List<Tetrimino> aspawnedMinos;
 
     public GameManager() {
         gamePanelList.add(level.build());
@@ -30,9 +30,13 @@ public class GameManager implements ICommandReceiver {
         if ( current == null ) current = spawn();
         if (isTick) {
             applyGravity();
+            if (current.collides(level.getBoxes())) {
+                util.log.GameLogger.debug("fell!");
+                current.revert();
+            }    
         }
         if (current.collides(level.getBoxes())) {
-            util.log.GameLogger.warning("collision!");
+            util.log.GameLogger.debug("collision!");
             current.revert();
         }
         return updatedGameState();

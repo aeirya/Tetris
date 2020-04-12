@@ -18,7 +18,7 @@ public class TetriminoGenerator {
             TetriminoShape.get(
                 (TetriminoShape) chooseRandom(TetriminoShape.values())),
             x, y, 
-            TColor.get((TColor) chooseRandom(TColor.values()))
+            TColor.get((TColor) chooseRandom(TColor.getUsableColors()))
             );
     }
 
@@ -104,6 +104,10 @@ public class TetriminoGenerator {
                 return new Color(a,b,c);
             }
         } 
+
+        public static TColor[] getUsableColors() {
+            return new TColor[]{ RED, GREEN, BLUE, YELLOW, CYAN, PURPLE } ;
+        }
 
         //for testing
         public static void setColorTone(int a, int b) {
