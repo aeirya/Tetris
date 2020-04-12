@@ -5,7 +5,8 @@ public class GameObject implements IGameObject {
     protected int x=0;
     protected int y=0;
     private IGameObject kid = null;
-
+    private Runnable revert;
+    
     public GameObject(int x, int y) {
         this.x = x;
         this.y = y;
@@ -23,6 +24,11 @@ public class GameObject implements IGameObject {
         if (kid!=null) {
             kid.move(dx, dy);
         }
+        revert = () -> move(-1*dx, -1*dy);
+    }
+    
+    public void revertMove() {
+        this.revert.run();
     }
 
     public IGameObject copy() {

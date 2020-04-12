@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -38,6 +39,13 @@ public class LevelDesigner implements Drawable {
             i+=1;
         }
         return list;
+    }
+
+    public List<Box> spawn() {
+        List<Box> level = new ArrayList<>();
+        level.addAll(Arrays.asList(spawnWall()));
+        level.addAll(Arrays.asList(spawnBackgroundPixels()));
+        return level;
     }
 
     public Box[] spawnWall() {

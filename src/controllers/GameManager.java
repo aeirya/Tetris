@@ -16,9 +16,7 @@ public class GameManager implements ICommandReceiver {
     List<Tetrimino> spawnedMinos;
 
     public GameManager() {
-        gamePanelList.add(level.spawnWall());
-        gamePanelList.add(level.spawnBackgroundPixels());
-
+        gamePanelList.add(level.spawn());
     }
     
     private Tetrimino spawn() {
@@ -39,11 +37,12 @@ public class GameManager implements ICommandReceiver {
     private GameState updatedGameState() {
         return new GameState(gamePanelList);
     }
-    
+
     private void applyGravity() {
         // current.fall();
         for (Tetrimino t : tetriminos) {
             t.fall();
+            // if( t.checkCollision() 
         }
     }
 

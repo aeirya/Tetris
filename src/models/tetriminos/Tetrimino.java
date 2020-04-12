@@ -43,6 +43,10 @@ public class Tetrimino implements IGameObject, Drawable {
         update();
     }
 
+    public void revertMove() {
+        body.revertMove();
+    }
+
     private void update() {
         leonardoDaVinci = shape.applyShape(body);
     }

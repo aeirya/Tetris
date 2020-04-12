@@ -23,5 +23,7 @@ public interface IGameObject {
         move(0, 1);
     }
 
+    void revertMove();
+    // void collides(Coor)
     IGameObject copy();
 }
