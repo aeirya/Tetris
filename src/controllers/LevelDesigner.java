@@ -1,7 +1,6 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -31,6 +30,10 @@ public class LevelDesigner implements Drawable {
         wall = spawnWall();
     }
 
+    public Box[][] create2DBoxList() {
+        return new Box[N_COL][N_ROW];
+    }
+
     public Box[] generateBoxes(Box sample, List<Coordinate> cList) {
         Box[] list = new Box[cList.size()];
         int i = 0;
@@ -39,13 +42,6 @@ public class LevelDesigner implements Drawable {
             i+=1;
         }
         return list;
-    }
-
-    public List<Box> spawn() {
-        List<Box> level = new ArrayList<>();
-        level.addAll(Arrays.asList(spawnWall()));
-        level.addAll(Arrays.asList(spawnBackgroundPixels()));
-        return level;
     }
 
     public Box[] spawnWall() {

@@ -23,7 +23,9 @@ public interface IGameObject {
         move(0, 1);
     }
 
-    void revertMove();
-    // void collides(Coor)
+    void revert();
+    void addTo(IGameObject[][] map);
+    boolean collides(Coordinate...coordinates);
+
     IGameObject copy();
 }

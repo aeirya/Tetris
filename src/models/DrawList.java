@@ -37,12 +37,9 @@ public class DrawList implements Drawable {
         list.removeAll(c);
     }
 
-    // public void replace()
-
     public void draw(Graphics g) {
         for (Drawable d : list) {
             d.draw(g);
         }
     }
-
 }

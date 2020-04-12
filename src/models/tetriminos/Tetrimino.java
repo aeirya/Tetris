@@ -1,5 +1,6 @@
 package models.tetriminos;
 
+import models.Coordinate;
 import models.DrawList;
 import models.Drawable;
 import models.GameObject;
@@ -43,10 +44,6 @@ public class Tetrimino implements IGameObject, Drawable {
         update();
     }
 
-    public void revertMove() {
-        body.revertMove();
-    }
-
     private void update() {
         leonardoDaVinci = shape.applyShape(body);
     }
@@ -57,5 +54,24 @@ public class Tetrimino implements IGameObject, Drawable {
 
     public IGameObject copy() {
         return new Tetrimino(shape, body);
+    }
+
+    public void revert() {
+        body.revert();
+        shape.revert();
+    }
+    
+    public boolean collides(Coordinate...c) {
+        // 
+        return false;
+    }
+
+    // private Box[] dissociate() {
+    //     // 
+    //     return null;
+    // }
+
+    public void addTo(IGameObject[][] map) {
+        // leonardoDaVinci.   
     }
 }

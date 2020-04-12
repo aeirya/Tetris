@@ -27,11 +27,29 @@ public class GameObject implements IGameObject {
         revert = () -> move(-1*dx, -1*dy);
     }
     
-    public void revertMove() {
+    private void revertMove() {
         this.revert.run();
+        revert = () -> {};
+    }
+
+    public void revert() {
+        revertMove();
+    }
+
+    public boolean collides(Coordinate...coordinates) {
+        for (Coordinate c : coordinates) {
+            if (c.getX()==x && c.getY()==y) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public IGameObject copy() {
         return kid.copy();
+    }
+
+    public void addTo(IGameObject[][] map) {
+        map[x][y] = this;
     }
 }

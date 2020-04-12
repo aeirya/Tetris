@@ -10,6 +10,12 @@ public class Shape implements IShape {
         }
     }
 
+    public void revert() {
+        for (ShapeCoordinate c : coordinates) {
+            c.rotateBack();
+        }
+    }
+
     public DrawList applyShape(IGameObject object) {
         DrawList result = new DrawList();
         for (Coordinate c : coordinates) {
@@ -30,6 +36,17 @@ public class Shape implements IShape {
             int t = x;
             x = y;
             y = -1 * t;
+        } 
+        //@TODO: should use rotate(i) ?
+
+        private void rotate(int i) {
+            int t = x;
+            x = i * y;
+            y = -1 * i * t;
+        }
+
+        public void rotateBack() {
+            rotate(-1);
         }
 
         /** For making life eaiser! Easily import coordinates. How to use: makeList(x1, y1, x2, y2, ...) */

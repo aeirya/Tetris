@@ -4,24 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.DrawList;
+import models.GameObject;
 import models.tetriminos.Tetrimino;
 
 public class GameManager implements ICommandReceiver {
 
-    private final LevelDesigner level = new LevelDesigner();
+    private final Level level = new Level();
     private DrawList gamePanelList = new DrawList();
-    private List<Tetrimino> tetriminos= new ArrayList<>();
     private Tetrimino current = null;
     
     List<Tetrimino> spawnedMinos;
 
     public GameManager() {
-        gamePanelList.add(level.spawn());
+        gamePanelList.add(level.build());
     }
     
     private Tetrimino spawn() {
         Tetrimino spawned = level.spawnTetrimino();
-        tetriminos.add(spawned);
         gamePanelList.add(spawned);
         return spawned;
     }
@@ -31,6 +30,9 @@ public class GameManager implements ICommandReceiver {
         if (isTick) {
             applyGravity();
         }
+        // if (current.collides(level.getBoxes())) {
+        //     current.revert();
+        // }
         return updatedGameState();
     }
     
@@ -39,11 +41,8 @@ public class GameManager implements ICommandReceiver {
     }
 
     private void applyGravity() {
-        // current.fall();
-        for (Tetrimino t : tetriminos) {
-            t.fall();
-            // if( t.checkCollision() 
-        }
+        current.fall();
+        //@TODO if(lineRemoved) others.fall()
     }
 
     @Override
