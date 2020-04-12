@@ -6,7 +6,7 @@ public class GameTimer {
     final Lock lock = new Lock();
     static final int FPS = 60;
     static final long INTERVAL = 1000/FPS;
-    static final float GAME_SPEED = 4.0f;
+    static final float GAME_SPEED = 10.0f;
     static final GameTimer instance = new GameTimer();
     private int frameCounter = 0;
 
@@ -44,7 +44,6 @@ public class GameTimer {
         lock.unlock();
     }
 
-    
     public boolean isTickTime() {
         if (GAME_SPEED * frameCounter >= FPS) {
             frameCounter=0;

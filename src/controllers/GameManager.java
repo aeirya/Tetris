@@ -11,7 +11,7 @@ public class GameManager implements ICommandReceiver {
     private DrawList gamePanelList = new DrawList();
     private Tetrimino current = null;
     private final Lock inputLock = new Lock(4);
-    private final Lock fallLock = new Lock(2);
+    private final Lock fallLock = new Lock(1);
 
     List<Tetrimino> aspawnedMinos;
 
@@ -20,21 +20,25 @@ public class GameManager implements ICommandReceiver {
     }
     
     private Tetrimino spawn() {
-        Tetrimino spawned = level.spawnTetrimino();
+        Tetrimino spawned = level.spawnTetrimino(current);
         gamePanelList.add((Drawable)spawned);
+        fallLock.unlock();
         return spawned;
     }
 
     public GameState update(boolean isTick) {
         if ( current == null ) {
             current = spawn();
-            fallLock.unlock();
         }
         if (isTick) {
-            fallLock.unlock(); //in case there were bugs
             inputLock.unlock();
             if (fallLock.isUnlocked()) { 
                 applyGravity();
+            }
+            else {
+                current.addTo(map);
+                gamePanelList.remove(current);
+                current = spawn();
             }
             if (level.checkCollision(current)) {
                 fallLock.report();

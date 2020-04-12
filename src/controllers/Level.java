@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import models.IGameObject;
 import models.tetriminos.Tetrimino;
 import ui.Architect.Box;
 
@@ -36,7 +37,12 @@ public class Level {
         }
     }
 
-    public Tetrimino spawnTetrimino() {
+    public void digest(IGameObject go) {
+        go.addTo(staticBoxes);
+    }
+
+    public Tetrimino spawnTetrimino(Tetrimino lastSpawned) {
+        // if (lastSpawned!=null) lastSpawned.addTo(map);
         return builder.spawnTetrimino();
     }
 }

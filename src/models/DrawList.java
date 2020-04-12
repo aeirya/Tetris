@@ -41,6 +41,11 @@ public class DrawList implements Drawable {
         }
     }
 
+    public void remove(Object obj) {
+        list.remove(obj);
+        //objects.remove
+    }
+
     public void removeAll(Collection<?> c) {
         list.removeAll(c);
     }

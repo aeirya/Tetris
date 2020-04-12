@@ -31,10 +31,7 @@ public class Game {
     }
     
     // runs on a loop by the tetris class
-    int c =0;
     public void update() {
-        c++;
-        System.out.println(c%60);
         final GameState state = manager.update(timer.isTickTime());
         if (!timer.isLocked()) {    
             timer.queue(gameGraphics::redraw);

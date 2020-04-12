@@ -74,7 +74,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     // }
 
     public void addTo(IGameObject[][] map) {
-        // leonardoDaVinci.   
+        leonardoDaVinci.addTo(map);
     }
 
     public DrawList applyShape(IGameObject body) {
