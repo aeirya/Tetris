@@ -18,6 +18,7 @@ public class Input implements KeyListener {
     }
     
     private ICommand parse(KeyEvent e) {
+        System.out.println("''"+e.getKeyChar()+" , "+e.getKeyCode());
         switch(e.getKeyChar()) {
             case 'a':
             return Tetrimino::moveLeft;

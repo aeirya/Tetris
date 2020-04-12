@@ -4,9 +4,9 @@ public class GameTimer {
     final Timer timer = new Timer();
     final Timer tickTimer = new Timer();
     final Lock lock = new Lock();
-    static final int FPS = 100;
+    static final int FPS = 60;
     static final long INTERVAL = 1000/FPS;
-    static final float GAME_SPEED = 3.0f;
+    static final float GAME_SPEED = 1.0f;
     static final GameTimer instance = new GameTimer();
     private int frameCounter = 0;
 
@@ -33,7 +33,7 @@ public class GameTimer {
     public void holdOn() {
         try {
             lock.lock();
-            Thread.sleep(calcWaitTime());
+            // Thread.sleep(calcWaitTime());
         } catch (InterruptedException e) {
             util.log.GameLogger.interrupted();
             Thread.currentThread().interrupt();
@@ -44,7 +44,9 @@ public class GameTimer {
         lock.unlock();
     }
 
+    
     public boolean isTickTime() {
+        // System.out.println(frameCounter);
         if (GAME_SPEED * frameCounter >= FPS) {
             frameCounter=0;
             util.log.GameLogger.log("tick");
@@ -52,5 +54,9 @@ public class GameTimer {
         }
         frameCounter++;
         return false;
+    }
+
+    public boolean isLocked() {
+        return lock.isLocked();
     }
 }

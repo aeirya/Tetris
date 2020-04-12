@@ -17,7 +17,7 @@ public class IShaped extends Shape {
         DrawList result = new DrawList();
         for (Coordinate c : check(coordinates)) {
 
-            result.add((Drawable)object.updatedCoordinates(c));
+            result.add(object.updatedCoordinates(c));
         }
         return result;
     }

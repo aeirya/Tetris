@@ -16,4 +16,8 @@ public class Lock {
         isLocked = false;
         notifyAll();
     }
+
+    public synchronized boolean isLocked() {
+        return isLocked;
+    }
   }
