@@ -3,23 +3,23 @@ package models;
 public class Shape implements IShape {
 
     protected ShapeCoordinate[] coordinates;
+    Runnable revert = () -> {};
 
-    public void rotate() {
+    public void rotate(int i) {
         for (ShapeCoordinate c : coordinates) {
-            c.rotate();
+            c.rotate(i);
         }
+        revert = () -> rotate(-1*i);
     }
 
     public void revert() {
-        for (ShapeCoordinate c : coordinates) {
-            c.rotateBack();
-        }
+        revert.run();
     }
 
     public DrawList applyShape(IGameObject object) {
         DrawList result = new DrawList();
         for (Coordinate c : coordinates) {
-            result.add((Drawable)object.updatedCoordinates(c));
+            result.add(object.updatedCoordinates(c));
         }
         return result;
     }

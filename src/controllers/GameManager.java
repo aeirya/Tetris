@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.DrawList;
+import models.Drawable;
 import models.GameObject;
 import models.tetriminos.Tetrimino;
 
@@ -21,7 +22,7 @@ public class GameManager implements ICommandReceiver {
     
     private Tetrimino spawn() {
         Tetrimino spawned = level.spawnTetrimino();
-        gamePanelList.add(spawned);
+        gamePanelList.add((Drawable)spawned);
         return spawned;
     }
 
@@ -30,9 +31,10 @@ public class GameManager implements ICommandReceiver {
         if (isTick) {
             applyGravity();
         }
-        // if (current.collides(level.getBoxes())) {
-        //     current.revert();
-        // }
+        if (current.collides(level.getBoxes())) {
+            util.log.GameLogger.warning("collision!");
+            current.revert();
+        }
         return updatedGameState();
     }
     

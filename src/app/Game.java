@@ -33,9 +33,9 @@ public class Game {
     // runs on a loop by the tetris class
     public void update() {
         final GameState state = manager.update(timer.isTickTime());
-        gameGraphics.update(state);
         timer.queue(gameGraphics::redraw);
         timer.flush();
         timer.holdOn();
+        gameGraphics.update(state);
     }
 }

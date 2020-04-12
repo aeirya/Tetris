@@ -10,11 +10,12 @@ import java.awt.Graphics;
 import ui.Architect;
 import java.awt.Color;
 
-public class Tetrimino implements IGameObject, Drawable {
+public class Tetrimino implements IGameObject, IShape, Drawable {
     
     IGameObject body;
     IShape shape;
     DrawList leonardoDaVinci;
+    boolean isLastActionMove = true;
 
     public Tetrimino(IShape shape, int x, int y, Color color) {
         this(shape, 
@@ -34,18 +35,20 @@ public class Tetrimino implements IGameObject, Drawable {
         update();
     }
 
-    public void rotate() {
-        shape.rotate();
+    public void rotate(int i) {
+        isLastActionMove = false;
+        shape.rotate(i);
         update();
     }
 
     public void move(int dx, int dy) {
+        isLastActionMove = true;
         body.move(dx, dy);
         update();
     }
 
     private void update() {
-        leonardoDaVinci = shape.applyShape(body);
+        leonardoDaVinci = applyShape(body);
     }
 
     public void draw(Graphics g) {
@@ -57,13 +60,14 @@ public class Tetrimino implements IGameObject, Drawable {
     }
 
     public void revert() {
-        body.revert();
-        shape.revert();
+        if (isLastActionMove) body.revert();
+        else shape.revert();
+        isLastActionMove = !isLastActionMove;
+        update();
     }
     
-    public boolean collides(Coordinate...c) {
-        // 
-        return false;
+    public boolean collides(IGameObject[][] objects) {
+        return leonardoDaVinci.collides(objects);
     }
 
     // private Box[] dissociate() {
@@ -73,5 +77,9 @@ public class Tetrimino implements IGameObject, Drawable {
 
     public void addTo(IGameObject[][] map) {
         // leonardoDaVinci.   
+    }
+
+    public DrawList applyShape(IGameObject body) {
+        return shape.applyShape(body);
     }
 }

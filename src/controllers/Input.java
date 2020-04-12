@@ -25,7 +25,9 @@ public class Input implements KeyListener {
             return Tetrimino::moveRight;
             default:
             case 'w':
-            return Tetrimino::rotate;
+            return Tetrimino::rotateLeft;
+            case 's':
+            return Tetrimino::rotateRight;
         }
     }
 

@@ -25,7 +25,7 @@ public interface IGameObject {
 
     void revert();
     void addTo(IGameObject[][] map);
-    boolean collides(Coordinate...coordinates);
+    boolean collides(IGameObject[][] objects);
 
     IGameObject copy();
 }

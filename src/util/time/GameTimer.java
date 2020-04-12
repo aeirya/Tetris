@@ -4,7 +4,7 @@ public class GameTimer {
     final Timer timer = new Timer();
     final Timer tickTimer = new Timer();
     final Lock lock = new Lock();
-    static final int FPS = 60;
+    static final int FPS = 100;
     static final long INTERVAL = 1000/FPS;
     static final float GAME_SPEED = 3.0f;
     static final GameTimer instance = new GameTimer();

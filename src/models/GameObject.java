@@ -5,7 +5,7 @@ public class GameObject implements IGameObject {
     protected int x=0;
     protected int y=0;
     private IGameObject kid = null;
-    private Runnable revert;
+    private Runnable revert = () -> move(0,0);
     
     public GameObject(int x, int y) {
         this.x = x;
@@ -36,13 +36,13 @@ public class GameObject implements IGameObject {
         revertMove();
     }
 
-    public boolean collides(Coordinate...coordinates) {
-        for (Coordinate c : coordinates) {
-            if (c.getX()==x && c.getY()==y) {
-                return true;
-            }
-        }
-        return false;
+    public boolean collides(IGameObject[][] objects) {
+        if (y<0) return false;
+        // System.out.println(x+","+y);
+        // System.out.println(objects[0].length + "," + objects.length);
+        // System.out.println(objects[x][y]);
+        return objects[x][y]!=null;
+        // return false;
     }
 
     public IGameObject copy() {

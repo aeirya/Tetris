@@ -9,7 +9,7 @@ public class OShaped extends Shape {
     }
 
     @Override
-    public void rotate() {
+    public void rotate(int i) {
         //do nothing!
     }
 }
