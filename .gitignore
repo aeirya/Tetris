@@ -27,3 +27,7 @@ hs_err_pid*
 .DS_Store
 .idea
 
+.VSCodeCounter/details.md
+.VSCodeCounter/results.csv
+.VSCodeCounter/results.txt
+.VSCodeCounter/results.md

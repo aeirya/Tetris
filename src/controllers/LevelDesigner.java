@@ -70,7 +70,7 @@ public class LevelDesigner implements Drawable {
     }
 
     public Tetrimino spawnTetrimino() {
-        int x = rand.nextInt(N_COL-3)+1;
+        int x = rand.nextInt(N_COL-4)+2;
         int y = -1;
         return TetriminoGenerator.random(x, y);
     }

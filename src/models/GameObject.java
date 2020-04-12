@@ -38,11 +38,7 @@ public class GameObject implements IGameObject {
 
     public boolean collides(IGameObject[][] objects) {
         if (y<0) return false;
-        // System.out.println(x+","+y);
-        // System.out.println(objects[0].length + "," + objects.length);
-        // System.out.println(objects[x][y]);
         return objects[x][y]!=null;
-        // return false;
     }
 
     public IGameObject copy() {
