@@ -41,13 +41,13 @@ public class GameManager implements ICommandReceiver {
             }
             if (level.checkCollision(current)) {
                 fallLock.report();
-                util.log.GameLogger.debug("fell!");
+                util.log.GameLogger.outdatedLog("fell!");
                 current.revert();
             }
         }
         else if (level.checkCollision(current)) {
             inputLock.report();
-            util.log.GameLogger.debug("collision!");
+            util.log.GameLogger.outdatedLog("collision!");
             current.revert();
         }
         return updatedGameState();

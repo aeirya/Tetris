@@ -42,7 +42,7 @@ public class Level {
     }
 
     public Tetrimino spawnTetrimino(Tetrimino lastSpawned) {
-        // if (lastSpawned!=null) lastSpawned.addTo(map);
+        // if (lastSpawned!=null) lastSpawned.addTo(staticBoxes);
         return builder.spawnTetrimino();
     }
 }
