@@ -36,8 +36,7 @@ public class GameManager implements ICommandReceiver {
                 applyGravity();
             }
             else {
-                current.addTo(map);
-                gamePanelList.remove(current);
+                level.digest(current);
                 current = spawn();
             }
             if (level.checkCollision(current)) {

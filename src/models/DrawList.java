@@ -43,7 +43,6 @@ public class DrawList implements Drawable {
 
     public void remove(Object obj) {
         list.remove(obj);
-        //objects.remove
     }
 
     public void removeAll(Collection<?> c) {
@@ -55,6 +54,12 @@ public class DrawList implements Drawable {
             if (go.collides(pixels)) return true;
         }
         return false;
+    }
+
+    public void addTo(IGameObject[][] map) {
+        for (IGameObject go : objects) {
+            go.addTo(map);
+        }
     }
 
     public void draw(Graphics g) {
