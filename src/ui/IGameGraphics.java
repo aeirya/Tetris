@@ -17,8 +17,8 @@ public interface IGameGraphics {
         Dimension screensize = settings.getScreenSize();
         setupFrame(screensize);
         setupLayoutManager(screensize);
-        addKeyListener(keyListener);
         start();
+        addKeyListener(keyListener);
     }
 
     void start();
