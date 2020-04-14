@@ -18,8 +18,8 @@ import java.security.SecureRandom;
 
 public class LevelDesigner implements Drawable {
 
-    private static final int N_COL = Architect.SizeManager.NCOLUMNS;
-    private static final int N_ROW = Architect.SizeManager.NROWS;
+    private static final int N_COL = Architect.SizeManager.getColumns();
+    private static final int N_ROW = Architect.SizeManager.getRows();
     private Architect arch = Architect.getInstance();
     private Random rand;
 
@@ -70,7 +70,7 @@ public class LevelDesigner implements Drawable {
     }
 
     public Tetrimino spawnTetrimino() {
-        int x = rand.nextInt(N_COL-4)+2;
+        int x = N_COL>=5 ? rand.nextInt(N_COL-4)+2 : 2;
         int y = -1;
         return TetriminoGenerator.random(x, y);
     }

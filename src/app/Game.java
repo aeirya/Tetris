@@ -24,7 +24,7 @@ public class Game {
     }
     
     public void start() {
-        final GameSettings settings = new GameSettings();
+        final GameSettings settings = new GameSettings("settings.properties");
         final Input input = new Input(manager);
         gameGraphics.setup(settings, input);
     }

@@ -38,8 +38,8 @@ public class Architect {
 
     public static class SizeManager {
         
-        public static final int NCOLUMNS = 12;
-        public static final int NROWS = 21;
+        private static final int NCOLUMNS = 5;
+        private static final int NROWS = 8;
         private final Dimension boxDimension = new Dimension();
 
         public void calculate(int sw, int sh) {
@@ -54,6 +54,14 @@ public class Architect {
 
         public Dimension getBoxDim() {
             return boxDimension;
+        }
+
+        public static int getRows() {
+            return NROWS;
+        }
+
+        public static int getColumns() {
+            return NCOLUMNS;
         }
     }
 

@@ -15,13 +15,14 @@ import java.util.Properties;
 
 public class GameSettings {
 
-    static final String PATH_TO_SETTINGS = "game.settings";
-    final String[] propertyNames = { "user name", "screen size", "background color" };
-    List<String> propertyVariables = new LinkedList<>();
-    Properties properties = new Properties();
-    Dimension screenSize;
+    private String pathToSettings;
+    private final String[] propertyNames = { "username", "screensize", "theme" };
+    private List<String> propertyVariables = new LinkedList<>();
+    private Properties properties = new Properties();
+    private Dimension screenSize;
 
-    public GameSettings() {
+    public GameSettings( String settingsFilePath ) {
+        this.pathToSettings = settingsFilePath;
         this.getReady();
     }
 
@@ -31,7 +32,7 @@ public class GameSettings {
     }
 
     private Dimension readScreenSize() {
-        final String[] size = properties.getProperty("screen size").split("x");
+        final String[] size = properties.getProperty("screensize").split("x");
         return new Dimension(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
     }
 
@@ -44,20 +45,24 @@ public class GameSettings {
         //read username, and background color
     }
 
+    private String[] defaultValues() {
+        return new String[] { "Player", "700x850", "default" };
+    }
+
     private void loadGameSettings() {
         try {
-            final InputStream inStream = new FileInputStream(PATH_TO_SETTINGS);
+            final InputStream inStream = new FileInputStream(pathToSettings);
             properties.load(inStream);
             for( final String name : propertyNames) {
                 propertyVariables.add(properties.getProperty(name));
             }
             inStream.close();
         } catch (final FileNotFoundException e) {
-            final String[] s = { "Player", "600x800", "20:20:20" };
+            final String[] s = defaultValues();
             propertyVariables = Arrays.asList(s);
             saveGameSettings();
         } catch (final IOException e) {
-            util.log.GameLogger.log("IOException");
+            ioError();
         }
     }
 
@@ -65,7 +70,7 @@ public class GameSettings {
         for (int i = 0; i < propertyNames.length; i++) {
             properties.setProperty(propertyNames[i], propertyVariables.get(i));
         }
-        final File file = new File(PATH_TO_SETTINGS);
+        final File file = new File(pathToSettings);
         if (!file.exists()) {
             try {
                 final boolean result = file.createNewFile();
@@ -76,11 +81,11 @@ public class GameSettings {
             }
         }
         try {
-            final OutputStream out = new FileOutputStream(PATH_TO_SETTINGS);
+            final OutputStream out = new FileOutputStream(pathToSettings);
             properties.store(out, "");
             out.close();
         } catch (final FileNotFoundException e) {
-            //
+            util.log.GameLogger.log("settings file address not found for saving");
         } catch (final IOException e) {
             ioError();
         }
