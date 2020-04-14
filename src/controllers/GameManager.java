@@ -26,6 +26,7 @@ public class GameManager implements ICommandReceiver {
         return spawned;
     }
 
+    /** @return next game state */
     public GameState update(boolean isTick) {
         if ( current == null ) {
             current = spawn();

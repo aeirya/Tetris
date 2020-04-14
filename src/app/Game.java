@@ -15,22 +15,21 @@ public class Game {
     private static final Game instance = new Game();
     private final IGameGraphics gameGraphics = new SwingGraphics();
     private final GameTimer timer = GameTimer.getInstance();
-    private final GameSettings settings = new GameSettings();
     private final GameManager manager = new GameManager();
 
     private Game() {}
-
+    
     public static Game getInstance() {
         return instance;
     }
-
+    
     public void start() {
-        gameGraphics.setup(settings);
+        final GameSettings settings = new GameSettings();
         final Input input = new Input(manager);
-        gameGraphics.addKeyListener(input);
+        gameGraphics.setup(settings, input);
     }
     
-    // runs on a loop by the tetris class
+    /** runs on a loop by the tetris class, responsible for generating a new game state and passing it to game graphics */
     public void update() {
         final GameState state = manager.update(timer.isTickTime());
         if (!timer.isLocked()) {    

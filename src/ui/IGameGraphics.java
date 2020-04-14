@@ -2,7 +2,6 @@ package ui;
 
 import app.GameSettings;
 import controllers.GameState;
-
 import java.awt.Dimension;
 import util.time.GameTimer;
 import java.awt.event.KeyListener;
@@ -14,10 +13,11 @@ public interface IGameGraphics {
         onDone();
     }
 
-    default void setup(GameSettings settings) {
+    default void setup(GameSettings settings, KeyListener keyListener) {
         Dimension screensize = settings.getScreenSize();
         setupFrame(screensize);
         setupLayoutManager(screensize);
+        addKeyListener(keyListener);
         start();
     }
 
@@ -26,7 +26,6 @@ public interface IGameGraphics {
     void setupFrame(Dimension size);
     void paint();
     void update(GameState state);
-
     void addKeyListener(KeyListener l);
 
     default void onDone() {

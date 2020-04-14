@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import models.tetriminos.Tetrimino;
 
+/** Responsible for getting keybaord input and passing it to its executer @see @ICommandReceiver */
+
 public class Input implements KeyListener {
 
     private ICommandReceiver executer;
@@ -18,7 +20,7 @@ public class Input implements KeyListener {
     }
     
     private ICommand parse(KeyEvent e) {
-        System.out.println("''"+e.getKeyChar()+" , "+e.getKeyCode());
+        util.log.GameLogger.outdatedLog("keychar: "+e.getKeyChar()+" , keycode: "+e.getKeyCode());
         switch(e.getKeyChar()) {
             case 'a':
             return Tetrimino::moveLeft;
