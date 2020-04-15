@@ -1,25 +1,30 @@
 package models.tetriminos;
 
+import models.Animate;
 import models.DrawList;
 import models.Drawable;
 import models.GameObject;
 import models.IGameObject;
 import models.IShape;
 import java.awt.Graphics;
+
+import controllers.ICommand;
 import ui.Architect;
 import java.awt.Color;
 
-public class Tetrimino implements IGameObject, IShape, Drawable {
+public class Tetrimino implements IGameObject, IShape, Drawable, Animate {
     
-    IGameObject body;
-    IShape shape;
-    DrawList leonardoDaVinci;
-    boolean isLastActionMove = true;
+    private IGameObject body;
+    private IShape shape;
+    private DrawList leonardoDaVinci;
+    private boolean isLastActionMove = true;
+    private ICommand animation;
 
     public Tetrimino(IShape shape, int x, int y, Color color) {
         this(shape, 
             Architect.getInstance().new Box(x,y,color)
         );
+        util.log.GameLogger.log("Successfully created the tetrimino");
     }
 
     public Tetrimino(IShape shape, int x, int y) {
@@ -44,6 +49,17 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
         isLastActionMove = true;
         body.move(dx, dy);
         update();
+    }
+
+    public void freeFall() {
+        fall();
+        // Thread.sleep();
+        fall();
+        fall();
+        fall();
+        fall();
+        fall();
+        fall();
     }
 
     private void update() {
@@ -74,5 +90,13 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
 
     public DrawList applyShape(IGameObject body) {
         return shape.applyShape(body);
+    }
+
+    public void setAnimation(ICommand cmd) {
+        animation = cmd;
+    }
+
+    public void playAnimation() {
+        if (animation!=null) animation.act(this);
     }
 }

@@ -31,6 +31,7 @@ public class GameManager implements ICommandReceiver {
         if ( current == null ) {
             current = spawn();
         }
+        current.playAnimation();
         if (isTick) {
             inputLock.unlock();
             if (fallLock.isUnlocked()) { 
@@ -40,13 +41,9 @@ public class GameManager implements ICommandReceiver {
                 level.digest(current);
                 current = spawn();
             }
-            if (level.checkCollision(current)) {
-                fallLock.report();
-                util.log.GameLogger.outdatedLog("fell!");
-                current.revert();
-            }
+            
         }
-        else if (level.checkCollision(current)) {
+        if (level.checkCollision(current)) {
             inputLock.report();
             util.log.GameLogger.outdatedLog("collision!");
             current.revert();
@@ -60,6 +57,11 @@ public class GameManager implements ICommandReceiver {
 
     private void applyGravity() {
         current.fall();
+        if (level.checkCollision(current)) {
+            fallLock.report();
+            util.log.GameLogger.outdatedLog("fell!");
+            current.revert();
+        }
         //@TODO if(lineRemoved) others.fall()
     }
 
