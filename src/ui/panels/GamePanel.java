@@ -5,7 +5,7 @@ import models.DrawList;
 
 public class GamePanel extends Panel {
 
-    DrawList list;
+    private DrawList list = new DrawList();
     
     public GamePanel(int w, int h) {
         super(w,h);

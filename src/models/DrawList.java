@@ -9,11 +9,12 @@ public class DrawList implements Drawable {
 
     private List<Drawable> list;
     private List<IGameObject> objects;
+    private boolean isDrawing = false;
 
     public DrawList() {
         list = new ArrayList<>();
-        objects = new ArrayList<>(); 
-        //this is so unneeded for drawlists rather than davinci =__= maybe should extend it
+        objects = new ArrayList<>();
+        // this is so unneeded for drawlists rather than davinci =__= maybe should extend it
     }
 
     public DrawList(List<Drawable> list) {
@@ -25,7 +26,7 @@ public class DrawList implements Drawable {
     }
 
     public void add(IGameObject item) {
-        list.add((Drawable)item);
+        list.add((Drawable) item);
         objects.add(item);
     }
 
@@ -37,7 +38,7 @@ public class DrawList implements Drawable {
 
     public void add(List<?> list) {
         for (Object d : list) {
-            add((Drawable)d);
+            add((Drawable) d);
         }
     }
 
@@ -50,8 +51,10 @@ public class DrawList implements Drawable {
     }
 
     public boolean collides(IGameObject[][] pixels) {
-        for (IGameObject go : objects) {
-            if (go.collides(pixels)) return true;
+        if (!isDrawing) {
+            for (IGameObject go : objects) {
+                if (go.collides(pixels)) return true;
+            }
         }
         return false;
     }
@@ -63,8 +66,10 @@ public class DrawList implements Drawable {
     }
 
     public void draw(Graphics g) {
+        isDrawing = true;
         for (Drawable d : list) {
             d.draw(g);
         }
+        isDrawing = false;
     }
 }

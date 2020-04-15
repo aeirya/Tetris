@@ -19,7 +19,8 @@ public class TetriminoGenerator {
             TetriminoShape.get(
                 (TetriminoShape) chooseRandom(TetriminoShape.values())),
             x, y, 
-            TColor.get((TColor) chooseRandom(TColor.getUsableColors()))
+            TColor.get(
+                (TColor) chooseRandom(TColor.getUsableColors()))
             );
     }
 
@@ -34,6 +35,7 @@ public class TetriminoGenerator {
             }
         }
         int i = rand.nextInt(e.length);
+        util.log.GameLogger.outdatedLog("Generated "+e[i]);
         return e[i];
     }
 

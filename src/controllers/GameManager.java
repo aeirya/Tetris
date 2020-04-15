@@ -51,10 +51,10 @@ public class GameManager implements ICommandReceiver {
             util.log.GameLogger.outdatedLog("collision!");
             current.revert();
         }
-        return updatedGameState();
+        return updatedGameState(gamePanelList);
     }
     
-    private GameState updatedGameState() {
+    private GameState updatedGameState(DrawList gamePanelList) {
         return new GameState(gamePanelList);
     }
 

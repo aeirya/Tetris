@@ -7,7 +7,7 @@ public class GameTimer {
     static final GameTimer instance = new GameTimer();
     static final int FPS = 30;
     static final long INTERVAL = 1000/FPS;
-    static final float GAME_SPEED = 1.0f;
+    static final float GAME_SPEED = 10.0f;
     private long waitTime = 0;
 
     private GameTimer() {

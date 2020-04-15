@@ -68,11 +68,6 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
         return leonardoDaVinci.collides(objects);
     }
 
-    // private Box[] dissociate() {
-    //     // 
-    //     return null;
-    // }
-
     public void addTo(IGameObject[][] map) {
         leonardoDaVinci.addTo(map);
     }
