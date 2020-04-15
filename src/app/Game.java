@@ -15,7 +15,7 @@ public class Game {
     private static final Game instance = new Game();
     private final IGameGraphics gameGraphics = new SwingGraphics();
     private final GameTimer timer = GameTimer.getInstance();
-    private final GameManager manager = new GameManager();
+    private final GameManager manager = new GameManager(timer);
 
     private Game() {}
     
@@ -38,5 +38,9 @@ public class Game {
             timer.holdOn();
         }
         gameGraphics.update(state);
+    }
+
+    public void changeGameSpeed() {
+        timer.goFaster();
     }
 }

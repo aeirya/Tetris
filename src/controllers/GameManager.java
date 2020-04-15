@@ -1,9 +1,12 @@
 package controllers;
 
 import java.util.List;
+
+import app.Game;
 import models.DrawList;
 import models.Drawable;
 import models.tetriminos.Tetrimino;
+import util.time.GameTimer;
 
 public class GameManager implements ICommandReceiver {
 
@@ -12,10 +15,11 @@ public class GameManager implements ICommandReceiver {
     private Tetrimino current = null;
     private final Lock inputLock = new Lock(4);
     private final Lock fallLock = new Lock(1);
-
+    private GameTimer timer;
     List<Tetrimino> aspawnedMinos;
 
-    public GameManager() {
+    public GameManager(GameTimer timer) {
+        this.timer = timer;
         gamePanelList.add(level.build());
     }
     
@@ -23,6 +27,7 @@ public class GameManager implements ICommandReceiver {
         Tetrimino spawned = level.spawnTetrimino(current);
         gamePanelList.add((Drawable)spawned);
         fallLock.unlock();
+        timer.resetSpeed();
         return spawned;
     }
 
@@ -31,7 +36,7 @@ public class GameManager implements ICommandReceiver {
         if ( current == null ) {
             current = spawn();
         }
-        current.playAnimation();
+        if (current.isDashing()) Game.getInstance().changeGameSpeed();
         if (isTick) {
             inputLock.unlock();
             if (fallLock.isUnlocked()) { 
@@ -44,6 +49,7 @@ public class GameManager implements ICommandReceiver {
             
         }
         if (level.checkCollision(current)) {
+            current.stopAnimation();
             inputLock.report();
             util.log.GameLogger.outdatedLog("collision!");
             current.revert();
@@ -67,7 +73,7 @@ public class GameManager implements ICommandReceiver {
 
     @Override
     public void receiveCommand(ICommand cmd) {
-        if (inputLock.isUnlocked()){
+        if (inputLock.isUnlocked() && fallLock.isUnlocked()){
             cmd.act(current);
             fallLock.unlock();
         }

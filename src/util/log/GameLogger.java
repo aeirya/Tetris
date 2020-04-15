@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 public class GameLogger {
     
     static final Logger logger = Logger.getLogger(GameLogger.class.getName());
-    private static final boolean DEBUG_MODE = true;
+    private static final boolean DEBUG_MODE = false;
     private GameLogger(){}
 
     public static void warning(String msg) {

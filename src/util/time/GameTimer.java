@@ -1,13 +1,14 @@
 package util.time;
 
 public class GameTimer {
-    final Timer timer = new Timer();
-    final Timer tickTimer = new Timer();
-    final Lock lock = new Lock();
-    static final GameTimer instance = new GameTimer();
-    static final int FPS = 30;
-    static final long INTERVAL = 1000/FPS;
-    static final float GAME_SPEED = 10.0f;
+    private final Timer timer = new Timer();
+    private final Timer tickTimer = new Timer();
+    private final Lock lock = new Lock();
+    private static final GameTimer instance = new GameTimer();
+    private static final int FPS = 30;
+    private static final long INTERVAL = 1000/FPS;
+    private static final float GAME_SPEED = 1.0f;
+    private float gameSpeed = GAME_SPEED;
     private long waitTime = 0;
 
     private GameTimer() {
@@ -48,8 +49,8 @@ public class GameTimer {
     public boolean isTickTime() {
         waitTime-= tickTimer.delta();
         if (waitTime <= 0) {
-            waitTime = (int) (1000 / GAME_SPEED);
-            util.log.GameLogger.log("\u001B[34m"+"tick"+"\u001B[0m");
+            waitTime = (int) (1000 / gameSpeed);
+            util.log.GameLogger.debug("\u001B[34m"+"tick"+"\u001B[0m");
             return true;
         }
         return false;
@@ -57,5 +58,13 @@ public class GameTimer {
 
     public boolean isLocked() {
         return lock.isLocked();
+    }
+
+    public void goFaster() {
+        gameSpeed *= 50;
+    }
+
+    public void resetSpeed() {
+        gameSpeed = GAME_SPEED;
     }
 }

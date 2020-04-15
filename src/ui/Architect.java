@@ -117,11 +117,11 @@ public class Architect {
         private void drawBorders(int x, int y, int width, int height, int w, Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setColor(c.darker());
-            drawVerticalLine(x+width-w, y, height, w, g2);
             drawHorizonalLine(x, y+height-w, width, w, g2);
+            drawVerticalLine(x+width-w, y, height, w, g2);
             g2.setColor(c.brighter());
             drawHorizonalLine(x, y+w, width, w, g2);
-            drawVerticalLine(x+w, y, width, w, g2);
+            drawVerticalLine(x+w, y, height, w, g2);
         }
         
         private void drawVerticalLine(int x, int y, int length, int w, Graphics2D g) {
