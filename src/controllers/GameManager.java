@@ -2,7 +2,7 @@ package controllers;
 
 import java.util.List;
 
-import app.Game;
+import app.Tetris;
 import models.DrawList;
 import models.Drawable;
 import models.tetriminos.Tetrimino;
@@ -36,17 +36,20 @@ public class GameManager implements ICommandReceiver {
         if ( current == null ) {
             current = spawn();
         }
-        if (current.isDashing()) Game.getInstance().changeGameSpeed();
         if (isTick) {
             inputLock.unlock();
             if (fallLock.isUnlocked()) { 
                 applyGravity();
             }
             else {
-                level.digest(current);
-                current = spawn();
+                try{
+                    level.digest(current);
+                } catch(Exception e) {
+                    util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
+                    Tetris.quitGame();
+                }
+                current = spawn(); //TODO: add this to try catch later
             }
-            
         }
         if (level.checkCollision(current)) {
             current.stopAnimation();
@@ -68,7 +71,7 @@ public class GameManager implements ICommandReceiver {
             util.log.GameLogger.outdatedLog("fell!");
             current.revert();
         }
-        //@TODO if(lineRemoved) others.fall()
+        //TODO: if lineRemoved others.fall()
     }
 
     @Override

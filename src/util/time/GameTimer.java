@@ -9,7 +9,7 @@ public class GameTimer {
     private static final long INTERVAL = 1000/FPS;
     private static final float GAME_SPEED = 1.0f;
     private float gameSpeed = GAME_SPEED;
-    private long waitTime = 0;
+    private long timeStanding = 0;
 
     private GameTimer() {
     }
@@ -47,11 +47,11 @@ public class GameTimer {
     }
 
     public boolean isTickTime() {
-        waitTime-= tickTimer.delta();
-        if (waitTime <= 0) {
-            waitTime = (int) (1000 / gameSpeed);
-            util.log.GameLogger.debug("\u001B[34m"+"tick"+"\u001B[0m");
-            return true;
+        timeStanding += tickTimer.delta();
+        if (timeStanding >= (int) (1000 / gameSpeed)) {
+            timeStanding = 0;
+                util.log.GameLogger.debug("\u001B[34m"+"tick"+"\u001B[0m");
+                return true;
         }
         return false;
     }

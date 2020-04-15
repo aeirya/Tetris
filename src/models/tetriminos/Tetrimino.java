@@ -1,6 +1,5 @@
 package models.tetriminos;
 
-import models.Animate;
 import models.DrawList;
 import models.Drawable;
 import models.GameObject;
@@ -8,6 +7,7 @@ import models.IGameObject;
 import models.IShape;
 import java.awt.Graphics;
 
+import app.Game;
 import controllers.Animator;
 import controllers.ICommand;
 import ui.Architect;
@@ -91,16 +91,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
         animator.stopAnimation();
     }
 
-    boolean isDashing = false;
-
     public void dash() {
-        isDashing = true;
-    }
-
-    public boolean isDashing() {
-        if (isDashing) {
-            isDashing = false;
-            return true;
-        } else return false;
+        Game.getInstance().changeGameSpeed();
     }
 }

@@ -1,6 +1,5 @@
 package controllers;
 
-import models.Animate;
 import models.tetriminos.Tetrimino;
 
 public class Animator {
