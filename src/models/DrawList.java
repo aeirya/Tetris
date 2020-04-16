@@ -9,7 +9,6 @@ public class DrawList implements Drawable {
 
     private List<Drawable> list;
     private List<IGameObject> objects;
-    private boolean isDrawing = false;
 
     public DrawList() {
         list = new ArrayList<>();
