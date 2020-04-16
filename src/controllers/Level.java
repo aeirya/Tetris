@@ -37,12 +37,45 @@ public class Level {
         }
     }
 
-    private void digest(IGameObject go) {
+    public void digest(IGameObject go) {
         go.addTo(staticBoxes);
+        checkLines();
     }
 
-    public Tetrimino spawnTetrimino(Tetrimino lastSpawned) {
-        if (lastSpawned!=null) digest(lastSpawned);
+    public Tetrimino spawnTetrimino() {
         return builder.spawnTetrimino();
+    }
+
+    private void checkLines() {
+        int i = 0;
+        for (Box[] line : staticBoxes) {
+            if (isLineFull(line)) {
+                util.log.GameLogger.log("line full");
+                deleteLine(line);
+                dropLevel(i);
+            }
+            i++;
+        }
+    }
+
+    private boolean isLineFull(Box[] line) {
+        util.log.GameLogger.outdatedLog("is Line full: "+line);
+        for(int i =0; i < line.length; i++) {
+            if (line[i]==null) return false;
+        }
+        return true;
+    }
+
+    private void deleteLine(Box[] line) {
+        for (int i = 0; i < line.length; i++) {
+            line[i] = null;
+        }
+    }
+
+    /** Moves any box above line i down */
+    private void dropLevel(int n) {
+        for (int i=n; i>=0 ; i--) {
+            staticBoxes[i] = staticBoxes[i-1];
+        }
     }
 }

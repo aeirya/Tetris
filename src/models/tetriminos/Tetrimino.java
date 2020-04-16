@@ -23,7 +23,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
 
     public Tetrimino(final IShape shape, final int x, final int y, final Color color) {
         this(shape, Architect.getInstance().new Box(x, y, color));
-        util.log.GameLogger.log("Successfully created the tetrimino");
+        util.log.GameLogger.outdatedLog("Successfully created the tetrimino");
     }
 
     public Tetrimino(final IShape shape, final int x, final int y) {

@@ -24,7 +24,7 @@ public class GameManager implements ICommandReceiver {
     }
     
     private Tetrimino spawn() {
-        Tetrimino spawned = level.spawnTetrimino(current);
+        Tetrimino spawned = level.spawnTetrimino();
         gamePanelList.add((Drawable)spawned);
         fallLock.unlock();
         timer.resetSpeed();
@@ -49,6 +49,7 @@ public class GameManager implements ICommandReceiver {
             }
             else {
                 try{
+                    level.digest(current);
                     current = spawn();
                 } catch(Exception e) {
                     util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");

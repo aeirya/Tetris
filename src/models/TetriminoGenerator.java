@@ -35,7 +35,7 @@ public class TetriminoGenerator {
             }
         }
         int i = rand.nextInt(e.length);
-        util.log.GameLogger.log("Generated "+e[i]);
+        util.log.GameLogger.outdatedLog("Generated "+e[i]);
         return e[i];
     }
 

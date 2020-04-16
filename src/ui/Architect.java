@@ -37,7 +37,7 @@ public class Architect {
     }
 
     public static class SizeManager {
-        
+        //TODO: these numbers should be custom
         private static final int NCOLUMNS = 12;
         private static final int NROWS = 21;
         private final Dimension boxDimension = new Dimension();
@@ -100,6 +100,12 @@ public class Architect {
             this.isSimple = isSimple;
         }
         
+        private int calcStrokeWidth(int width, int height) {
+            int a = 2+height/38;
+            int b = 2+width/50;
+            return a > b ? a : b;
+        }
+
         public void draw(Graphics g) {
             int width = (int) sizes.getBoxDim().getWidth();
             int height = (int) sizes.getBoxDim().getHeight();
@@ -107,8 +113,9 @@ public class Architect {
             int y = this.y*height;
             g.setColor(c);
             g.fillRect(x, y, width, height);
-            drawBorders(x+2, y+2, width-4, height-4, 2, g);
-            drawBorders(x,y,width,height, 2, g);
+            int strokeWidth = calcStrokeWidth(width, height);
+            drawBorders(x+2, y+2, width-4, height-4, strokeWidth, g);
+            drawBorders(x,y,width,height, strokeWidth, g);
             if (!isSimple) {
                 drawPokerface(x, y, width, height, g);
             }
