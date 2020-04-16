@@ -47,35 +47,51 @@ public class Level {
     }
 
     private void checkLines() {
-        int i = 0;
-        for (Box[] line : staticBoxes) {
+        for (int i=0; i<staticBoxes.length-1; i++) {
+            Box[] line = staticBoxes[i];
+            util.log.GameLogger.outdatedLog("is Line full: "+i);
             if (isLineFull(line)) {
                 util.log.GameLogger.log("line full");
                 deleteLine(line);
                 dropLevel(i);
             }
-            i++;
         }
     }
 
     private boolean isLineFull(Box[] line) {
-        util.log.GameLogger.outdatedLog("is Line full: "+line);
-        for(int i =0; i < line.length; i++) {
+        for(int i = 1; i < line.length-1; i++) {   
             if (line[i]==null) return false;
         }
         return true;
     }
 
+    private boolean isLineEmpty(Box[] line) {
+        for (int i = 1; i < line.length-1; i++) {
+            // System.out.println("Iterating" + i);
+            if (line[i]!=null) return false;
+        }
+        return true;
+    }
+
     private void deleteLine(Box[] line) {
-        for (int i = 0; i < line.length; i++) {
+        for (int i = 1; i < line.length-1; i++) {
             line[i] = null;
         }
     }
 
     /** Moves any box above line i down */
     private void dropLevel(int n) {
-        for (int i=n; i>=0 ; i--) {
-            staticBoxes[i] = staticBoxes[i-1];
+        for (int i=n-1; i>=0 ; i--) {
+            Box[] line = staticBoxes[i];
+            if (isLineEmpty(line)) { break; }
+            staticBoxes[i+1] = line;
+            moveLine(line);
+        }
+    }
+
+    private void moveLine(Box[] line) {
+        for (Box box : line) {
+            if(box != null) box.fall();
         }
     }
 }

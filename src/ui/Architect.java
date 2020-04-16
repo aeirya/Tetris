@@ -69,6 +69,7 @@ public class Architect {
 
         private Color c;
         private boolean isSimple = true;
+        private boolean isEmpty = false;
 
         public Box(int x, int y) {
             super(x,y);
@@ -77,6 +78,7 @@ public class Architect {
 
         public Box() {
             this(0,0);
+            isEmpty = true;
         }
 
         public Box(int x, int y, Color c, boolean isSimple) {
@@ -100,6 +102,10 @@ public class Architect {
             this.isSimple = isSimple;
         }
         
+        public boolean isEmpty() {
+            return isEmpty;
+        }
+
         private int calcStrokeWidth(int width, int height) {
             int a = 2+height/38;
             int b = 2+width/50;
@@ -156,6 +162,10 @@ public class Architect {
         @Override
         public IGameObject copy() {
             return new Box(x, y, c, isSimple);
+        }
+
+        public String toString() {
+            return "Box at " +x + ","+y;
         }
     }
 }

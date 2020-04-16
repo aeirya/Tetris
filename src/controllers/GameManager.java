@@ -52,6 +52,7 @@ public class GameManager implements ICommandReceiver {
                     level.digest(current);
                     current = spawn();
                 } catch(Exception e) {
+                    e.printStackTrace();
                     util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
                     Tetris.quitGame();
                 }

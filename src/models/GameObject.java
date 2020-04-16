@@ -41,7 +41,7 @@ public class GameObject implements IGameObject {
         if (x<=0 || x>=objects.length-1) return true;
         //don't want the game crashing while spawning
         if (y<0) return false; 
-        return objects[x][y]!=null;
+        return objects[y][x]!=null;
     }
 
     public IGameObject copy() {
@@ -49,6 +49,6 @@ public class GameObject implements IGameObject {
     }
 
     public void addTo(IGameObject[][] map) {
-        map[x][y] = this;
+        map[y][x] = this;
     }
 }
