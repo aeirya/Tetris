@@ -51,10 +51,8 @@ public class DrawList implements Drawable {
     }
 
     public boolean collides(IGameObject[][] pixels) {
-        if (!isDrawing) {
-            for (IGameObject go : objects) {
-                if (go.collides(pixels)) return true;
-            }
+        for (IGameObject go : objects) {
+            if (go.collides(pixels)) return true;
         }
         return false;
     }
@@ -66,10 +64,9 @@ public class DrawList implements Drawable {
     }
 
     public void draw(Graphics g) {
-        isDrawing = true;
-        for (Drawable d : list) {
-            d.draw(g);
+        //creating a copy of the array first, ditching the concurrent modification exception
+        for (Object obj : list.toArray()) { 
+            ((Drawable)obj).draw(g);
         }
-        isDrawing = false;
     }
 }
