@@ -72,6 +72,7 @@ public class LevelDesigner implements Drawable {
     public Tetrimino spawnTetrimino() {
         int x = N_COL>=5 ? rand.nextInt(N_COL-4)+2 : 2;
         int y = -1;
+        util.log.GameLogger.outdatedLog("Spawning at "+x+","+y);
         return TetriminoGenerator.random(x, y);
     }
 

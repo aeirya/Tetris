@@ -67,6 +67,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
             body.revert();
         else
             shape.revert();
+        isLastActionMove = !isLastActionMove;
         update();
     }
 

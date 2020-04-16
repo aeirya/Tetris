@@ -37,7 +37,10 @@ public class GameObject implements IGameObject {
     }
 
     public boolean collides(IGameObject[][] objects) {
-        if (y<0) return false;
+        //first and last spot, reserved to the walls
+        if (x<=0 || x>=objects.length-1) return true;
+        //don't want the game crashing while spawning
+        if (y<0) return false; 
         return objects[x][y]!=null;
     }
 

@@ -37,12 +37,12 @@ public class Level {
         }
     }
 
-    public void digest(IGameObject go) {
+    private void digest(IGameObject go) {
         go.addTo(staticBoxes);
     }
 
     public Tetrimino spawnTetrimino(Tetrimino lastSpawned) {
-        // if (lastSpawned!=null) lastSpawned.addTo(staticBoxes);
+        if (lastSpawned!=null) digest(lastSpawned);
         return builder.spawnTetrimino();
     }
 }

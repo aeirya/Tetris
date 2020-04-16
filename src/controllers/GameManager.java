@@ -49,12 +49,11 @@ public class GameManager implements ICommandReceiver {
             }
             else {
                 try{
-                    level.digest(current);
+                    current = spawn();
                 } catch(Exception e) {
                     util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
                     Tetris.quitGame();
                 }
-                current = spawn(); //TODO: add this to try catch later
             }
         }
         return updatedGameState(gamePanelList);
