@@ -1,5 +1,7 @@
 package models;
 
+import controllers.Map;
+
 public interface IGameObject {
     
     void move(int x, int y);
@@ -24,8 +26,8 @@ public interface IGameObject {
     }
 
     void revert();
-    void addTo(IGameObject[][] map);
-    boolean collides(IGameObject[][] objects);
+    void addTo(Map list);
+    boolean collides(Map map);
     
     IGameObject copy();
 }

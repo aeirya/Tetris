@@ -2,6 +2,8 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+
+import models.DrawList;
 import models.Drawable;
 import models.GameObject;
 import models.IGameObject;
@@ -166,6 +168,10 @@ public class Architect {
 
         public String toString() {
             return "Box at " +x + ","+y;
+        }
+
+        public void setDrawer(DrawList list) {
+            //
         }
     }
 }

@@ -1,5 +1,7 @@
 package models;
 
+import controllers.Map;
+
 public class GameObject implements IGameObject {
 
     protected int x=0;
@@ -36,19 +38,21 @@ public class GameObject implements IGameObject {
         revertMove();
     }
 
-    public boolean collides(IGameObject[][] objects) {
+    public boolean collides(Map map) {
         //first and last spot, reserved to the walls
-        if (x<=0 || x>=objects.length-1) return true;
+        if (x<=0 || x-1>=map.getWidth()) return true;
+        //bottom
+        if (y>=map.getHeight()) return true;
         //don't want the game crashing while spawning
         if (y<0) return false; 
-        return objects[y][x]!=null;
+        return map.shapeAt(x, y);
     }
 
     public IGameObject copy() {
         return kid.copy();
     }
 
-    public void addTo(IGameObject[][] map) {
-        map[y][x] = this;
+    public void addTo(Map map) {
+        map.set(x, y, this);
     }
 }

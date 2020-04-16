@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Tetris<Tetris_1514cad1>",
+            "request": "launch",
+            "mainClass": "app.Tetris",
+            "projectName": "Tetris_1514cad1"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestMain<Tetris_1514cad1>",
+            "request": "launch",
+            "mainClass": "util.TestMain",
+            "projectName": "Tetris_1514cad1"
+        }
+    ]
+}

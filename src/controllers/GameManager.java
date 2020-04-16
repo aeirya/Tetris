@@ -21,6 +21,7 @@ public class GameManager implements ICommandReceiver {
     public GameManager(GameTimer timer) {
         this.timer = timer;
         gamePanelList.add(level.build());
+        gamePanelList.add(level);
     }
     
     private Tetrimino spawn() {
@@ -49,7 +50,9 @@ public class GameManager implements ICommandReceiver {
             }
             else {
                 try{
+                    gamePanelList.remove(current);
                     level.digest(current);
+                    level.checkLines();
                     current = spawn();
                 } catch(Exception e) {
                     e.printStackTrace();

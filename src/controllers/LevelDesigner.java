@@ -31,7 +31,7 @@ public class LevelDesigner implements Drawable {
     }
 
     public Box[][] create2DBoxList() {
-        return new Box[N_ROW][N_COL];
+        return new Box[N_ROW-1][N_COL-2];
     }
 
     public Box[] generateBoxes(Box sample, List<Coordinate> cList) {

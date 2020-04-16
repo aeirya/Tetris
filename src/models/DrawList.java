@@ -3,6 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import controllers.Map;
+
 import java.awt.Graphics;
 
 public class DrawList implements Drawable {
@@ -22,6 +25,8 @@ public class DrawList implements Drawable {
 
     public void add(Drawable item) {
         list.add(item);
+        // item.setDrawer(this);
+
     }
 
     public void add(IGameObject item) {
@@ -45,18 +50,19 @@ public class DrawList implements Drawable {
         list.remove(obj);
     }
 
+
     public void removeAll(Collection<?> c) {
         list.removeAll(c);
     }
 
-    public boolean collides(IGameObject[][] pixels) {
+    public boolean collides(Map map) {
         for (IGameObject go : objects) {
-            if (go.collides(pixels)) return true;
+            if (go.collides(map)) return true;
         }
         return false;
     }
 
-    public void addTo(IGameObject[][] map) {
+    public void addTo(Map map) {
         for (IGameObject go : objects) {
             go.addTo(map);
         }
