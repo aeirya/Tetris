@@ -14,7 +14,7 @@ public class TetriminoGenerator {
     }
 
     public static Tetrimino random(int x, int y) {
-        util.log.GameLogger.debug("trying to geneerate a tetrimono");
+        util.log.GameLogger.outdatedLog("trying to geneerate a tetrimono");
         return new Tetrimino(
             TetriminoShape.get(
                 (TetriminoShape) chooseRandom(TetriminoShape.values())),
@@ -35,7 +35,7 @@ public class TetriminoGenerator {
             }
         }
         int i = rand.nextInt(e.length);
-        util.log.GameLogger.outdatedLog("Generated "+e[i]);
+        util.log.GameLogger.log("Generated "+e[i]);
         return e[i];
     }
 

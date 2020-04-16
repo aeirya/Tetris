@@ -20,7 +20,6 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     private DrawList leonardoDaVinci;
     private boolean isLastActionMove = true;
     private Animator animator = new Animator();
-    private boolean locked = false;
 
     public Tetrimino(final IShape shape, final int x, final int y, final Color color) {
         this(shape, Architect.getInstance().new Box(x, y, color));
@@ -40,28 +39,15 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
 
     public void rotate(final int i) {
-        if (!locked) {
-            isLastActionMove = false;
-            shape.rotate(i);
-            update();
-        }
-    }
-
-    public void move(final int dx, final int dy) {
-        if (!locked) {
-            forceMove(dx, dy);
-        }
-    }
-    
-    private void forceMove(final int dx, final int dy) {
-        isLastActionMove = true;
-        body.move(dx, dy);
+        isLastActionMove = false;
+        shape.rotate(i);
         update();
     }
 
-    @Override
-    public void fall() {
-        forceMove(0, 1);
+    public void move(final int dx, final int dy) {
+        isLastActionMove = true;
+        body.move(dx, dy);
+        update();
     }
 
     private void update() {
@@ -106,7 +92,6 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
 
     public void dash() {
-        this.locked = true;
         Game.getInstance().changeGameSpeed();
     }
 }

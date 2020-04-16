@@ -36,6 +36,12 @@ public class GameManager implements ICommandReceiver {
         if ( current == null ) {
             current = spawn();
         }
+        if (level.checkCollision(current)) {
+            current.stopAnimation();
+            inputLock.report();
+            util.log.GameLogger.outdatedLog("collision!");
+            current.revert();
+        }
         if (isTick) {
             inputLock.unlock();
             if (fallLock.isUnlocked()) { 
@@ -50,12 +56,6 @@ public class GameManager implements ICommandReceiver {
                 }
                 current = spawn(); //TODO: add this to try catch later
             }
-        }
-        if (level.checkCollision(current)) {
-            current.stopAnimation();
-            inputLock.report();
-            util.log.GameLogger.outdatedLog("collision!");
-            current.revert();
         }
         return updatedGameState(gamePanelList);
     }
