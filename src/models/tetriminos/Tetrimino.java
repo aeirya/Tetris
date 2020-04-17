@@ -1,15 +1,17 @@
 package models.tetriminos;
 
-import models.DrawList;
+import models.CollidableDrawList;
 import models.Drawable;
 import models.GameObject;
 import models.IGameObject;
 import models.IShape;
 import java.awt.Graphics;
+import java.util.List;
 
 import app.Game;
 import controllers.Animator;
 import controllers.ICommand;
+import controllers.Map;
 import ui.Architect;
 import java.awt.Color;
 
@@ -17,13 +19,13 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
 
     private final IGameObject body;
     private final IShape shape;
-    private DrawList leonardoDaVinci;
+    private CollidableDrawList leonardoDaVinci;
     private boolean isLastActionMove = true;
     private Animator animator = new Animator();
 
     public Tetrimino(final IShape shape, final int x, final int y, final Color color) {
         this(shape, Architect.getInstance().new Box(x, y, color));
-        util.log.GameLogger.log("Successfully created the tetrimino");
+        util.log.GameLogger.outdatedLog("Successfully created the tetrimino");
     }
 
     public Tetrimino(final IShape shape, final int x, final int y) {
@@ -51,7 +53,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
 
     private void update() {
-        leonardoDaVinci = applyShape(body);
+        leonardoDaVinci = new CollidableDrawList( applyShape(body) );
     }
 
     public void draw(final Graphics g) {
@@ -71,15 +73,15 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
         update();
     }
 
-    public boolean collides(final IGameObject[][] objects) {
+    public boolean collides(final Map objects) {
         return leonardoDaVinci.collides(objects);
     }
 
-    public void addTo(final IGameObject[][] map) {
+    public void addTo(final Map map) {
         leonardoDaVinci.addTo(map); 
     }
 
-    public DrawList applyShape(final IGameObject body) {
+    public List<IGameObject> applyShape(final IGameObject body) {
         return shape.applyShape(body);
     }
 

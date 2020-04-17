@@ -1,7 +1,9 @@
 package models.tetriminos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Coordinate;
-import models.DrawList;
 import models.IGameObject;
 import models.Shape;
 
@@ -12,8 +14,8 @@ public class IShaped extends Shape {
     }
 
     @Override
-    public DrawList applyShape(IGameObject object) {
-        DrawList result = new DrawList();
+    public List<IGameObject> applyShape(IGameObject object) {
+        List<IGameObject> result = new ArrayList<>();
         for (Coordinate c : check(coordinates)) {
 
             result.add(object.updatedCoordinates(c));

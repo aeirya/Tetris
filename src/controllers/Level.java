@@ -1,48 +1,52 @@
 package controllers;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import models.Drawable;
 import models.IGameObject;
 import models.tetriminos.Tetrimino;
 import ui.Architect.Box;
 
-public class Level {
+public class Level implements Drawable {
 
     private final LevelDesigner builder = new LevelDesigner();
-    private Box[][] staticBoxes;
+    private Map map;
 
     public Level() {
-        staticBoxes = builder.create2DBoxList();
+        map = new Map(builder.create2DBoxList());
     }
 
     public List<Box> build() {
         List<Box> level = new ArrayList<>();
-        List<Box> wallsList = Arrays.asList(builder.spawnWall());
-        List<Box> background = Arrays.asList(builder.spawnBackgroundPixels());
-        digest(wallsList);
-        level.addAll(wallsList);
-        level.addAll(background);
+        level.addAll(
+            Arrays.asList(builder.spawnWall())
+        );
+        level.addAll(
+            Arrays.asList(builder.spawnBackgroundPixels())
+        );
         return level;
     }
 
-    public boolean checkCollision(Tetrimino t) {
-        return t.collides(staticBoxes);
+    public boolean checkCollision(Tetrimino tetrimino) {
+        return tetrimino.collides(map);
     }
 
-    private void digest(List<Box> items) {
-        for (Box box : items) {
-            box.addTo(staticBoxes);
-        }
-    }
-
-    private void digest(IGameObject go) {
-        go.addTo(staticBoxes);
-    }
-
-    public Tetrimino spawnTetrimino(Tetrimino lastSpawned) {
-        if (lastSpawned!=null) digest(lastSpawned);
+    public Tetrimino spawnTetrimino() {
         return builder.spawnTetrimino();
+    }
+
+    public void digest(IGameObject go) {
+        map.digest(go);
+    }
+
+    public void checkLines() {
+        map.checkLines();
+    }
+
+    public void draw(Graphics g) {
+        map.draw(g);
     }
 }
