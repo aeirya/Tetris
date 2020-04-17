@@ -39,7 +39,7 @@ public class Map implements Drawable {
         for (int i = 0; i < getHeight(); i++) {
             Line line = getLine(i);
             if (line.isFull()) {
-                util.log.GameLogger.log("line full!");
+                util.log.GameLogger.outdatedLog("line full!");
                 line.clear();
                 dropLevel(i);
             }
@@ -51,7 +51,7 @@ public class Map implements Drawable {
             Line line = getLine(i);
             if (line.isEmpty()) break;
             line.moveDown();
-            list[i+1] = list[i];
+            line.replace(list[i+1]);
         }
         Line head = getLine(0);
         if (!head.isEmpty()) head.clear();
@@ -96,6 +96,13 @@ public class Map implements Drawable {
                 if (box != null)
                     box.fall();
             }
+        }
+
+        void replace(Box[] dest) {
+            for (int i=0; i<getWidth(); i++) {
+                dest[i] = myLine[i];
+            }
+            this.clear();
         }
     }
     

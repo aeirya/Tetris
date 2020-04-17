@@ -1,5 +1,8 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Shape implements IShape {
 
     protected ShapeCoordinate[] coordinates;
@@ -16,10 +19,10 @@ public class Shape implements IShape {
         revert.run();
     }
 
-    public DrawList applyShape(IGameObject object) {
-        DrawList result = new DrawList();
+    public List<IGameObject> applyShape(IGameObject object) {
+        List<IGameObject> result = new ArrayList<>();
         for (Coordinate c : coordinates) {
-            result.add(object.updatedCoordinates(c));
+            result.add( object.updatedCoordinates(c) );
         }
         return result;
     }

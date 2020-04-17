@@ -21,11 +21,12 @@ public class Level implements Drawable {
 
     public List<Box> build() {
         List<Box> level = new ArrayList<>();
-        List<Box> wallsList = Arrays.asList(builder.spawnWall());
-        List<Box> background = Arrays.asList(builder.spawnBackgroundPixels());
-        // digest(wallsList);
-        level.addAll(wallsList);
-        level.addAll(background);
+        level.addAll(
+            Arrays.asList(builder.spawnWall())
+        );
+        level.addAll(
+            Arrays.asList(builder.spawnBackgroundPixels())
+        );
         return level;
     }
 
@@ -39,12 +40,6 @@ public class Level implements Drawable {
 
     public void digest(IGameObject go) {
         map.digest(go);
-    }
-
-    private void digest(List<Box> items) {
-        for (Box box : items) {
-            digest(box);
-        }
     }
 
     public void checkLines() {

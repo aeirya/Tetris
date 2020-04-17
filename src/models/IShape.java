@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 public interface IShape {
     void rotate(int i);
     default void rotateLeft() {
@@ -9,5 +11,5 @@ public interface IShape {
         rotate(-1);
     }
     void revert();
-    DrawList applyShape(IGameObject body);
+    List<IGameObject> applyShape(IGameObject body);
 }

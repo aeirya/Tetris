@@ -1,11 +1,12 @@
 package models.tetriminos;
 
-import models.DrawList;
+import models.CollidableDrawList;
 import models.Drawable;
 import models.GameObject;
 import models.IGameObject;
 import models.IShape;
 import java.awt.Graphics;
+import java.util.List;
 
 import app.Game;
 import controllers.Animator;
@@ -18,7 +19,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
 
     private final IGameObject body;
     private final IShape shape;
-    private DrawList leonardoDaVinci;
+    private CollidableDrawList leonardoDaVinci;
     private boolean isLastActionMove = true;
     private Animator animator = new Animator();
 
@@ -52,7 +53,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
 
     private void update() {
-        leonardoDaVinci = applyShape(body);
+        leonardoDaVinci = new CollidableDrawList( applyShape(body) );
     }
 
     public void draw(final Graphics g) {
@@ -80,7 +81,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
         leonardoDaVinci.addTo(map); 
     }
 
-    public DrawList applyShape(final IGameObject body) {
+    public List<IGameObject> applyShape(final IGameObject body) {
         return shape.applyShape(body);
     }
 

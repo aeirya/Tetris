@@ -55,7 +55,7 @@ public class GameManager implements ICommandReceiver {
                     level.checkLines();
                     current = spawn();
                 } catch(Exception e) {
-                    e.printStackTrace();
+                    util.log.GameLogger.outdatedLog(e.toString());
                     util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
                     Tetris.quitGame();
                 }
@@ -75,7 +75,6 @@ public class GameManager implements ICommandReceiver {
             util.log.GameLogger.outdatedLog("fell!");
             current.revert();
         }
-        //TODO: if lineRemoved others.fall()
     }
 
     @Override
