@@ -16,6 +16,7 @@ public class GameManager implements ICommandReceiver {
     private final Level level = new Level();
     private DrawList gamePanelList = new DrawList();
     private Tetrimino current = null;
+    private Tetrimino next = null;
     private final Lock inputLock = new Lock(4);
     private final Lock fallLock = new Lock(1);
     private GameTimer timer;
@@ -28,7 +29,10 @@ public class GameManager implements ICommandReceiver {
     }
     
     private Tetrimino spawn() {
-        Tetrimino spawned = level.spawnTetrimino();
+        if (next == null) next = level.spawnTetrimino();
+        Tetrimino spawned = (Tetrimino)next.copy();
+        next = level.spawnTetrimino();
+        next.fall(); next.fall();
         gamePanelList.add((Drawable)spawned);
         fallLock.unlock();
         timer.resetSpeed();
@@ -68,7 +72,7 @@ public class GameManager implements ICommandReceiver {
     }
     
     private GameState updatedGameState(DrawList gamePanelList) {
-        return new GameState(gamePanelList);
+        return new GameState(gamePanelList, next);
     }
 
     private void applyGravity() {

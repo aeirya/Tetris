@@ -14,18 +14,20 @@ public class DrawList implements Drawable {
         list = new ArrayList<>();
     }
 
-    public void add(Drawable item) {
+    public DrawList add(Drawable item) {
         list.add(item);
+        return this;
     }
 
-    public void add(IGameObject item) {
-        add((Drawable) item);
+    public DrawList add(IGameObject item) {
+        return add((Drawable) item);
     }
 
-    public void add(List<?> list) {
+    public DrawList add(List<?> list) {
         for (Object d : list) {
             add((Drawable) d);
         }
+        return this;
     }
 
     public void remove(Object obj) {

@@ -1,11 +1,11 @@
 package ui.graphics;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import controllers.GameState;
-import ui.drawlist.DrawList;
 import models.Architect;
 import ui.panels.GamePanel;
 import ui.panels.SidePanel;
@@ -39,7 +39,7 @@ public class SwingGraphics implements IGameGraphics {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(size);
         frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
+        // frame.setResizable(false);
         mainPanel.setBackground(new Color(20,20,20));
     }
     
@@ -49,14 +49,14 @@ public class SwingGraphics implements IGameGraphics {
         Architect.getInstance().updateNumbers(new Dimension(gameX, gameY));
         gamePanel = new GamePanel(gameX, gameY);
         sidePanel = new SidePanel(size.width-gameX, size.height);
-        mainPanel.setLayout(new java.awt.BorderLayout());
-        gamePanel.addToPanel(mainPanel, BorderLayout.CENTER);
-        sidePanel.addToPanel(mainPanel, BorderLayout.LINE_END);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.LINE_AXIS));
+        gamePanel.addToPanel(mainPanel, BoxLayout.X_AXIS);
+        sidePanel.addToPanel(mainPanel, BoxLayout.X_AXIS);
     }
     
     public void update(GameState state) {
         gamePanel.update(state.getGamePanelDrawables());
-        // sidePanel.update(state.getNext());
+        sidePanel.update(state.getSidePanelDrawables());
     }
 
     public void addKeyListener(KeyListener l) {

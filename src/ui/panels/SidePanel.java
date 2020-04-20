@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import models.tetrimino.Tetrimino;
 import ui.ComponentGenerator;
+import ui.drawlist.DrawList;
 
 public class SidePanel extends Panel {
 
@@ -30,12 +31,8 @@ public class SidePanel extends Panel {
         pane.add(Box.createVerticalGlue());
     }
 
-    public void update() {
-        
-    }
-
-    public void showNext(Tetrimino next) {
-        nextPanel.showTetrimino(next);
+    public void update(DrawList list) {
+        nextPanel.update(list);
     }
 
     private JComponent scoresPanel() {
