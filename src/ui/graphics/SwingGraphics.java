@@ -6,7 +6,7 @@ import javax.swing.WindowConstants;
 
 import controllers.GameState;
 import ui.drawlist.DrawList;
-import ui.Architect;
+import models.Architect;
 import ui.panels.GamePanel;
 import ui.panels.SidePanel;
 

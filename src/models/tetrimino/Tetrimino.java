@@ -12,7 +12,7 @@ import app.Game;
 import controllers.Animator;
 import controllers.input.ICommand;
 import controllers.level.Map;
-import ui.Architect;
+import models.Architect;
 import java.awt.Color;
 
 public class Tetrimino implements IGameObject, IShape, Drawable {

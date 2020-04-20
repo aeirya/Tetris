@@ -8,7 +8,7 @@ import java.util.List;
 import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
 import models.tetrimino.Tetrimino;
-import ui.Architect.Box;
+import models.Architect.Box;
 
 public class Level implements Drawable {
 

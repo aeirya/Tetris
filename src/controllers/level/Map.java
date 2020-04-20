@@ -1,11 +1,10 @@
 package controllers.level;
 
+import java.awt.Graphics;
 import java.util.Objects;
-
 import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
-import ui.Architect.Box;
-import java.awt.Graphics;
+import models.Architect.Box;
 
 public class Map implements Drawable {
 
@@ -99,9 +98,7 @@ public class Map implements Drawable {
         }
 
         void replace(Box[] dest) {
-            for (int i=0; i<getWidth(); i++) {
-                dest[i] = myLine[i];
-            }
+            System.arraycopy(myLine, 0, dest, 0, getWidth());
             this.clear();
         }
     }
