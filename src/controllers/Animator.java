@@ -1,6 +1,7 @@
 package controllers;
 
-import models.tetriminos.Tetrimino;
+import controllers.input.ICommand;
+import models.tetrimino.Tetrimino;
 
 public class Animator {
 

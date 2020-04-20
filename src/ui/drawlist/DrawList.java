@@ -1,8 +1,10 @@
-package models;
+package ui.drawlist;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+import models.interfaces.Drawable;
+import models.interfaces.IGameObject;
 
 public class DrawList implements Drawable {
 

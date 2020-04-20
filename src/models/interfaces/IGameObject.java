@@ -1,6 +1,7 @@
-package models;
+package models.interfaces;
 
-import controllers.Map;
+import controllers.level.Map;
+import models.Coordinate;
 
 public interface IGameObject {
     

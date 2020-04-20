@@ -1,8 +1,8 @@
-package controllers;
+package controllers.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import models.tetriminos.Tetrimino;
+import models.tetrimino.Tetrimino;
 
 /** Responsible for getting keybaord input and passing it to its executer @see @ICommandReceiver */
 

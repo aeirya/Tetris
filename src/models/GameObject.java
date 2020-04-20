@@ -1,6 +1,7 @@
 package models;
 
-import controllers.Map;
+import controllers.level.Map;
+import models.interfaces.IGameObject;
 
 public class GameObject implements IGameObject {
 

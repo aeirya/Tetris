@@ -2,9 +2,9 @@ package app;
 
 import controllers.GameManager;
 import controllers.GameState;
-import controllers.Input;
-import ui.IGameGraphics;
-import ui.SwingGraphics;
+import controllers.input.Input;
+import ui.graphics.IGameGraphics;
+import ui.graphics.SwingGraphics;
 import util.time.GameTimer;
 
 /**

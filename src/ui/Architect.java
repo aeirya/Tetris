@@ -3,11 +3,11 @@ package ui;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import models.DrawList;
-import models.Drawable;
+import ui.drawlist.DrawList;
+import models.interfaces.Drawable;
 import models.GameObject;
-import models.IGameObject;
-import models.TetriminoGenerator.TColor;
+import models.interfaces.IGameObject;
+import models.tetrimino.TetriminoGenerator.TColor;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

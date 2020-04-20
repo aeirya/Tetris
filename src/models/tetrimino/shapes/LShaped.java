@@ -1,6 +1,6 @@
-package models.tetriminos;
+package models.tetrimino.shapes;
 
-import models.Shape;
+import models.tetrimino.Shape;
 
 public class LShaped extends Shape {
     

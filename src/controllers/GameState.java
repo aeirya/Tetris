@@ -1,6 +1,6 @@
 package controllers;
 
-import models.DrawList;
+import ui.drawlist.DrawList;
 
 public class GameState {
 

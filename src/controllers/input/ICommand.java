@@ -1,6 +1,6 @@
-package controllers;
+package controllers.input;
 
-import models.tetriminos.Tetrimino;
+import models.tetrimino.Tetrimino;
 
 @FunctionalInterface
 public interface ICommand {

@@ -1,11 +1,11 @@
-package models.tetriminos;
+package models.tetrimino.shapes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import models.Coordinate;
-import models.IGameObject;
-import models.Shape;
+import models.interfaces.IGameObject;
+import models.tetrimino.Shape;
 
 public class IShaped extends Shape {
     

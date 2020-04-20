@@ -1,8 +1,8 @@
 package ui.panels;
 
 import javax.swing.JPanel;
-import models.DrawList;
-import models.Drawable;
+import ui.drawlist.DrawList;
+import models.interfaces.Drawable;
 import java.awt.Graphics;
 
 public interface IPanel extends Drawable {

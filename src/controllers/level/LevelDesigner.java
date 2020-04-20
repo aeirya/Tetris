@@ -1,15 +1,15 @@
-package controllers;
+package controllers.level;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import models.Coordinate;
-import models.Drawable;
-import models.TetriminoGenerator;
-import models.TetriminoGenerator.TColor;
-import models.TetriminoGenerator.TetriminoShape;
-import models.tetriminos.Tetrimino;
+import models.interfaces.Drawable;
+import models.tetrimino.TetriminoGenerator;
+import models.tetrimino.TetriminoGenerator.TColor;
+import models.tetrimino.TetriminoGenerator.TetriminoShape;
+import models.tetrimino.Tetrimino;
 import ui.Architect;
 import ui.Architect.Box;
 import java.awt.Graphics;

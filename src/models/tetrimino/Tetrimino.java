@@ -1,17 +1,17 @@
-package models.tetriminos;
+package models.tetrimino;
 
-import models.CollidableDrawList;
-import models.Drawable;
+import ui.drawlist.CollidableDrawList;
+import models.interfaces.Drawable;
 import models.GameObject;
-import models.IGameObject;
-import models.IShape;
+import models.interfaces.IGameObject;
+import models.interfaces.IShape;
 import java.awt.Graphics;
 import java.util.List;
 
 import app.Game;
 import controllers.Animator;
-import controllers.ICommand;
-import controllers.Map;
+import controllers.input.ICommand;
+import controllers.level.Map;
 import ui.Architect;
 import java.awt.Color;
 

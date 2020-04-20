@@ -1,9 +1,9 @@
-package models;
+package ui.drawlist;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import controllers.Map;
+import models.interfaces.IGameObject;
+import controllers.level.Map;
 
 public class CollidableDrawList extends DrawList {
 

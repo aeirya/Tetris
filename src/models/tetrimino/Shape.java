@@ -1,7 +1,11 @@
-package models;
+package models.tetrimino;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import models.Coordinate;
+import models.interfaces.IGameObject;
+import models.interfaces.IShape;
 
 public class Shape implements IShape {
 

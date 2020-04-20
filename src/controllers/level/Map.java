@@ -1,9 +1,9 @@
-package controllers;
+package controllers.level;
 
 import java.util.Objects;
 
-import models.Drawable;
-import models.IGameObject;
+import models.interfaces.Drawable;
+import models.interfaces.IGameObject;
 import ui.Architect.Box;
 import java.awt.Graphics;
 

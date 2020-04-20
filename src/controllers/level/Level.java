@@ -1,13 +1,13 @@
-package controllers;
+package controllers.level;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import models.Drawable;
-import models.IGameObject;
-import models.tetriminos.Tetrimino;
+import models.interfaces.Drawable;
+import models.interfaces.IGameObject;
+import models.tetrimino.Tetrimino;
 import ui.Architect.Box;
 
 public class Level implements Drawable {

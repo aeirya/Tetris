@@ -1,6 +1,7 @@
-package models;
+package models.tetrimino;
 
-import models.tetriminos.*;
+import models.interfaces.IShape;
+import models.tetrimino.shapes.*;
 import java.awt.Color;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

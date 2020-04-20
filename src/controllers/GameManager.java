@@ -3,10 +3,13 @@ package controllers;
 import java.util.List;
 
 import app.Tetris;
-import models.DrawList;
-import models.Drawable;
-import models.tetriminos.Tetrimino;
+import controllers.input.ICommandReceiver;
+import controllers.input.ICommand;
+import ui.drawlist.DrawList;
+import models.interfaces.Drawable;
+import models.tetrimino.Tetrimino;
 import util.time.GameTimer;
+import controllers.level.Level;
 
 public class GameManager implements ICommandReceiver {
 
@@ -55,7 +58,7 @@ public class GameManager implements ICommandReceiver {
                     level.checkLines();
                     current = spawn();
                 } catch(Exception e) {
-                    util.log.GameLogger.outdatedLog(e.toString());
+                    util.log.GameLogger.log(e.toString());
                     util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
                     Tetris.quitGame();
                 }

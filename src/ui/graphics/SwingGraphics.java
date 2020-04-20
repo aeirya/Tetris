@@ -1,11 +1,12 @@
-package ui;
+package ui.graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import controllers.GameState;
-import models.DrawList;
+import ui.drawlist.DrawList;
+import ui.Architect;
 import ui.panels.GamePanel;
 import ui.panels.SidePanel;
 

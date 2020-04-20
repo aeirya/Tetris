@@ -1,7 +1,7 @@
 package ui.panels;
 
 import java.awt.Graphics;
-import models.DrawList;
+import ui.drawlist.DrawList;
 
 public class GamePanel extends Panel {
 
