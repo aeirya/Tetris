@@ -20,6 +20,7 @@ public class SwingGraphics implements IGameGraphics {
     private final JFrame frame = new JFrame();
     private final JPanel mainPanel = new JPanel();
     private GamePanel gamePanel;
+    private SidePanel sidePanel;
     
     public void start() {
         frame.setVisible(true);
@@ -38,11 +39,11 @@ public class SwingGraphics implements IGameGraphics {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(size);
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
         mainPanel.setBackground(new Color(20,20,20));
     }
     
     public void setupLayoutManager(Dimension size) {
-        SidePanel sidePanel;
         int gameX = (int)(size.width * 0.75);
         int gameY = size.height;
         Architect.getInstance().updateNumbers(new Dimension(gameX, gameY));
@@ -54,11 +55,8 @@ public class SwingGraphics implements IGameGraphics {
     }
     
     public void update(GameState state) {
-        updateGamePanel(state.getGamePanelDrawables());
-    }
-
-    private void updateGamePanel(DrawList list) {
-        gamePanel.update(list);
+        gamePanel.update(state.getGamePanelDrawables());
+        // sidePanel.update(state.getNext());
     }
 
     public void addKeyListener(KeyListener l) {

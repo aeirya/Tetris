@@ -5,10 +5,15 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.LayoutManager;
+import java.awt.Point;
 
 public abstract class Panel implements IPanel {
 
-    private JPanel pane = new JPanel() {
+    protected int width;
+    protected int height;
+
+    protected JPanel pane = new JPanel() {
         private static final long serialVersionUID = 1L;
         @Override
         protected void paintComponent(Graphics g) {
@@ -17,20 +22,50 @@ public abstract class Panel implements IPanel {
         }
     };
 
+    /** @param width
+     *  @param height */
     protected Panel(int w, int h) {
         setPreferredSize(w, h);
+        this.width = w;
+        this.height = h;
+    }
+
+    public void addToPanel(JPanel container) {
+        container.add(pane);
     }
 
 	@Override
 	public void addToPanel(JPanel container, Object constraints) {
         container.add(pane, constraints);
     }
-    
+
+    public void addToPanel(JPanel container, Point location) {
+        container.add(pane);
+        pane.setLocation(location);
+    }
+
+    /** x and y are numbers between 0 and 1, showing the relative location of the panel */
+    // public void add(Panel panel, double x, double y) {
+    //     Point p = new Point(
+    //         (int) (x*width) , (int) (y*height)
+    //     );
+    //     panel.addToPanel(pane);
+    //     panel.setBounds 
+    // }
+
     protected void setBackground(int r, int g, int b) {
         pane.setBackground(new Color(r,g,b));
     }
 
+    protected void setBackground(Color color) {
+        pane.setBackground(color);
+    }
+
     protected void setPreferredSize(int w, int h) {
         pane.setPreferredSize(new Dimension(w,h));
+    }
+
+    protected void setLayout(LayoutManager mgr) {
+        pane.setLayout(mgr);
     }
 }

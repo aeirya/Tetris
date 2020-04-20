@@ -21,8 +21,9 @@ public class Input implements KeyListener {
     
     private ICommand parse(KeyEvent e) {
         util.log.GameLogger.outdatedLog("keychar: "+e.getKeyChar()+" , keycode: "+e.getKeyCode());
-        if (e.getKeyCode()==32) 
+        if (e.getKeyCode()==32)  //space
             return Tetrimino::dash; 
+            
         switch(e.getKeyChar()) {
             case 'a':
             return Tetrimino::moveLeft;
