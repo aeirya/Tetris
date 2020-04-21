@@ -69,11 +69,18 @@ public class LevelDesigner implements Drawable {
         return generateBoxes(sample, list);
     }
 
-    public Tetrimino spawnTetrimino() {
+    public Tetrimino spawnTetrimino(Tetrimino tetrimino) {
         int x = N_COL>=5 ? rand.nextInt(N_COL-4)+2 : 2;
         int y = -1;
         util.log.GameLogger.outdatedLog("Spawning at "+x+","+y);
-        return TetriminoGenerator.random(x, y);
+        tetrimino = ((Tetrimino) tetrimino.copy());
+        tetrimino.move(-1, -2); //becuase of : generate tetrimino
+        tetrimino.move(x, y);
+        return tetrimino;
+    }
+
+    public Tetrimino generateTetrimino() {
+        return TetriminoGenerator.random(1, 2);
     }
 
     public List<Tetrimino> spawnAllMinosTest() {

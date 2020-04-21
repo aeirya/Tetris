@@ -7,7 +7,6 @@ import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import models.tetrimino.Tetrimino;
 import ui.ComponentGenerator;
 import ui.drawlist.DrawList;
 
@@ -31,6 +30,7 @@ public class SidePanel extends Panel {
         pane.add(Box.createVerticalGlue());
     }
 
+    @Override
     public void update(DrawList list) {
         nextPanel.update(list);
     }
@@ -38,7 +38,7 @@ public class SidePanel extends Panel {
     private JComponent scoresPanel() {
         Box box = Box.createVerticalBox();
         box.add(c.verticalFiller(0.05, 0.05, 0.1));
-        box.add(c.board(1, "Score: "));;
+        box.add(c.board(1, "Score: "));
         box.add(c.verticalFiller(0.05, 0.05, 0.1));
         box.add(c.vSandwich(c.board(1 , "Lines removed")));
         box.add(top10List());

@@ -2,7 +2,6 @@ package ui.panels;
 
 import java.awt.Graphics;
 
-import models.tetrimino.Tetrimino;
 import ui.ComponentGenerator;
 import ui.drawlist.DrawList;
 

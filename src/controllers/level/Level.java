@@ -34,8 +34,12 @@ public class Level implements Drawable {
         return tetrimino.collides(map);
     }
 
-    public Tetrimino spawnTetrimino() {
-        return builder.spawnTetrimino();
+    public Tetrimino generateTetrimino() {
+        return builder.generateTetrimino();
+    }
+
+    public Tetrimino spawnTetrimino(Tetrimino tetrimino) {
+        return builder.spawnTetrimino(tetrimino);
     }
 
     public void digest(IGameObject go) {

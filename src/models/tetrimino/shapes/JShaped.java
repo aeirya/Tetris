@@ -5,6 +5,6 @@ import models.tetrimino.Shape;
 public class JShaped extends Shape {
 
     public JShaped() {
-        coordinates = ShapeCoordinate.makeList(-1,0,0,0,1,0,1,-1);
+        coordinates = ShapeCoordinate.makeList(0,1,0,0,0,-1,1,-1);
     }
 }

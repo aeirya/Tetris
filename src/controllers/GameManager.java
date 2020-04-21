@@ -29,10 +29,9 @@ public class GameManager implements ICommandReceiver {
     }
     
     private Tetrimino spawn() {
-        if (next == null) next = level.spawnTetrimino();
-        Tetrimino spawned = (Tetrimino)next.copy();
-        next = level.spawnTetrimino();
-        next.fall(); next.fall();
+        if (next == null) next = level.generateTetrimino();
+        Tetrimino spawned = level.spawnTetrimino(next);
+        next = level.generateTetrimino();
         gamePanelList.add((Drawable)spawned);
         fallLock.unlock();
         timer.resetSpeed();
