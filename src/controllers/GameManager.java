@@ -1,12 +1,8 @@
 package controllers;
 
-import java.util.List;
-
 import app.Tetris;
 import controllers.input.ICommandReceiver;
 import controllers.input.ICommand;
-import ui.drawlist.DrawList;
-import models.interfaces.Drawable;
 import models.tetrimino.Tetrimino;
 import util.time.GameTimer;
 import controllers.level.Level;
@@ -14,25 +10,20 @@ import controllers.level.Level;
 public class GameManager implements ICommandReceiver {
 
     private final Level level = new Level();
-    private DrawList gamePanelList = new DrawList();
     private Tetrimino current = null;
     private Tetrimino next = null;
     private final Lock inputLock = new Lock(4);
     private final Lock fallLock = new Lock(1);
     private GameTimer timer;
-    List<Tetrimino> aspawnedMinos;
 
     public GameManager(GameTimer timer) {
         this.timer = timer;
-        gamePanelList.add(level.build());
-        gamePanelList.add(level);
     }
     
     private Tetrimino spawn() {
         if (next == null) next = level.generateTetrimino();
         Tetrimino spawned = level.spawnTetrimino(next);
         next = level.generateTetrimino();
-        gamePanelList.add((Drawable)spawned);
         fallLock.unlock();
         timer.resetSpeed();
         return spawned;
@@ -56,7 +47,6 @@ public class GameManager implements ICommandReceiver {
             }
             else {
                 try{
-                    gamePanelList.remove(current);
                     level.digest(current);
                     level.checkLines();
                     current = spawn();
@@ -67,11 +57,11 @@ public class GameManager implements ICommandReceiver {
                 }
             }
         }
-        return updatedGameState(gamePanelList);
+        return updatedGameState(level, current, next );
     }
     
-    private GameState updatedGameState(DrawList gamePanelList) {
-        return new GameState(gamePanelList, next);
+    private GameState updatedGameState(Level level, Tetrimino current, Tetrimino next) {
+        return new GameState(level, current, next);
     }
 
     private void applyGravity() {

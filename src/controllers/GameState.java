@@ -1,24 +1,26 @@
 package controllers;
 
-import models.interfaces.Drawable;
+import controllers.level.Level;
 import models.tetrimino.Tetrimino;
 import ui.drawlist.DrawList;
 
 public class GameState {
 
-    private DrawList gamePanel;
+    private Level level;
+    private Tetrimino current;
     private Tetrimino next;
 
-    public GameState( DrawList gamePanel, Tetrimino next) {
-        this.gamePanel = gamePanel;
+    public GameState( Level level, Tetrimino current, Tetrimino next) {
+        this.level = level;
+        this.current = current;
         this.next = next;
     }
 
     public DrawList getGamePanelDrawables() {
-        return gamePanel;
+        return new DrawList().add(level).add(current);
     }
 
     public DrawList getSidePanelDrawables() {
-        return new DrawList().add((Drawable) next);
+        return new DrawList().add(next);
     }
 }
