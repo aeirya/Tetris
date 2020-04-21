@@ -2,9 +2,9 @@ package ui.drawlist;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import models.interfaces.Drawable;
-import models.interfaces.IGameObject;
 
 public class DrawList implements Drawable {
 
@@ -19,14 +19,15 @@ public class DrawList implements Drawable {
         return this;
     }
 
-    public DrawList add(IGameObject item) {
-        return add((Drawable) item);
+    public DrawList add(List<?> list) {
+        list.stream().forEach(
+            (Object obj) -> add((Drawable) obj)
+        );
+        return this;
     }
 
-    public DrawList add(List<?> list) {
-        for (Object d : list) {
-            add((Drawable) d);
-        }
+    public DrawList add(Drawable...items) {
+        list = Arrays.asList(items);
         return this;
     }
 

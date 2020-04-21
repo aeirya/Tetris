@@ -8,26 +8,32 @@ import java.util.List;
 import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
 import models.tetrimino.Tetrimino;
+import ui.drawlist.DrawList;
 import models.Architect.Box;
 
 public class Level implements Drawable {
 
     private final LevelDesigner builder = new LevelDesigner();
     private Map map;
+    private List<Box> myLevel;
+    
 
     public Level() {
         map = new Map(builder.create2DBoxList());
+        myLevel = build();
     }
 
     public List<Box> build() {
-        List<Box> level = new ArrayList<>();
-        level.addAll(
-            Arrays.asList(builder.spawnWall())
-        );
-        level.addAll(
-            Arrays.asList(builder.spawnBackgroundPixels())
-        );
-        return level;
+        if (myLevel == null) {
+            myLevel = new ArrayList<>();
+            myLevel.addAll(
+                Arrays.asList(builder.spawnWall())
+            );
+            myLevel.addAll(
+                Arrays.asList(builder.spawnBackgroundPixels())
+            );
+        }
+        return myLevel;
     }
 
     public boolean checkCollision(Tetrimino tetrimino) {
@@ -51,6 +57,7 @@ public class Level implements Drawable {
     }
 
     public void draw(Graphics g) {
+        new DrawList().add(myLevel).draw(g);
         map.draw(g);
     }
 }
