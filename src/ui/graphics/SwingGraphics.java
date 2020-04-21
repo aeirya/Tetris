@@ -39,7 +39,7 @@ public class SwingGraphics implements IGameGraphics {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(size);
         frame.setLocationRelativeTo(null);
-        // frame.setResizable(false);
+        frame.setResizable(false);
         mainPanel.setBackground(new Color(20,20,20));
     }
     

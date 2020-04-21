@@ -53,7 +53,7 @@ public class SidePanel extends Panel {
         textField.setPreferredSize(
             new Dimension(width, (int) (height * 0.25))
             );
-        textField.setFont(textField.getFont().deriveFont((float)20));
+        textField.setFont(textField.getFont().deriveFont((float)16));
         textField.setFocusable(false);
         JScrollPane pane = new JScrollPane(textField);
         pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
