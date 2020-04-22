@@ -29,7 +29,7 @@ public class SidePanel extends Panel {
     }
 
     private void initiate() {
-        scoresPanel = scoresPanel();
+        scoresPanel = scoresPanel(score);
         pane.add(scoresPanel);
         nextPanel.addToPanel(pane);
         pane.add(Box.createVerticalGlue());
@@ -38,11 +38,17 @@ public class SidePanel extends Panel {
     @Override
     public void update(GameState state) {
         score = (GameScore) state.get(this);
-        // scoresPanel.
+        util.log.GameLogger.log(""+score.getScore());
+        scoresPanel = scoresPanel(score);
         nextPanel.update(state);
     }
 
-    private JComponent scoresPanel() {
+    @Override
+    public void draw(java.awt.Graphics g) {
+        scoresPanel.paint(g);
+    }
+
+    private JComponent scoresPanel(GameScore score) {
         Box box = Box.createVerticalBox();
         box.add(c.verticalFiller(0.05, 0.05, 0.1));
         box.add(c.board(score.getScore(), "Score: "));

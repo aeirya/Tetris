@@ -42,7 +42,6 @@ public class GameManager implements ICommandReceiver {
             current.revert();
         }
         if (isTick) {
-            score.nextLevel();
             inputLock.unlock();
             if (fallLock.isUnlocked()) { 
                 applyGravity();
@@ -52,6 +51,7 @@ public class GameManager implements ICommandReceiver {
                     level.digest(current);
                     score.removedLine( level.checkLines() );
                     current = spawn();
+                    score.nextLevel();
                 } catch(Exception e) {
                     util.log.GameLogger.log(e.toString());
                     util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
