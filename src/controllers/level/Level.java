@@ -56,7 +56,7 @@ public class Level implements Drawable {
     }
 
     public void draw(Graphics g) {
-        new DrawList().add(build()).draw(g);
+        new DrawList().add(myLevel).draw(g);
         map.draw(g);
     }
 }
