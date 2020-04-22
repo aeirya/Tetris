@@ -15,6 +15,7 @@ public class GameManager implements ICommandReceiver {
     private final Lock inputLock = new Lock(4);
     private final Lock fallLock = new Lock(1);
     private GameTimer timer;
+    private GameScore score = new GameScore();
 
     public GameManager(GameTimer timer) {
         this.timer = timer;
@@ -41,6 +42,7 @@ public class GameManager implements ICommandReceiver {
             current.revert();
         }
         if (isTick) {
+            score.nextLevel();
             inputLock.unlock();
             if (fallLock.isUnlocked()) { 
                 applyGravity();
@@ -48,7 +50,7 @@ public class GameManager implements ICommandReceiver {
             else {
                 try{
                     level.digest(current);
-                    level.checkLines();
+                    score.removedLine( level.checkLines() );
                     current = spawn();
                 } catch(Exception e) {
                     util.log.GameLogger.log(e.toString());
@@ -57,11 +59,11 @@ public class GameManager implements ICommandReceiver {
                 }
             }
         }
-        return updatedGameState(level, current, next );
+        return updatedGameState(level, current, next, score );
     }
     
-    private GameState updatedGameState(Level level, Tetrimino current, Tetrimino next) {
-        return new GameState(level, current, next);
+    private GameState updatedGameState(Level level, Tetrimino current, Tetrimino next, GameScore score) {
+        return new GameState(level, current, next, score);
     }
 
     private void applyGravity() {

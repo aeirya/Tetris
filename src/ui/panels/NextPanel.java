@@ -2,6 +2,7 @@ package ui.panels;
 
 import java.awt.Graphics;
 
+import controllers.GameState;
 import ui.ComponentGenerator;
 import ui.drawlist.DrawList;
 
@@ -18,8 +19,8 @@ public class NextPanel extends Panel {
     }
 
     @Override
-    public void update(DrawList list) {
-        drawlist = list;
+    public void update(GameState state) {
+        drawlist = (DrawList) state.get(this);
     }
 
     @Override 

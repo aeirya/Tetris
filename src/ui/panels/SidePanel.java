@@ -7,38 +7,45 @@ import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+
+import controllers.GameScore;
+import controllers.GameState;
 import ui.ComponentGenerator;
-import ui.drawlist.DrawList;
 
 public class SidePanel extends Panel {
 
-    private NextPanel nextPanel;
-    private ComponentGenerator c;
+    private final NextPanel nextPanel;
+    private JComponent scoresPanel;
+    private final ComponentGenerator c;
+    private GameScore score = new GameScore();
 
     public SidePanel(int w, int h) {
         super(w, h);
         setBackground(40, 40, 45);
         setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
         c = new ComponentGenerator(w, h);
+        nextPanel = new NextPanel((int)(width*0.75), (int)(height*0.4));
         initiate();
     }
 
     private void initiate() {
-        pane.add(scoresPanel());
-        nextPanel = new NextPanel((int)(width*0.75), (int)(height*0.4));
+        scoresPanel = scoresPanel();
+        pane.add(scoresPanel);
         nextPanel.addToPanel(pane);
         pane.add(Box.createVerticalGlue());
     }
 
     @Override
-    public void update(DrawList list) {
-        nextPanel.update(list);
+    public void update(GameState state) {
+        score = (GameScore) state.get(this);
+        // scoresPanel.
+        nextPanel.update(state);
     }
 
     private JComponent scoresPanel() {
         Box box = Box.createVerticalBox();
         box.add(c.verticalFiller(0.05, 0.05, 0.1));
-        box.add(c.board(1, "Score: "));
+        box.add(c.board(score.getScore(), "Score: "));
         box.add(c.verticalFiller(0.05, 0.05, 0.1));
         box.add(c.vSandwich(c.board(1 , "Lines removed")));
         box.add(top10List());

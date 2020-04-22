@@ -1,6 +1,8 @@
 package ui.panels;
 
 import java.awt.Graphics;
+
+import controllers.GameState;
 import ui.drawlist.DrawList;
 
 public class GamePanel extends Panel {
@@ -18,7 +20,7 @@ public class GamePanel extends Panel {
     }
     
     @Override
-    public void update(DrawList list) {
-        this.list = list;
+    public void update(GameState state) {
+        this.list = (DrawList) state.get(this);
     }
 }

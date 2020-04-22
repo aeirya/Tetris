@@ -43,4 +43,6 @@ public class Game {
     public void changeGameSpeed() {
         timer.goFaster();
     }
+
+    //TODO: add gamestate backup : public GameState getLastState()
 }

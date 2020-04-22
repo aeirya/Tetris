@@ -55,8 +55,8 @@ public class SwingGraphics implements IGameGraphics {
     }
     
     public void update(GameState state) {
-        gamePanel.update(state.getGamePanelDrawables());
-        sidePanel.update(state.getSidePanelDrawables());
+        gamePanel.update(state);
+        sidePanel.update(state);
     }
 
     public void addKeyListener(KeyListener l) {
