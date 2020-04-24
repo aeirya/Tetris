@@ -168,9 +168,5 @@ public class Architect {
         public String toString() {
             return "Box at " +x + ","+y;
         }
-
-        public void setDrawer(DrawList list) {
-            //
-        }
     }
 }

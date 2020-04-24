@@ -23,7 +23,8 @@ public class ComponentGenerator {
 
     public JComponent board(int number, String text) {
         Box box = Box.createVerticalBox();
-        box.add(label(text));
+        JComponent label = label(text);
+        box.add(label);
         box.add(coloredLabel(String.valueOf(number), Color.GRAY.darker()));
         return sandwich(box);
     }

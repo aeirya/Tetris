@@ -5,6 +5,7 @@ import models.tetrimino.Tetrimino;
 import ui.drawlist.DrawList;
 import ui.panels.GamePanel;
 import ui.panels.NextPanel;
+import ui.panels.ScorePanel;
 import ui.panels.SidePanel;
 
 public class GameState {
@@ -29,6 +30,9 @@ public class GameState {
             return getNextPanelDrawables();
         }
         if (receiver.getClass()==SidePanel.class) {
+            return null;
+        }
+        if (receiver.getClass()==ScorePanel.class) {
             return score;
         }
         return null;
