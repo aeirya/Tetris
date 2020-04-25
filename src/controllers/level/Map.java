@@ -34,15 +34,18 @@ public class Map implements Drawable {
         go.addTo(this);
     }
 
-    public void checkLines() {
+    public int checkLines() {
+        int counter = 0;
         for (int i = 0; i < getHeight(); i++) {
             Line line = getLine(i);
             if (line.isFull()) {
                 util.log.GameLogger.outdatedLog("line full!");
                 line.clear();
                 dropLevel(i);
+                counter += 1;
             }
         }
+        return counter;
     }
 
     private void dropLevel(int n) {

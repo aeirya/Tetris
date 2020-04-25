@@ -23,7 +23,8 @@ public class ComponentGenerator {
 
     public JComponent board(int number, String text) {
         Box box = Box.createVerticalBox();
-        box.add(label(text));
+        JComponent label = label(text);
+        box.add(label);
         box.add(coloredLabel(String.valueOf(number), Color.GRAY.darker()));
         return sandwich(box);
     }
@@ -76,6 +77,17 @@ public class ComponentGenerator {
         box.add(component);
         box.add(verticalFiller(0.05, 0.05, 0.1));
         return box;
+    }
+
+    public JLabel labelOfBoard(JComponent c) {
+        return
+            (JLabel)
+                ((JComponent) (
+                    ((JComponent) (
+                        c.getComponent(1)
+                    )).getComponent(1)
+                )).getComponent(0)
+            ;
     }
             
     /** @param m : minimum height rate 

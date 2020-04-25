@@ -51,8 +51,10 @@ public class Level implements Drawable {
         map.digest(go);
     }
 
-    public void checkLines() {
-        map.checkLines();
+    /** checks and removes lines
+     * @return lines removed */
+    public int checkLines() {
+        return map.checkLines();
     }
 
     public void draw(Graphics g) {

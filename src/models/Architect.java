@@ -3,7 +3,6 @@ package models;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import ui.drawlist.DrawList;
 import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
 import models.tetrimino.TetriminoGenerator.TColor;
@@ -167,10 +166,6 @@ public class Architect {
 
         public String toString() {
             return "Box at " +x + ","+y;
-        }
-
-        public void setDrawer(DrawList list) {
-            //
         }
     }
 }
