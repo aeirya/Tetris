@@ -1,22 +1,13 @@
 package ui.panels;
 
-import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
-
-import controllers.GameScore;
 import controllers.GameState;
-import ui.ComponentGenerator;
 
 public class SidePanel extends Panel {
 
     private final NextPanel nextPanel;
     private final ScorePanel scorePanel;
-    private GameScore score = new GameScore();
     private GameState lastState = null;
 
     public SidePanel(int w, int h) {

@@ -3,7 +3,6 @@ package models;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import ui.drawlist.DrawList;
 import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
 import models.tetrimino.TetriminoGenerator.TColor;

@@ -16,18 +16,20 @@ import ui.ComponentGenerator;
 public class ScorePanel extends Panel {
 
     private final ComponentGenerator c;
-    private GameScore score;
-    private JComponent myScorePanel;
+    private final JLabel scoreLabel;
+    private final JLabel linesRemovedLabel;
+    private GameScore score = new GameScore();
 
     /** TODO: panel sizing should be dynamic */
     public ScorePanel(final int w, final int h) {
         super(w, h);
         c = new ComponentGenerator(w, h);
-        initiate();
-    }
-
-    private void initiate() {
-        myScorePanel = scoresPanel();
+        //initiate
+        final JComponent myScorePanel = scoresPanel();
+        final JComponent scoreBoard = (JComponent) myScorePanel.getComponent(1);
+        final JComponent removedLinesBoard = (JComponent)((JComponent) myScorePanel.getComponent(3)).getComponent(0);
+        scoreLabel = c.labelOfBoard(scoreBoard);
+        linesRemovedLabel = c.labelOfBoard(removedLinesBoard);
         pane.add(myScorePanel);
     }
 
@@ -60,17 +62,15 @@ public class ScorePanel extends Panel {
     @Override
     public void update(GameState state) {
         score = (GameScore) state.get(this);
-        
-    }
-
-    private JLabel getScoreBoard() {
-        JComponent board = myScorePanel.getComponent(1);
-        JComponent label = myScorePanel.getComponent(0);
-        return (JLabel)label;
+        changeScore(score);
     }
 
     private void changeScore(GameScore score) {
-        // score.getScore()
-        
+        scoreLabel.setText(
+            String.valueOf(score.getScore())
+        );
+        linesRemovedLabel.setText(
+            String.valueOf(score.getRemovedLines())
+        );
     }
 }

@@ -78,6 +78,17 @@ public class ComponentGenerator {
         box.add(verticalFiller(0.05, 0.05, 0.1));
         return box;
     }
+
+    public JLabel labelOfBoard(JComponent c) {
+        return
+            (JLabel)
+                ((JComponent) (
+                    ((JComponent) (
+                        c.getComponent(1)
+                    )).getComponent(1)
+                )).getComponent(0)
+            ;
+    }
             
     /** @param m : minimum height rate 
      * @param M : maximum height rate
