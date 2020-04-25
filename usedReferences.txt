@@ -62,3 +62,10 @@ evevn dispatch:
 https://codereview.stackexchange.com/questions/151473/simple-event-dispatcher-for-game
 https://docs.oracle.com/javase/tutorial/uiswing/events/eventsandcomponents.html
 
+jar:
+https://stackoverflow.com/questions/20700053/how-to-add-local-jar-file-dependency-to-build-gradle-file
+https://www.geeksforgeeks.org/jar-files-java/
+
+sound:
+https://stackoverflow.com/questions/2343187/loading-resources-using-getclass-getresource
+https://www.geeksforgeeks.org/play-audio-file-using-java/

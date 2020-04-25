@@ -5,6 +5,7 @@ import controllers.GameState;
 import controllers.input.Input;
 import ui.graphics.IGameGraphics;
 import ui.graphics.SwingGraphics;
+import util.SimpleAudioPlayer;
 import util.time.GameTimer;
 
 /**
@@ -27,6 +28,13 @@ public class Game {
         final GameSettings settings = new GameSettings("settings.properties");
         final Input input = new Input(manager);
         gameGraphics.setup(settings, input);
+        try {
+            SimpleAudioPlayer audio = new SimpleAudioPlayer();
+            audio.play();
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        
     }
     
     /** runs on a loop by the tetris class, responsible for generating a new game state and passing it to game graphics */
