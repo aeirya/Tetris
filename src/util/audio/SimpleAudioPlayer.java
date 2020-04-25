@@ -1,4 +1,4 @@
-package util;
+package util.audio;
 
 import java.io.IOException;
 import javax.sound.sampled.AudioInputStream; 
@@ -20,7 +20,7 @@ public class SimpleAudioPlayer
 	{ 
         clip = AudioSystem.getClip(); 
 		resetAudioStream();
-	} 
+	}
 	
 	public void play() 
 	{ 
@@ -75,6 +75,7 @@ public class SimpleAudioPlayer
 			clip.setMicrosecondPosition(c); 
 			this.play(); 
 		} 
+		else restart();
 	} 
 	
     public void resetAudioStream() 
@@ -84,7 +85,11 @@ public class SimpleAudioPlayer
 		audioInputStream = AudioSystem.getAudioInputStream(
 			getClass().getResourceAsStream(filePath)
         ); 
-		clip.open(audioInputStream); 
-		clip.loop(Clip.LOOP_CONTINUOUSLY); 
+		clip.open(audioInputStream);
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
+	}
+
+	public Long getCurrentFrame() {
+		return currentFrame;
 	}
 } 

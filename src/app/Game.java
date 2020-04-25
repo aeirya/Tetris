@@ -5,18 +5,20 @@ import controllers.GameState;
 import controllers.input.Input;
 import ui.graphics.IGameGraphics;
 import ui.graphics.SwingGraphics;
-import util.SimpleAudioPlayer;
+import util.audio.GameAudioPlayer;
+import util.audio.IGameAudioPlayer;
 import util.time.GameTimer;
 
 /**
  * Game
  */
 public class Game {
-    
+
     private static final Game instance = new Game();
     private final IGameGraphics gameGraphics = new SwingGraphics();
     private final GameTimer timer = GameTimer.getInstance();
     private final GameManager manager = new GameManager(timer);
+    private final IGameAudioPlayer audioPlayer = new GameAudioPlayer();
 
     private Game() {}
     
@@ -28,13 +30,7 @@ public class Game {
         final GameSettings settings = new GameSettings("settings.properties");
         final Input input = new Input(manager);
         gameGraphics.setup(settings, input);
-        try {
-            SimpleAudioPlayer audio = new SimpleAudioPlayer();
-            audio.play();
-        }catch(Exception ex) {
-            ex.printStackTrace();
-        }
-        
+        audioPlayer.start();
     }
     
     /** runs on a loop by the tetris class, responsible for generating a new game state and passing it to game graphics */
@@ -52,5 +48,8 @@ public class Game {
         timer.goFaster();
     }
 
+    public IGameAudioPlayer getAudioPlayer() {
+        return audioPlayer;
+    }
     //TODO: add gamestate backup : public GameState getLastState()
 }
