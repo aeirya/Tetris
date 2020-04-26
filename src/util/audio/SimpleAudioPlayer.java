@@ -12,14 +12,22 @@ public class SimpleAudioPlayer
 	private Long currentFrame; 
 	private Clip clip; 	
 	private String status; 
-	private static String filePath = "../resources/funny_clip_1.wav"; 
+	private static final String DEFAULT_FILE_PATH = "../resources/funny_clip_1.wav"; 
+	private String filePath;
 
 	// constructor to initialize streams and clip 
-	public SimpleAudioPlayer() 
+	public SimpleAudioPlayer(String filePath) 
 		throws UnsupportedAudioFileException, IOException, LineUnavailableException 
 	{ 
+		this.filePath = filePath;
         clip = AudioSystem.getClip(); 
 		resetAudioStream();
+	}
+
+	public SimpleAudioPlayer()
+		throws UnsupportedAudioFileException, IOException, LineUnavailableException  
+	{
+		this(DEFAULT_FILE_PATH);
 	}
 	
 	public void play() 

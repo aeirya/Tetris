@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import models.interfaces.Drawable;
+import models.tetrimino.Tetrimino;
 
 public class DrawList implements Drawable {
 
@@ -14,8 +15,8 @@ public class DrawList implements Drawable {
         list = new ArrayList<>();
     }
 
-    public DrawList add(Drawable item) {
-        list.add(item);
+    public DrawList add(Tetrimino next) {
+        list.add(next);
         return this;
     }
 

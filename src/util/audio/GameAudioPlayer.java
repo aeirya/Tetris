@@ -15,12 +15,14 @@ public class GameAudioPlayer implements IGameAudioPlayer {
             return new SimpleAudioPlayer();
         } catch(Exception ex) {
             audioError(ex);
+            util.log.GameLogger.log("returning null player");
             return null;
         }
     }
     
     private void audioError(Exception ex) {
-        util.log.GameLogger.warning(ex.toString());
+        // util.log.GameLogger.warning(ex.getStackTrace()[0].toString());
+        ex.printStackTrace();
     }
 
     public void start() {
@@ -60,7 +62,7 @@ public class GameAudioPlayer implements IGameAudioPlayer {
     }
 
     public void fall() {
-        playClip(4000L, 5000L);
+        SoundEffect.FALL.play();
     }
 
     public void destroy() {

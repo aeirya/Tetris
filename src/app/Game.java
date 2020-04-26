@@ -19,7 +19,7 @@ public class Game {
     private final GameTimer timer = GameTimer.getInstance();
     private final GameManager manager = new GameManager(timer);
     private final IGameAudioPlayer audioPlayer = new GameAudioPlayer();
-
+    
     private Game() {}
     
     public static Game getInstance() {
@@ -46,10 +46,6 @@ public class Game {
 
     public void changeGameSpeed() {
         timer.goFaster();
-    }
-
-    public IGameAudioPlayer getAudioPlayer() {
-        return audioPlayer;
     }
     //TODO: add gamestate backup : public GameState getLastState()
 }

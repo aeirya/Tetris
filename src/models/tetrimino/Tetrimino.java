@@ -1,8 +1,9 @@
 package models.tetrimino;
 
 import ui.drawlist.CollidableDrawList;
-import models.interfaces.Drawable;
+import util.audio.SoundEffect;
 import models.GameObject;
+import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
 import models.interfaces.IShape;
 import java.awt.Graphics;
@@ -21,7 +22,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     private final IShape shape;
     private CollidableDrawList leonardoDaVinci;
     private boolean isLastActionMove = true;
-    private Animator animator = new Animator();
+    private final Animator animator = new Animator();
 
     public Tetrimino(final IShape shape, final int x, final int y, final Color color) {
         this(shape, Architect.getInstance().new Box(x, y, color));
@@ -53,7 +54,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
 
     private void update() {
-        leonardoDaVinci = new CollidableDrawList( applyShape(body) );
+        leonardoDaVinci = new CollidableDrawList(applyShape(body));
     }
 
     public void draw(final Graphics g) {
@@ -78,14 +79,14 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
 
     public void addTo(final Map map) {
-        leonardoDaVinci.addTo(map); 
+        leonardoDaVinci.addTo(map);
     }
 
     public List<IGameObject> applyShape(final IGameObject body) {
         return shape.applyShape(body);
     }
 
-    public void setAnimation(ICommand animation) {
+    public void setAnimation(final ICommand animation) {
         animator.setAnimation(animation);
         animator.playAnimation(this);
     }
@@ -96,5 +97,6 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
 
     public void dash() {
         Game.getInstance().changeGameSpeed();
+        SoundEffect.FALL.play();
     }
 }
