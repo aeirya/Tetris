@@ -97,6 +97,6 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
 
     public void dash() {
         Game.getInstance().changeGameSpeed();
-        SoundEffect.FALL.play();
+        SoundEffect.DASH.play();
     }
 }

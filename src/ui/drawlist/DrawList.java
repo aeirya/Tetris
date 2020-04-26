@@ -28,7 +28,7 @@ public class DrawList implements Drawable {
     }
 
     public DrawList add(Drawable...items) {
-        list = Arrays.asList(items);
+        list.addAll( Arrays.asList(items) );
         return this;
     }
 

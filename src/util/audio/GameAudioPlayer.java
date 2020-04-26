@@ -27,6 +27,7 @@ public class GameAudioPlayer implements IGameAudioPlayer {
 
     public void start() {
         player.play();
+        // SoundEffect.init();
     }
 
     @Override
@@ -62,7 +63,7 @@ public class GameAudioPlayer implements IGameAudioPlayer {
     }
 
     public void fall() {
-        SoundEffect.FALL.play();
+        // SoundEffect.FALL.play();
     }
 
     public void destroy() {

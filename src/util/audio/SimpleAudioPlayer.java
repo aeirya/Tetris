@@ -1,5 +1,6 @@
 package util.audio;
 
+import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioInputStream; 
 import javax.sound.sampled.AudioSystem; 
@@ -12,7 +13,7 @@ public class SimpleAudioPlayer
 	private Long currentFrame; 
 	private Clip clip; 	
 	private String status; 
-	private static final String DEFAULT_FILE_PATH = "../resources/funny_clip_1.wav"; 
+	private static final String DEFAULT_FILE_PATH = "resources/funny_clip_1.wav"; 
 	private String filePath;
 
 	// constructor to initialize streams and clip 
@@ -20,7 +21,6 @@ public class SimpleAudioPlayer
 		throws UnsupportedAudioFileException, IOException, LineUnavailableException 
 	{ 
 		this.filePath = filePath;
-        clip = AudioSystem.getClip(); 
 		resetAudioStream();
 	}
 
@@ -91,8 +91,10 @@ public class SimpleAudioPlayer
 	{ 
         final AudioInputStream audioInputStream; 
 		audioInputStream = AudioSystem.getAudioInputStream(
-			getClass().getResourceAsStream(filePath)
-        ); 
+			// getClass().getResourceAsStream(filePath)
+			new File(filePath).getAbsoluteFile()
+		); 
+		clip = AudioSystem.getClip(); 
 		clip.open(audioInputStream);
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}

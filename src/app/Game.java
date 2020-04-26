@@ -47,5 +47,9 @@ public class Game {
     public void changeGameSpeed() {
         timer.goFaster();
     }
+
+    public void stop() {
+        audioPlayer.stop();
+    }
     //TODO: add gamestate backup : public GameState getLastState()
 }

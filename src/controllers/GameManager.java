@@ -4,6 +4,7 @@ import app.Tetris;
 import controllers.input.ICommandReceiver;
 import controllers.input.ICommand;
 import models.tetrimino.Tetrimino;
+import util.audio.SoundEffect;
 import util.time.GameTimer;
 import controllers.level.Level;
 
@@ -13,7 +14,7 @@ public class GameManager implements ICommandReceiver {
     private Tetrimino current = null;
     private Tetrimino next = null;
     private final Lock inputLock = new Lock(4);
-    private final Lock fallLock = new Lock(1);
+    private final Lock fallLock = new Lock(1, SoundEffect.FELL::play);
     private GameTimer timer;
     private GameScore score = new GameScore();
 
@@ -49,13 +50,15 @@ public class GameManager implements ICommandReceiver {
             else {
                 try{
                     level.digest(current);
-                    score.removedLine( level.checkLines() );
+                    final int toRemove = level.checkLines();
+                    if (toRemove > 1) SoundEffect.STACK.play();
+                    if (toRemove > 0) SoundEffect.EXPLOSION.play();
+                    score.removedLine( toRemove );
                     current = spawn();
                     score.nextLevel();
                 } catch(Exception e) {
-                    util.log.GameLogger.log(e.toString());
                     util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
-                    Tetris.quitGame();
+                    gameover();
                 }
             }
         }
@@ -64,6 +67,11 @@ public class GameManager implements ICommandReceiver {
     
     private GameState updatedGameState(Level level, Tetrimino current, Tetrimino next, GameScore score) {
         return new GameState(level, current, next, score);
+    }
+
+    private void gameover() {
+        SoundEffect.GAMEOVER.play();
+        Tetris.quitGame();
     }
 
     private void applyGravity() {
@@ -88,12 +96,24 @@ public class GameManager implements ICommandReceiver {
         private int counter = 0;
         private int limit = 1;
 
+        private Runnable onLock;
+
         public Lock(int limit) {
             this.limit = limit;
         } 
 
+        public Lock(int limit, Runnable onLock) {
+            this(limit);
+            this.onLock = onLock;
+        }
+
         public void report() { 
             counter += 1;
+            check();
+        }
+
+        private void check() {
+            if (counter == limit && onLock != null) new Thread(onLock).start();
         }
 
         public boolean isUnlocked() { return counter < limit; }
