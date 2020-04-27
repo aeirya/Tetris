@@ -4,6 +4,7 @@ public class GameAudioPlayer implements IGameAudioPlayer {
 
     private final SimpleAudioPlayer player = initiatePlayer();
     private boolean isMute = false;
+    private boolean isPlaying = true;
 
     public GameAudioPlayer() {
         SoundEffect.init();
@@ -21,7 +22,8 @@ public class GameAudioPlayer implements IGameAudioPlayer {
     }
 
     public void togglePlay() {
-        if (isMute()) play();
+        isPlaying = !isPlaying;
+        if (isPlaying && !isMute) play();
         else pause();
     }
     

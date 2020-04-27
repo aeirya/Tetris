@@ -15,8 +15,6 @@ public class GameState {
     private Tetrimino current;
     private Tetrimino next;
     private GameScore score;
-    private boolean isMute;
-    private boolean isPaused;
 
     public GameState( Level level, Tetrimino current, Tetrimino next, GameScore score) {
         this.level = level;
@@ -39,7 +37,7 @@ public class GameState {
             return score;
         }
         if (receiver.getClass()==ControlPanel.class) {
-            return new Boolean[] { isMute, isPaused };
+            return null;
         }
         return null;
     }

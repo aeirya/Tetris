@@ -1,5 +1,6 @@
 package ui.panels;
 
+import java.awt.event.ActionEvent;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -7,9 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import app.Game;
-import controllers.GameState;
 
-import java.awt.event.ActionEvent;
 
 public class ControlPanel extends Panel {
 
@@ -25,6 +24,7 @@ public class ControlPanel extends Panel {
         muteButton = createMuteButton();
         pauseButton = createPauseButton();
         pane.add(controlPanelBox(muteButton, pauseButton));
+        setPreferredSize(w, (int) (1.5 * muteButton.getIcon().getIconHeight()));
     }
     
     private JButton createMuteButton() {
@@ -34,9 +34,11 @@ public class ControlPanel extends Panel {
         btn.setBackground(java.awt.Color.RED);
         btn.setFocusable(false);
         btn.addActionListener((
-            ActionEvent e) -> 
-                Game.getInstance().toggleMute()
-            );
+            ActionEvent e) -> {
+                Game.getInstance().toggleMute();
+                isMute = !isMute;
+                toggleMute(isMute);
+            });
         return btn;
     }
 
@@ -47,9 +49,10 @@ public class ControlPanel extends Panel {
         btn.addActionListener( 
             (ActionEvent e) -> {
                 Game.getInstance().togglePause();
-                toggleButtonText();
+                isPaused = !isPaused;
+                toggleButtonText(isPaused);
             });
-        return pauseButton;
+        return btn;
     }
 
     private JComponent controlPanelBox(JButton muteButton, JButton pauseButton) {
@@ -58,24 +61,9 @@ public class ControlPanel extends Panel {
         b.add(pauseButton);
         return b;
     }
-    
-    @Override
-    public void update(GameState state) {
-        final Boolean[] received = (Boolean[]) state.get(this);
-        final boolean stateIsMute = received[0];
-        final boolean stateIsPaused = received[1];
-        if (stateIsMute != isMute) {
-            isMute = stateIsMute;
-            toggleMute(isMute);
-        }
-        if (stateIsPaused != isPaused) {
-            isPaused = stateIsPaused;
-            toggleButtonText(isPaused);
-        }
-    }
 
     private void toggleButtonText(boolean isPaused) {
-        if (isPaused) {
+        if (!isPaused) {
             final String PAUSE = "Pause";
             pauseButton.setText(PAUSE);
         }
