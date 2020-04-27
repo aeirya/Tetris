@@ -91,7 +91,6 @@ public class SimpleAudioPlayer
 	{ 
         final AudioInputStream audioInputStream; 
 		audioInputStream = AudioSystem.getAudioInputStream(
-			// getClass().getResourceAsStream(filePath)
 			new File(filePath).getAbsoluteFile()
 		); 
 		clip = AudioSystem.getClip(); 
@@ -101,5 +100,9 @@ public class SimpleAudioPlayer
 
 	public Long getCurrentFrame() {
 		return currentFrame;
+	}
+
+	public String getStatus() {
+		return status;
 	}
 } 
