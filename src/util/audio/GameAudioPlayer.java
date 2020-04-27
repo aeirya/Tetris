@@ -3,8 +3,10 @@ package util.audio;
 public class GameAudioPlayer implements IGameAudioPlayer {
 
     private final SimpleAudioPlayer player = initiatePlayer();
+    private boolean isMute = false;
 
     public GameAudioPlayer() {
+        SoundEffect.init();
         player.play();
     }
 
@@ -17,11 +19,15 @@ public class GameAudioPlayer implements IGameAudioPlayer {
             return null;
         }
     }
-    // SoundEffect.init();
 
     public void togglePlay() {
-        if (player.getStatus().equals("play")) pause();
-        else play();
+        if (isMute()) play();
+        else pause();
+    }
+    
+    public void toggleMute() {
+        isMute = !isMute;
+        togglePlay();
     }
 
     public void play() {
@@ -30,6 +36,10 @@ public class GameAudioPlayer implements IGameAudioPlayer {
 
     public void pause() {
         player.pause();
+    }
+
+    public boolean isMute() {
+        return player.getStatus().equals("paused");
     }
 
     private void audioError(Exception ex) {

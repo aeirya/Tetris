@@ -76,7 +76,7 @@ public class SimpleAudioPlayer
         throws UnsupportedAudioFileException, IOException, LineUnavailableException 
 	{ 
 		if (c > 0 && c < clip.getMicrosecondLength()) { 
-			clip.stop(); 
+			clip.stop();
 			clip.close(); 
 			resetAudioStream(); 
 			currentFrame = c; 

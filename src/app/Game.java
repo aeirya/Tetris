@@ -66,12 +66,12 @@ public class Game {
     }
 
     public void togglePause() {
-        toggleMute();
         isPaused = !isPaused;
+        audioPlayer.togglePlay();
     }
 
     public void toggleMute() {
-        audioPlayer.togglePlay();
+        audioPlayer.toggleMute();
     }
     //TODO: add gamestate backup : public GameState getLastState()
 }
