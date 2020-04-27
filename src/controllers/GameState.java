@@ -3,6 +3,7 @@ package controllers;
 import controllers.level.Level;
 import models.tetrimino.Tetrimino;
 import ui.drawlist.DrawList;
+import ui.panels.ControlPanel;
 import ui.panels.GamePanel;
 import ui.panels.NextPanel;
 import ui.panels.ScorePanel;
@@ -14,6 +15,8 @@ public class GameState {
     private Tetrimino current;
     private Tetrimino next;
     private GameScore score;
+    private boolean isMute;
+    private boolean isPaused;
 
     public GameState( Level level, Tetrimino current, Tetrimino next, GameScore score) {
         this.level = level;
@@ -34,6 +37,9 @@ public class GameState {
         }
         if (receiver.getClass()==ScorePanel.class) {
             return score;
+        }
+        if (receiver.getClass()==ControlPanel.class) {
+            return new Boolean[] { isMute, isPaused };
         }
         return null;
     }

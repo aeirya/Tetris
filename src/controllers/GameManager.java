@@ -17,7 +17,7 @@ public class GameManager implements ICommandReceiver {
     private final Lock fallLock = new Lock(1, SoundEffect.FELL::play);
     private GameTimer timer;
     private GameScore score = new GameScore();
-
+    
     public GameManager(GameTimer timer) {
         this.timer = timer;
     }

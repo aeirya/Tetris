@@ -20,6 +20,7 @@ public class Game {
     private final GameManager manager = new GameManager(timer);
     private final IGameAudioPlayer audioPlayer = new GameAudioPlayer();
     private boolean isPaused = false;
+    private boolean isMute = false;
 
     private Game() {
     }
