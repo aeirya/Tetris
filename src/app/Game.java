@@ -19,37 +19,59 @@ public class Game {
     private final GameTimer timer = GameTimer.getInstance();
     private final GameManager manager = new GameManager(timer);
     private final IGameAudioPlayer audioPlayer = new GameAudioPlayer();
-    
-    private Game() {}
-    
+    private boolean isPaused = false;
+
+    private Game() {
+    }
+
     public static Game getInstance() {
         return instance;
     }
-    
+
     public void start() {
         final GameSettings settings = new GameSettings("settings.properties");
         final Input input = new Input(manager);
         gameGraphics.setup(settings, input);
-        audioPlayer.start();
     }
-    
-    /** runs on a loop by the tetris class, responsible for generating a new game state and passing it to game graphics */
+
+    /**
+     * runs on a loop by the tetris class, responsible for generating a new game
+     * state and passing it to game graphics
+     */
     public void update() {
-        final GameState state = manager.update(timer.isTickTime());
-        if (!timer.isLocked()) {    
-            timer.queue(gameGraphics::redraw);
-            timer.flush();
-            timer.holdOn();
+        if (!isPaused) {
+            final GameState state = manager.update(timer.isTickTime());
+            if (!timer.isLocked()) {
+                timer.queue(gameGraphics::redraw);
+                timer.flush();
+                timer.holdOn();
+            }
+            gameGraphics.update(state);
+        } else {
+            doWait();
         }
-        gameGraphics.update(state);
+    }
+
+    private void doWait() {
+        try {
+            Thread.sleep(200L);
+        } catch (InterruptedException e) {
+            util.log.GameLogger.interrupted();
+            Thread.currentThread().interrupt();
+        }
     }
 
     public void changeGameSpeed() {
         timer.goFaster();
     }
 
-    public void stop() {
-        audioPlayer.stop();
+    public void togglePause() {
+        toggleMute();
+        isPaused = !isPaused;
+    }
+
+    public void toggleMute() {
+        audioPlayer.togglePlay();
     }
     //TODO: add gamestate backup : public GameState getLastState()
 }

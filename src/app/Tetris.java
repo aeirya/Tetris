@@ -12,7 +12,6 @@ public class Tetris {
                 game::start
             );  
         while (!quit) game.update();
-        game.stop();
     }   
 
     public static void quitGame() {
