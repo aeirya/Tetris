@@ -31,3 +31,11 @@ hs_err_pid*
 .VSCodeCounter/results.csv
 .VSCodeCounter/results.txt
 .VSCodeCounter/results.md
+
+#build files
+bin
+build
+.vscode
+.settings
+.classpath
+

@@ -30,6 +30,10 @@ public class GameLogger {
         logger.info(msg);
     }
 
+    public static void error(Exception ex, Object from) {
+        warning(ex.toString() + " from " + from.getClass().getName());
+    }
+
     public static void info(String msg) {
         setColor(Color.BLUE);
         logger.info(msg);
