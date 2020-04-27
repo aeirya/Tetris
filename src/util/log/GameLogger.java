@@ -32,7 +32,6 @@ public class GameLogger {
 
     public static void error(Exception ex, Object from) {
         warning(ex.toString() + " from " + from.getClass().getName());
-        // ex.printStackTrace();
     }
 
     public static void info(String msg) {
