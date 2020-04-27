@@ -3,6 +3,7 @@ package controllers;
 import controllers.level.Level;
 import models.tetrimino.Tetrimino;
 import ui.drawlist.DrawList;
+import ui.panels.ControlPanel;
 import ui.panels.GamePanel;
 import ui.panels.NextPanel;
 import ui.panels.ScorePanel;
@@ -34,6 +35,9 @@ public class GameState {
         }
         if (receiver.getClass()==ScorePanel.class) {
             return score;
+        }
+        if (receiver.getClass()==ControlPanel.class) {
+            return null;
         }
         return null;
     }
