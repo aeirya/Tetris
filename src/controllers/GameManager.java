@@ -37,9 +37,9 @@ public class GameManager implements ICommandReceiver {
             current = spawn();
         }
         if (level.checkCollision(current)) {
+            util.log.GameLogger.outdatedLog("collision!");
             current.stopAnimation();
             inputLock.report();
-            util.log.GameLogger.outdatedLog("collision!");
             current.revert();
         }
         if (isTick) {
@@ -49,13 +49,7 @@ public class GameManager implements ICommandReceiver {
             }
             else {
                 try{
-                    level.digest(current);
-                    final int toRemove = level.checkLines();
-                    if (toRemove > 1) SoundEffect.STACK.play();
-                    if (toRemove > 0) SoundEffect.EXPLOSION.play();
-                    score.removedLine( toRemove );
-                    current = spawn();
-                    score.nextLevel();
+                    endRound();
                 } catch(Exception e) {
                     util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
                     gameover();
@@ -67,6 +61,16 @@ public class GameManager implements ICommandReceiver {
     
     private GameState updatedGameState(Level level, Tetrimino current, Tetrimino next, GameScore score) {
         return new GameState(level, current, next, score);
+    }
+
+    private void endRound() {
+        level.digest(current);
+        final int toRemove = level.checkLines();
+        if (toRemove > 1) SoundEffect.STACK.play();
+        if (toRemove > 0) SoundEffect.EXPLOSION.play();
+        score.removedLine( toRemove );
+        current = spawn();
+        score.nextLevel();
     }
 
     private void gameover() {
@@ -91,7 +95,7 @@ public class GameManager implements ICommandReceiver {
         }
     }
 
-    public static class Lock {
+    private static class Lock {
         
         private int counter = 0;
         private int limit = 1;

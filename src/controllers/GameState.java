@@ -30,11 +30,11 @@ public class GameState {
         if (receiver.getClass()==NextPanel.class) {
             return getNextPanelDrawables();
         }
-        if (receiver.getClass()==SidePanel.class) {
-            return null;
-        }
         if (receiver.getClass()==ScorePanel.class) {
             return score;
+        }
+        if (receiver.getClass()==SidePanel.class) {
+            return null;
         }
         if (receiver.getClass()==ControlPanel.class) {
             return null;

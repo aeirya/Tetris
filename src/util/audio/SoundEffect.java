@@ -1,7 +1,6 @@
 package util.audio;
 
 import java.io.*;
-import java.net.URL;
 import javax.sound.sampled.*;
 
 public enum SoundEffect {
@@ -25,7 +24,6 @@ public enum SoundEffect {
    
    private SoundEffect(String soundFileName) {
       try {
-         // URL url = this.getClass().getClassLoader().getResource(PATH_TO_SOUNDS + soundFileName);
          File url = new File(PATH_TO_SOUNDS+soundFileName+FORMAT).getAbsoluteFile();
          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
          clip = AudioSystem.getClip();
