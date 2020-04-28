@@ -2,6 +2,7 @@ package app;
 
 import java.awt.EventQueue;
 
+
 public class Tetris {
     private static boolean quit = false;
     //TODO: add pause
@@ -16,5 +17,6 @@ public class Tetris {
 
     public static void quitGame() {
         Tetris.quit = true;
+        System.exit(0);
     }
 }

@@ -1,16 +1,11 @@
 package controllers;
 
 import java.awt.Dimension;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import ui.panels.Menu;
 import ui.panels.Panel;
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 public class UiManager {
 
@@ -44,8 +39,7 @@ public class UiManager {
     }
 
     public void toggleMenu() {
-        // if (menu.Trigger) showMenu();
-        
+        if (menu.trigger()) showMenu();   
         else hideMenu();
     }
 }

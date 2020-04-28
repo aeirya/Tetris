@@ -6,11 +6,13 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-
+import java.io.File;
 import app.Game;
 
 
 public class ControlPanel extends Panel {
+
+    private static final String MUTE_ICON_PATH = "resources/icons8-mute-48.pngg";
 
     private final JButton pauseButton;
     private final JButton muteButton;
@@ -23,14 +25,35 @@ public class ControlPanel extends Panel {
         setBackground(40, 40, 45);
         muteButton = createMuteButton();
         pauseButton = createPauseButton();
-        pane.add(controlPanelBox(muteButton, pauseButton));
-        setPreferredSize(w, (int) (1.5 * muteButton.getIcon().getIconHeight()));
+        if (muteHasIcon()) {
+            pane.add(controlPanelBox(muteButton, pauseButton));
+        } else pane.add(alternativeControlPanelBox(muteButton, pauseButton));
+        setSize(w);
+    }
+
+    private void setSize(int w) {
+        final int h = (muteButton.getIcon() == null) 
+            ? 50 : (int) (1.5 * muteButton.getIcon().getIconHeight());
+        setPreferredSize(w,h);
     }
     
+    private boolean muteHasIcon() {
+        return (muteButton.getIcon() != null);
+    }
+
+    private boolean muteIconPathExists() {
+        return new File(MUTE_ICON_PATH).exists();
+    }
+
     private JButton createMuteButton() {
         final JButton btn;
-        Icon muteIcon = new ImageIcon("resources/icons8-mute-48.png");
-        btn = new JButton(muteIcon);
+        if (!muteIconPathExists()) btn = new JButton("Mute");
+        else {
+            Icon muteIcon = new ImageIcon(MUTE_ICON_PATH);
+            btn = new JButton(muteIcon);
+        }
+        btn.setPreferredSize(new java.awt.Dimension(20,50));
+        btn.setSize(btn.getPreferredSize());
         btn.setBackground(java.awt.Color.RED);
         btn.setFocusable(false);
         btn.addActionListener((
@@ -39,6 +62,7 @@ public class ControlPanel extends Panel {
                 isMute = !isMute;
                 toggleMute(isMute);
             });
+        btn.setToolTipText("mute the background sound");
         return btn;
     }
 
@@ -55,13 +79,38 @@ public class ControlPanel extends Panel {
         return btn;
     }
 
+    private JButton createMenuButton() {
+        final JButton btn;
+        btn = new JButton("Menu");
+        btn.setFocusable(false);
+        btn.addActionListener(
+            (ActionEvent e) -> Game.getInstance().toggleMenu()
+        );
+        return btn;
+    }
+
     private JComponent controlPanelBox(JButton muteButton, JButton pauseButton) {
         Box b = Box.createHorizontalBox();
         b.add(muteButton);
-        b.add(pauseButton);
+        Box v = Box.createVerticalBox();
+        v.add(pauseButton);
+        v.add(createMenuButton());
+        b.add(v);
         return b;
     }
 
+    private JComponent alternativeControlPanelBox(JButton muteButton, JButton pauseButton) {
+        Box b = Box.createHorizontalBox();
+        b.add(muteButton);
+        b.add(pauseButton);
+        Box v = Box.createVerticalBox();
+        v.add(b);
+        v.add(createMenuButton());
+        return v;
+    }
+
+
+    
     private void toggleButtonText(boolean isPaused) {
         if (!isPaused) {
             final String PAUSE = "Pause";

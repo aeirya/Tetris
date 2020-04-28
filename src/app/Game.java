@@ -22,7 +22,6 @@ public class Game {
     private final GameTimer timer = GameTimer.getInstance();
     private final IGameAudioPlayer audioPlayer = new GameAudioPlayer();
     private GameManager manager;
-    // private UiManager ui = new 
     private GameState state;
     private boolean isPaused = false;
 
@@ -101,7 +100,6 @@ public class Game {
     }
 
     public void toggleMenu() {
-        System.out.println("MENUUU");
         gameGraphics.toggleMenu();
     }
     //TODO: add gamestate backup : public GameState getLastState()

@@ -6,8 +6,6 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,23 +25,23 @@ public class Menu extends JPanel {
     private static final Game game = Game.getInstance();
     private static final transient 
         Map <String, ActionListener> btnMap = Map.of(
-            "Sorry", 
+            "Sorry",
             (ActionEvent e) -> {
         
             },
             "Restart",
             (ActionEvent e) -> 
-                game.reset()
+                Game.getInstance().reset()
+            ,
+            "Load",
+            (ActionEvent e) -> 
+                Game.getInstance().load()
             ,
             "Save",
             (ActionEvent e) -> 
-                game.load()
+                Game.getInstance().save()
             ,
             "Quit",
-            (ActionEvent e) -> 
-                game.save()
-            ,
-            "Load",
             (ActionEvent e) -> 
                 Tetris.quitGame()
         );
