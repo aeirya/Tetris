@@ -23,7 +23,7 @@ public class Game {
     private boolean isPaused = false;
 
     private Game() {
-        manager = new GameManager(timer, GameSave.loadState());
+        manager = new GameManager(timer, null);
     }
 
     public static Game getInstance() {

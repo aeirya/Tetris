@@ -15,10 +15,12 @@ public class GameManager implements ICommandReceiver {
     private Tetrimino next;
     private final Lock inputLock = new Lock(4);
     private final Lock fallLock = new Lock(1, SoundEffect.FELL::play);
-    private GameTimer timer;
-    private GameScore score;
+    private final GameTimer timer;
+    private final GameScore score;
+    private final GameEventHandler event;
     
     public GameManager(GameTimer timer, GameState state) {
+        event = new GameEventHandler();
         if (state == null) {
             level = new Level();
             current = null;
@@ -34,38 +36,25 @@ public class GameManager implements ICommandReceiver {
         }
         this.timer = timer;
     }
-    
-    private Tetrimino spawn() {
-        if (next == null) next = level.generateTetrimino();
-        Tetrimino spawned = level.spawnTetrimino(next);
-        next = level.generateTetrimino();
-        fallLock.unlock();
-        timer.resetSpeed();
-        return spawned;
-    }
 
     /** @return next game state */
     public GameState update(boolean isTick) {
-        if ( current == null ) {
-            current = spawn();
+        if (current == null) {
+            current = event.spawn();
         }
         if (level.checkCollision(current)) {
-            util.log.GameLogger.outdatedLog("collision!");
-            current.stopAnimation();
-            inputLock.report();
-            current.revert();
+            event.collision();
         }
         if (isTick) {
             inputLock.unlock();
             if (fallLock.isUnlocked()) { 
-                applyGravity();
+                event.applyGravity();
             }
             else {
                 try{
-                    endRound();
+                    event.call(GameEvent.END_ROUND);
                 } catch(Exception e) {
-                    util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
-                    gameover();
+                    event.call(GameEvent.GAMEOVER);
                 }
             }
         }
@@ -74,30 +63,6 @@ public class GameManager implements ICommandReceiver {
     
     private GameState updatedGameState(Level level, Tetrimino current, Tetrimino next, GameScore score) {
         return new GameState(level, current, next, score);
-    }
-
-    private void endRound() {
-        level.digest(current);
-        final int toRemove = level.checkLines();
-        if (toRemove > 1) SoundEffect.STACK.play();
-        if (toRemove > 0) SoundEffect.EXPLOSION.play();
-        score.removedLine( toRemove );
-        current = spawn();
-        score.nextLevel();
-    }
-
-    private void gameover() {
-        SoundEffect.GAMEOVER.play();
-        Tetris.quitGame();
-    }
-
-    private void applyGravity() {
-        current.fall();
-        if (level.checkCollision(current)) {
-            fallLock.report();
-            util.log.GameLogger.outdatedLog("fell!");
-            current.revert();
-        }
     }
 
     @Override
@@ -136,6 +101,77 @@ public class GameManager implements ICommandReceiver {
         public boolean isUnlocked() { return counter < limit; }
 
         public void unlock() { counter = 0; }
+    }
+
+    private enum GameEvent {
+        LINE_REMOVE,
+        END_ROUND,
+        GAMEOVER;
+    }
+
+    private class GameEventHandler {
+
+        private void call(GameEvent event) {
+            get(event).run();
+        }
+
+        private Runnable get(GameEvent event) {
+            switch(event) {
+                case GAMEOVER:
+                return this::gameover;
+                case LINE_REMOVE:
+                return this::lineRemove;
+                case END_ROUND:
+                return this::endRound;
+                default:
+                return () -> {};
+            }
+        }
+
+        private void gameover() {
+            util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
+            SoundEffect.GAMEOVER.play();
+            Tetris.quitGame();
+        }
+
+        private void endRound() {
+            level.digest(current);
+            this.call(GameEvent.LINE_REMOVE);
+            current = spawn();
+            score.nextLevel();
+        }
+        
+        private void lineRemove() {
+            final int toRemove = level.checkLines();
+            if (toRemove > 1) SoundEffect.STACK.play();
+            if (toRemove > 0) SoundEffect.EXPLOSION.play();
+            score.removedLine( toRemove );
+        }
+
+        private Tetrimino spawn() {
+            if (next == null) next = level.generateTetrimino();
+            Tetrimino spawned = level.spawnTetrimino(next);
+            next = level.generateTetrimino();
+            fallLock.unlock();
+            timer.resetSpeed();
+            return spawned;
+        }
+
+        private void collision() {
+            util.log.GameLogger.outdatedLog("collision!");
+            current.stopAnimation();
+            inputLock.report();
+            current.revert();
+        }
+
+        private void applyGravity() {
+            current.fall();
+            if (level.checkCollision(current)) {
+                fallLock.report();
+                util.log.GameLogger.outdatedLog("fell!");
+                current.revert();
+            }
+        }
     }
 }
 
