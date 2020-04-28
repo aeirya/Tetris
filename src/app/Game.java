@@ -23,6 +23,7 @@ public class Game {
     private final IGameAudioPlayer audioPlayer = new GameAudioPlayer();
     private GameManager manager;
     // private UiManager ui = new 
+    private GameState state;
     private boolean isPaused = false;
 
     private Game() {
@@ -49,7 +50,7 @@ public class Game {
      */
     public void update() {
         if (!isPaused) {
-            final GameState state = manager.update(timer.isTickTime());
+            state = manager.update(timer.isTickTime());
             if (!timer.isLocked()) {
                 timer.queue(gameGraphics::redraw);
                 timer.flush();
@@ -91,8 +92,12 @@ public class Game {
         loadState(null);
     }
 
-    public void load(GameState state) {
-        loadState(state);
+    public void load() {
+        loadState(GameSave.loadState());
+    }
+
+    public void save() {
+        GameSave.saveState(state);
     }
 
     public void toggleMenu() {
