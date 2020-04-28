@@ -44,7 +44,8 @@ public class UiManager {
     }
 
     public void toggleMenu() {
-        if (menu.trigger()) showMenu();
+        // if (menu.Trigger) showMenu();
+        
         else hideMenu();
     }
 }

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,9 +22,31 @@ import app.Tetris;
 public class Menu extends JPanel {
 
     private static final long serialVersionUID = 1L;
-
-    private boolean isVisible = false;
     
+    private static final List<JButton> btnList = new ArrayList<>();
+    private static final Game game = Game.getInstance();
+    private static final transient 
+        Map <String, ActionListener> btnMap = Map.of(
+            "Sorry", 
+            (ActionEvent e) -> {
+        
+            },
+            "Restart",
+            (ActionEvent e) -> 
+                game.reset()
+            ,
+            "Save",
+            (ActionEvent e) -> 
+                game.load()
+            ,
+            "Quit",
+            (ActionEvent e) -> 
+                game.save()
+            ,
+            "Load",
+            (ActionEvent e) -> 
+                Tetris.quitGame()
+        );
 
     public Menu() {
         setLayout(new BorderLayout());
@@ -31,73 +54,36 @@ public class Menu extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
         initiateComponents();
     }
-    
-    private Box buttons() {
-        Box box = Box.createHorizontalBox();
-        JButton sorry = new JButton("Sorry!");
-        JButton restart = new JButton("Restart");
-        JButton save = new JButton("Save");
-        JButton quit = new JButton("Quit");
-        JButton load = new JButton("Load");
-        List<JButton> btn = 
-            Arrays.asList(
-                sorry, restart, load, save, quit
-            );
-        btn.forEach(this::unfocusButton); //idk why it didn't accept consumer expression
-        btn.forEach(box::add);
-        int i = 0;
-        actions.forEach(btn.get(i++)::addActionListener);
-        // btn.forEach(action);
-        return box;
-        list.forEach(
-            (text, listener) -> {
-                new JButton(text).addActionListener(listener);
-            }
-        );
-    }
 
-    private transient Game game = Game.getInstance();
-    private final transient Map <String, ActionListener> list = Map.of(
-        "Sorry", 
-        (ActionEvent e) -> {
-    
-        },
-        "Restart",
-        (ActionEvent e) -> {
-            game.reset();
-        },
-        "Save",
-        (ActionEvent e) -> {
-            game.load();
-        },
-        "Quit",
-        (ActionEvent e) -> {
-            game.save();
-        },
-        "Load",
-        (ActionEvent e) -> {
-            Tetris.quitGame();
-        }
-
-    );
-
-    public void unfocusButton(JButton b) {
-        b.setFocusable(false);
-    }
-
-    public void addActionListener(JButton b) {
-        // list.
-    }
-    
     public void initiateComponents() {
         add(Box.createGlue());
-        add(buttons());
+        add(buttonsBox());
         add(Box.createGlue());
         add(Box.createGlue());
     }
+
+    private boolean isVisible = false;
 
     public boolean trigger() {
         isVisible = !isVisible;
         return isVisible;
+    }
+    
+    private Box buttonsBox() {
+        Box box = Box.createHorizontalBox();
+        btnMap.forEach(
+            (String text, ActionListener listener) -> 
+                btnList.add(makeButton(text, listener))
+            );
+        btnList.forEach(btn -> btn.setFocusable(false));
+        btnList.forEach(box::add);
+        return box;
+    }
+    
+    private JButton makeButton(String text, ActionListener listener) {
+        JButton btn = new JButton();
+        btn.setText(text);
+        btn.addActionListener(listener);
+        return btn;
     }
 }
