@@ -8,11 +8,12 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import java.io.File;
 import app.Game;
-
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 public class ControlPanel extends Panel {
 
-    private static final String MUTE_ICON_PATH = "resources/icons8-mute-48.pngg";
+    private static final String MUTE_ICON_PATH = "resources/icons8-mute-48.png";
 
     private final JButton pauseButton;
     private final JButton muteButton;
@@ -26,17 +27,17 @@ public class ControlPanel extends Panel {
         muteButton = createMuteButton();
         pauseButton = createPauseButton();
         if (muteHasIcon()) {
-            pane.add(controlPanelBox(muteButton, pauseButton));
-        } else pane.add(alternativeControlPanelBox(muteButton, pauseButton));
+            controlPanelGridBag(muteButton, pauseButton);
+        } else
+            alternativeControlPanelBox(muteButton, pauseButton);
         setSize(w);
     }
 
     private void setSize(int w) {
-        final int h = (muteButton.getIcon() == null) 
-            ? 50 : (int) (1.5 * muteButton.getIcon().getIconHeight());
-        setPreferredSize(w,h);
+        final int h = (muteButton.getIcon() == null) ? 50 : (int) (1.5 * muteButton.getIcon().getIconHeight());
+        setPreferredSize(w, h);
     }
-    
+
     private boolean muteHasIcon() {
         return (muteButton.getIcon() != null);
     }
@@ -47,21 +48,19 @@ public class ControlPanel extends Panel {
 
     private JButton createMuteButton() {
         final JButton btn;
-        if (!muteIconPathExists()) btn = new JButton("Mute");
+        if (!muteIconPathExists())
+            btn = new JButton("Mute");
         else {
             Icon muteIcon = new ImageIcon(MUTE_ICON_PATH);
             btn = new JButton(muteIcon);
         }
-        btn.setPreferredSize(new java.awt.Dimension(20,50));
-        btn.setSize(btn.getPreferredSize());
         btn.setBackground(java.awt.Color.RED);
         btn.setFocusable(false);
-        btn.addActionListener((
-            ActionEvent e) -> {
-                Game.getInstance().toggleMute();
-                isMute = !isMute;
-                toggleMute(isMute);
-            });
+        btn.addActionListener((ActionEvent e) -> {
+            Game.getInstance().toggleMute();
+            isMute = !isMute;
+            toggleMute(isMute);
+        });
         btn.setToolTipText("mute the background sound");
         return btn;
     }
@@ -70,12 +69,11 @@ public class ControlPanel extends Panel {
         final JButton btn;
         btn = new JButton("Pause");
         btn.setFocusable(false);
-        btn.addActionListener( 
-            (ActionEvent e) -> {
-                Game.getInstance().togglePause();
-                isPaused = !isPaused;
-                toggleButtonText(isPaused);
-            });
+        btn.addActionListener((ActionEvent e) -> {
+            Game.getInstance().togglePause();
+            isPaused = !isPaused;
+            toggleButtonText(isPaused);
+        });
         return btn;
     }
 
@@ -83,12 +81,14 @@ public class ControlPanel extends Panel {
         final JButton btn;
         btn = new JButton("Menu");
         btn.setFocusable(false);
-        btn.addActionListener(
-            (ActionEvent e) -> Game.getInstance().toggleMenu()
-        );
+        btn.addActionListener((ActionEvent e) -> Game.getInstance().toggleMenu());
         return btn;
     }
 
+    /**
+     @deprecated
+     */
+    @Deprecated(since = "")
     private JComponent controlPanelBox(JButton muteButton, JButton pauseButton) {
         Box b = Box.createHorizontalBox();
         b.add(muteButton);
@@ -99,18 +99,47 @@ public class ControlPanel extends Panel {
         return b;
     }
 
-    private JComponent alternativeControlPanelBox(JButton muteButton, JButton pauseButton) {
-        Box b = Box.createHorizontalBox();
-        b.add(muteButton);
-        b.add(pauseButton);
-        Box v = Box.createVerticalBox();
-        v.add(b);
-        v.add(createMenuButton());
-        return v;
+    private void controlPanelGridBag(JButton muteButton, JButton pauseButton) {
+        JButton btnMenu = createMenuButton();
+        pane.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0.5;
+        c.weighty = 0;
+        c.gridheight = 3;
+        c.gridx = 0;
+        c.gridy = 0;
+        pane.add(muteButton, c);
+        c.gridheight = 1;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 0;
+        pane.add(pauseButton, c);
+        c.gridx = 1;
+        c.gridy = 1;
+        pane.add(btnMenu, c);
     }
 
+    private void alternativeControlPanelBox(JButton muteButton, JButton pauseButton) {
+        util.log.GameLogger.log("alternative mute button");
+        JButton btnMenu = createMenuButton();
+        pane.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 0;
+        pane.add(muteButton, c);
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 0;
+        pane.add(pauseButton, c);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 3;
+        pane.add(btnMenu, c);
+    }
 
-    
     private void toggleButtonText(boolean isPaused) {
         if (!isPaused) {
             final String PAUSE = "Pause";
