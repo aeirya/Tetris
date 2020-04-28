@@ -1,16 +1,12 @@
 package controllers;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.JButton;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import ui.panels.GamePanel;
 import ui.panels.Menu;
 import ui.panels.Panel;
-import ui.panels.SidePanel;
 
 public class UiManager {
 
@@ -19,28 +15,36 @@ public class UiManager {
     private final Panel gamePanel;
     private final Panel sidePanel;
     private final Menu menu;
+    
+    // private final int width;
+    // private final int height;
 
     public UiManager(JFrame frame, JPanel mainPanel, Panel gamePanel, Panel sidePanel) {
+        // width = frame.get
+        // height = frame.getHeight();
         this.frame = frame;
         this.mainPanel = mainPanel;
         this.gamePanel = gamePanel;
         this.sidePanel = sidePanel;
         menu = new Menu();
+        addMenu();
+    }
+
+    private void addMenu() {
+        // frame.setLayout(new BorderLayout());
+        // frame.getContentPane().add(menu, BorderLayout.SOUTH);
+        frame.setLayout(new BoxLayout(frame, BoxLayout.Y_AXIS));
+        frame.add(menu, BoxLayout.Y_AXIS);
+        menu.setPreferredSize(new Dimension(frame.getWidth(), 100));
+        menu.setSize(menu.getPreferredSize());
     }
     
     public void showMenu() {
-        frame.setSize(frame.getSize().width, (int)(frame.getSize().height*));
-        frame.setLayout(new BorderLayout());
-        // frame.setContentPane(menu);
-        // frame.add(menu, BorderLayout.CENTER);
-        
-        menu.setPreferredSize(new Dimension(frame.getSize().width, (int) (frame.getSize().height * 0.2)));
+        frame.setSize(frame.getSize().width, (int)(frame.getSize().height + 100));
+        // frame.pack();
         menu.setSize(menu.getPreferredSize());
-        frame.getContentPane().add(menu, BorderLayout.SOUTH);
         
         frame.setResizable(true);
-        // menu.setBounds(10,600,100,100);
-        // frame.getContentPane().add(new JButton("FRICK"), BorderLayout.CENTER);
         frame.revalidate();
     }
 
@@ -49,6 +53,6 @@ public class UiManager {
     }
 
     public void toggleMenu() {
-        
+//
     }
 }

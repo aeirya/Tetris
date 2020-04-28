@@ -1,23 +1,11 @@
 package util;
 
-
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-
-import controllers.GameState;
-import controllers.UiManager;
-import models.Architect;
-import ui.panels.GamePanel;
-import ui.panels.Menu;
-import ui.panels.SidePanel;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.KeyListener;
 
 public class TestMain {
     public static void main(String[] args) {
@@ -35,12 +23,9 @@ public class TestMain {
         System.out.println("hello,bye,1000".split(",")[2]);
     }
 
-    private JFrame frame = new JFrame();
-    private JLayeredPane lpane = new JLayeredPane();
-    private JPanel panelBlue = new JPanel();
-    private JPanel panelGreen = new JPanel();
-
+    
     void c() {
+        JFrame frame = new JFrame();
         frame.setPreferredSize(new Dimension(600, 400));
         frame.setLayout(new BorderLayout());
         frame.add(layeredPaneTest(), BorderLayout.CENTER);

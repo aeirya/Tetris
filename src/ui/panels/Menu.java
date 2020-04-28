@@ -16,8 +16,10 @@ public class Menu extends JPanel {
 
     public Menu() {
         setLayout(new BorderLayout());
-        setBackground(new Color(30,30,40));
-        this.add(initiateComponents(), BorderLayout.SOUTH);
+        setBackground(new Color(200,200,200));
+        System.out.println("INSTANVIATD");
+        this.add(initiateComponents(), BorderLayout.CENTER);
+        this.add(new JButton("ELOFJD"), BorderLayout.SOUTH);
     }
     
     public JComponent initiateComponents() {
