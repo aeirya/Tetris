@@ -70,6 +70,9 @@ public class Game {
 
     public void togglePause() {
         isPaused = !isPaused;
+        if (!isPaused) {
+            audioPlayer.pause(); //resets its state
+        }
         audioPlayer.togglePlay();
     }
 

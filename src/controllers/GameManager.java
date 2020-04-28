@@ -1,5 +1,6 @@
 package controllers;
 
+import app.Game;
 import app.Tetris;
 import controllers.input.ICommandReceiver;
 import controllers.input.ICommand;
@@ -131,6 +132,7 @@ public class GameManager implements ICommandReceiver {
         private void gameover() {
             util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
             SoundEffect.GAMEOVER.play();
+            Game.getInstance().togglePause();
             Tetris.quitGame();
         }
 

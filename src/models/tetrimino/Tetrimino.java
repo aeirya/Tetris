@@ -105,6 +105,10 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
 
     public void stopAnimation() {
-        animator.stopAnimation();
+        try { 
+            animator.stopAnimation();
+        } catch(Exception ex) {
+            util.log.GameLogger.debug("ok what animation to stop? no animator :|");
+        }
     }
 }
