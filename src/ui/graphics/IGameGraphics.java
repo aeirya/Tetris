@@ -32,5 +32,5 @@ public interface IGameGraphics {
         GameTimer.getInstance().resume();
     }
 
-    void showMenu();
+    void toggleMenu();
 }

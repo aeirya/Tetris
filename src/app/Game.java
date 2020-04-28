@@ -95,9 +95,9 @@ public class Game {
         loadState(state);
     }
 
-    public void showMenu() {
+    public void toggleMenu() {
         System.out.println("MENUUU");
-        gameGraphics.showMenu();
+        gameGraphics.toggleMenu();
     }
     //TODO: add gamestate backup : public GameState getLastState()
 }

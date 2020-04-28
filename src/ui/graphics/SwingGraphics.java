@@ -67,7 +67,7 @@ public class SwingGraphics implements IGameGraphics {
     }
 
     @Override
-    public void showMenu() {
-        uiManager.showMenu();
+    public void toggleMenu() {
+        uiManager.toggleMenu();
     }
 }

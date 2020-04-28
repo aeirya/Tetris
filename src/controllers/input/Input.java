@@ -47,7 +47,7 @@ public class Input implements KeyListener {
             case 'r':
             return (Tetrimino t) -> { Game.getInstance().reset(); };
             case 'm':
-            return (Tetrimino t) -> { Game.getInstance().showMenu(); };
+            return (Tetrimino t) -> { Game.getInstance().toggleMenu(); };
         }
     }
 

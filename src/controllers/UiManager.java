@@ -2,11 +2,15 @@ package controllers;
 
 import java.awt.Dimension;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import ui.panels.Menu;
 import ui.panels.Panel;
+import java.awt.BorderLayout;
+import java.awt.Color;
 
 public class UiManager {
 
@@ -14,45 +18,33 @@ public class UiManager {
     private final JPanel mainPanel;
     private final Panel gamePanel;
     private final Panel sidePanel;
-    private final Menu menu;
     
-    // private final int width;
-    // private final int height;
+    private final Menu menu;
 
     public UiManager(JFrame frame, JPanel mainPanel, Panel gamePanel, Panel sidePanel) {
-        // width = frame.get
-        // height = frame.getHeight();
         this.frame = frame;
         this.mainPanel = mainPanel;
         this.gamePanel = gamePanel;
         this.sidePanel = sidePanel;
         menu = new Menu();
-        addMenu();
+        menu.setPreferredSize(new Dimension(frame.getWidth(), 35));
     }
 
-    private void addMenu() {
-        // frame.setLayout(new BorderLayout());
-        // frame.getContentPane().add(menu, BorderLayout.SOUTH);
-        frame.setLayout(new BoxLayout(frame, BoxLayout.Y_AXIS));
-        frame.add(menu, BoxLayout.Y_AXIS);
-        menu.setPreferredSize(new Dimension(frame.getWidth(), 100));
-        menu.setSize(menu.getPreferredSize());
-    }
-    
+    private static final int MENU_HEIGHT = 35;
+
     public void showMenu() {
-        frame.setSize(frame.getSize().width, (int)(frame.getSize().height + 100));
-        // frame.pack();
-        menu.setSize(menu.getPreferredSize());
-        
-        frame.setResizable(true);
+        frame.setSize(frame.getSize().width, frame.getSize().height + MENU_HEIGHT);
+        frame.add(menu , BorderLayout.SOUTH);
         frame.revalidate();
     }
 
     public void hideMenu() {
-        //
+        frame.setSize(frame.getSize().width, frame.getSize().height - MENU_HEIGHT);
+        frame.remove(menu);
     }
 
     public void toggleMenu() {
-//
+        if (menu.trigger()) showMenu();
+        else hideMenu();
     }
 }
