@@ -1,8 +1,9 @@
 package models.interfaces;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface IShape {
+public interface IShape extends Serializable {
     void rotate(int i);
     default void rotateLeft() {
         rotate(1);

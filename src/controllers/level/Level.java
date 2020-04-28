@@ -11,20 +11,24 @@ import models.tetrimino.Tetrimino;
 import ui.drawlist.DrawList;
 import models.Architect.Box;
 
-public class Level implements Drawable {
+public class Level implements Drawable, java.io.Serializable {
 
-    private final LevelDesigner builder = new LevelDesigner();
+    private static final long serialVersionUID = 1L;
+  
+    private transient LevelDesigner builder = null;
     private Map map;
-    private List<Box> myLevel;
+    private transient List<Box> myLevel = null;
     
     public Level() {
+        builder = new LevelDesigner();
         map = new Map(builder.create2DBoxList());
-        myLevel = build();
     }
 
     public List<Box> build() {
         if (myLevel == null) {
             myLevel = new ArrayList<>();
+            if (builder == null) 
+                this.builder = new LevelDesigner();
             myLevel.addAll(
                 Arrays.asList(builder.spawnWall())
             );
@@ -58,7 +62,7 @@ public class Level implements Drawable {
     }
 
     public void draw(Graphics g) {
-        new DrawList().add(myLevel).draw(g);
+        new DrawList().add(build()).draw(g);
         map.draw(g);
     }
 }

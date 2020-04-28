@@ -7,10 +7,12 @@ import models.Coordinate;
 import models.interfaces.IGameObject;
 import models.interfaces.IShape;
 
-public class Shape implements IShape {
+public class Shape implements IShape  {
+
+    private static final long serialVersionUID = 1L;
 
     protected ShapeCoordinate[] coordinates;
-    Runnable revert = () -> {};
+    private transient Runnable revert = () -> {};
 
     public void rotate(int i) {
         for (ShapeCoordinate c : coordinates) {
@@ -33,6 +35,8 @@ public class Shape implements IShape {
 
     /** It has the ability to rotate, and has a method for Shape, getting coordinates at the same time */
     protected static class ShapeCoordinate extends Coordinate {
+
+        private static final long serialVersionUID = 1L;
 
         public ShapeCoordinate(int x, int y) {
             super(x,y);

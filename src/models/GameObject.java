@@ -5,10 +5,12 @@ import models.interfaces.IGameObject;
 
 public class GameObject implements IGameObject {
 
-    protected int x=0;
+    private static final long serialVersionUID = 1L;
+
+    protected int x = 0;
     protected int y=0;
     private IGameObject kid = null;
-    private Runnable revert = () -> move(0,0);
+    private transient Runnable revert = () -> move(0,0);
     
     public GameObject(int x, int y) {
         this.x = x;

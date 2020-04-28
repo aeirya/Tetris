@@ -1,9 +1,11 @@
 package models.interfaces;
 
+import java.io.Serializable;
+
 import controllers.level.Map;
 import models.Coordinate;
 
-public interface IGameObject {
+public interface IGameObject extends Serializable {
     
     void move(int x, int y);
 

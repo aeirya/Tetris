@@ -12,7 +12,9 @@ import java.awt.Graphics2D;
 import java.awt.BasicStroke;
 
 /** Calculates size of boxes and generates objects */
-public class Architect {
+public class Architect implements java.io.Serializable {
+
+    private static final long serialVersionUID = -408508351995967127L;
 
     private final SizeManager sizes = new SizeManager();
     
@@ -36,8 +38,11 @@ public class Architect {
         return genBox(0,0);
     }
 
-    public static class SizeManager {
-        //TODO: these numbers should be custom
+    public static class SizeManager implements java.io.Serializable {
+        
+        private static final long serialVersionUID = 1L;
+        
+        // TODO: these numbers should be custom
         private static final int NCOLUMNS = 12;
         private static final int NROWS = 21;
         private final Dimension boxDimension = new Dimension();
@@ -67,6 +72,8 @@ public class Architect {
 
     public class Box extends GameObject implements Drawable {
 
+        private static final long serialVersionUID = 1L;
+        
         private Color c;
         private boolean isSimple = true;
         private boolean isEmpty = false;

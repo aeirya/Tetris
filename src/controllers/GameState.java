@@ -9,12 +9,14 @@ import ui.panels.NextPanel;
 import ui.panels.ScorePanel;
 import ui.panels.SidePanel;
 
-public class GameState {
+public class GameState implements java.io.Serializable {
 
-    private Level level;
-    private Tetrimino current;
-    private Tetrimino next;
-    private GameScore score;
+    private static final long serialVersionUID = 1L;
+    
+    protected final Level level;
+    protected final Tetrimino current;
+    protected final Tetrimino next;
+    protected final GameScore score;
 
     public GameState( Level level, Tetrimino current, Tetrimino next, GameScore score) {
         this.level = level;
@@ -38,6 +40,9 @@ public class GameState {
         }
         if (receiver.getClass()==ControlPanel.class) {
             return null;
+        }
+        if (receiver.getClass()==GameManager.class) {
+            return new ReadableGameState(level, current, next, score);
         }
         return null;
     }

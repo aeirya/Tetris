@@ -3,6 +3,7 @@ package controllers.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import models.tetrimino.Tetrimino;
+import util.file.GameSave;
 
 /** Responsible for getting keybaord input and passing it to its executer @see @ICommandReceiver */
 
@@ -34,6 +35,9 @@ public class Input implements KeyListener {
             return Tetrimino::rotateLeft;
             case 's':
             return Tetrimino::rotateRight;
+
+            case 'i':
+            return (Tetrimino t) -> { GameSave.loadState(); };
         }
     }
 

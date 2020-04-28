@@ -70,3 +70,9 @@ sound:
 https://stackoverflow.com/questions/2343187/loading-resources-using-getclass-getresource
 https://www.ntu.edu.sg/home/ehchua/programming/java/J8c_PlayingSound.html
 https://www.geeksforgeeks.org/play-audio-file-using-java/
+
+game save:
+https://www.tutorialspoint.com/java/java_serialization.htm
+https://www.geeksforgeeks.org/serialversionuid-in-java/
+
+

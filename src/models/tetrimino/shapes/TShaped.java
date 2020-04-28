@@ -4,6 +4,8 @@ import models.tetrimino.Shape;
 
 public class TShaped extends Shape {
 
+    private static final long serialVersionUID = -2476564806973775845L;
+
     public TShaped() {
         coordinates = ShapeCoordinate.makeList(0,-1,1,0,0,1,0,0);
     }

@@ -9,6 +9,8 @@ import models.tetrimino.Shape;
 
 public class IShaped extends Shape {
     
+    private static final long serialVersionUID = 1L;
+
     public IShaped() {
         coordinates = ShapeCoordinate.makeList(1,2,1,1,1,-1,1,-2);
     }

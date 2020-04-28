@@ -1,7 +1,9 @@
 package models;
 
-public class Coordinate {
-        
+public class Coordinate implements java.io.Serializable {
+       
+    private static final long serialVersionUID = 1L;
+    
     protected int x = 0;
     protected int y = 0;
 

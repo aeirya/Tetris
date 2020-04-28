@@ -1,6 +1,10 @@
 package controllers;
 
-public class GameScore {
+import java.io.Serializable;
+
+public class GameScore implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private int linesRemoved = 0;
     private int level = 0;

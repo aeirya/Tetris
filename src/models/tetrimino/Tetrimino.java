@@ -18,11 +18,15 @@ import java.awt.Color;
 
 public class Tetrimino implements IGameObject, IShape, Drawable {
 
+    private static final long serialVersionUID = 1L;
+    
     private final IGameObject body;
     private final IShape shape;
-    private CollidableDrawList leonardoDaVinci;
+    
     private boolean isLastActionMove = true;
-    private final Animator animator = new Animator();
+    private transient CollidableDrawList leonardoDaVinci = null;
+    
+    private final transient Animator animator = new Animator();
 
     public Tetrimino(final IShape shape, final int x, final int y, final Color color) {
         this(shape, Architect.getInstance().new Box(x, y, color));
@@ -40,7 +44,36 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
         this.body = body;
         update();
     }
+    
+    private void update() {
+        leonardoDaVinci = createDrawList();
+    }
 
+    private CollidableDrawList createDrawList() {
+        return new CollidableDrawList(applyShape(body));
+    }
+    
+    public List<IGameObject> applyShape(final IGameObject body) {
+        return shape.applyShape(body);
+    }
+    
+    public void draw(final Graphics g) {
+        if(leonardoDaVinci!=null) leonardoDaVinci.draw(g);
+    }
+    
+    public void revert() {
+        if (isLastActionMove)
+            body.revert();
+        else
+            shape.revert();
+        isLastActionMove = !isLastActionMove;
+        update();
+    }
+
+    public IGameObject copy() {
+        return new Tetrimino(shape, body);
+    }
+    
     public void rotate(final int i) {
         isLastActionMove = false;
         shape.rotate(i);
@@ -53,37 +86,17 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
         update();
     }
 
-    private void update() {
-        leonardoDaVinci = new CollidableDrawList(applyShape(body));
-    }
-
-    public void draw(final Graphics g) {
-        leonardoDaVinci.draw(g);
-    }
-
-    public IGameObject copy() {
-        return new Tetrimino(shape, body);
-    }
-
-    public void revert() {
-        if (isLastActionMove)
-            body.revert();
-        else
-            shape.revert();
-        isLastActionMove = !isLastActionMove;
-        update();
+    public void dash() {
+        Game.getInstance().changeGameSpeed();
+        SoundEffect.DASH.play();
     }
 
     public boolean collides(final Map objects) {
-        return leonardoDaVinci.collides(objects);
+        return leonardoDaVinci != null && leonardoDaVinci.collides(objects);
     }
 
     public void addTo(final Map map) {
         leonardoDaVinci.addTo(map);
-    }
-
-    public List<IGameObject> applyShape(final IGameObject body) {
-        return shape.applyShape(body);
     }
 
     public void setAnimation(final ICommand animation) {
@@ -93,10 +106,5 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
 
     public void stopAnimation() {
         animator.stopAnimation();
-    }
-
-    public void dash() {
-        Game.getInstance().changeGameSpeed();
-        SoundEffect.DASH.play();
     }
 }

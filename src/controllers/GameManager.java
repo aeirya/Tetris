@@ -10,15 +10,28 @@ import controllers.level.Level;
 
 public class GameManager implements ICommandReceiver {
 
-    private final Level level = new Level();
-    private Tetrimino current = null;
-    private Tetrimino next = null;
+    private final Level level;
+    private Tetrimino current;
+    private Tetrimino next;
     private final Lock inputLock = new Lock(4);
     private final Lock fallLock = new Lock(1, SoundEffect.FELL::play);
     private GameTimer timer;
-    private GameScore score = new GameScore();
+    private GameScore score;
     
-    public GameManager(GameTimer timer) {
+    public GameManager(GameTimer timer, GameState state) {
+        if (state == null) {
+            level = new Level();
+            current = null;
+            next = null;
+            score = new GameScore();
+        } else {
+            util.log.GameLogger.log("loading from save");
+            final ReadableGameState data = (ReadableGameState) state.get(this);
+            level = data.getLevel();
+            current = data.getCurrent();
+            next = data.getNext();
+            score = data.getScore();
+        }
         this.timer = timer;
     }
     

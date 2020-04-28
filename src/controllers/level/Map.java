@@ -6,8 +6,10 @@ import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
 import models.Architect.Box;
 
-public class Map implements Drawable {
+public class Map implements Drawable, java.io.Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     private Box[][] list;
 
     public Map(Box[][] boxes) {

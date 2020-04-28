@@ -7,6 +7,7 @@ import ui.graphics.IGameGraphics;
 import ui.graphics.SwingGraphics;
 import util.audio.GameAudioPlayer;
 import util.audio.IGameAudioPlayer;
+import util.file.GameSave;
 import util.time.GameTimer;
 
 /**
@@ -17,11 +18,12 @@ public class Game {
     private static final Game instance = new Game();
     private final IGameGraphics gameGraphics = new SwingGraphics();
     private final GameTimer timer = GameTimer.getInstance();
-    private final GameManager manager = new GameManager(timer);
     private final IGameAudioPlayer audioPlayer = new GameAudioPlayer();
+    private final GameManager manager;
     private boolean isPaused = false;
 
     private Game() {
+        manager = new GameManager(timer, GameSave.loadState());
     }
 
     public static Game getInstance() {
@@ -45,6 +47,7 @@ public class Game {
                 timer.queue(gameGraphics::redraw);
                 timer.flush();
                 timer.holdOn();
+                GameSave.saveState(state);
             }
             gameGraphics.update(state);
         } else {
