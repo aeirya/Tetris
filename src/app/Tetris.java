@@ -9,7 +9,7 @@ public class Tetris {
     public static void main(String[] args) {
         Game game = Game.getInstance();
         EventQueue.invokeLater( 
-                game::start
+                game::reset
             );  
         while (!quit) game.update();
     }   

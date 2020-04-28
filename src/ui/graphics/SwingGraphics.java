@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import controllers.GameState;
+import controllers.UiManager;
 import models.Architect;
 import ui.panels.GamePanel;
 import ui.panels.SidePanel;
@@ -21,6 +22,7 @@ public class SwingGraphics implements IGameGraphics {
     private final JPanel mainPanel = new JPanel();
     private GamePanel gamePanel;
     private SidePanel sidePanel;
+    private final UiManager uiManager = new UiManager(frame, mainPanel, gamePanel, sidePanel);
     
     public void start() {
         frame.setVisible(true);
@@ -62,5 +64,10 @@ public class SwingGraphics implements IGameGraphics {
     public void addKeyListener(KeyListener l) {
         mainPanel.addKeyListener(l);
         mainPanel.requestFocusInWindow();
+    }
+
+    @Override
+    public void showMenu() {
+        uiManager.showMenu();
     }
 }

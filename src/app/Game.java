@@ -2,6 +2,7 @@ package app;
 
 import controllers.GameManager;
 import controllers.GameState;
+import controllers.UiManager;
 import controllers.input.Input;
 import ui.graphics.IGameGraphics;
 import ui.graphics.SwingGraphics;
@@ -16,24 +17,30 @@ import util.time.GameTimer;
 public class Game {
 
     private static final Game instance = new Game();
+    private final Input input;
     private final IGameGraphics gameGraphics = new SwingGraphics();
     private final GameTimer timer = GameTimer.getInstance();
     private final IGameAudioPlayer audioPlayer = new GameAudioPlayer();
-    private final GameManager manager;
+    private GameManager manager;
+    // private UiManager ui = new 
     private boolean isPaused = false;
 
     private Game() {
         manager = new GameManager(timer, null);
+        input = new Input(manager);
+        final GameSettings settings = new GameSettings("settings.properties");
+        gameGraphics.setup(settings, input);
     }
 
     public static Game getInstance() {
         return instance;
     }
 
-    public void start() {
-        final GameSettings settings = new GameSettings("settings.properties");
-        final Input input = new Input(manager);
-        gameGraphics.setup(settings, input);
+    private void loadState(GameState state) {
+        //Todo: actiave this
+        // audioPlayer.reset(); 
+        manager = new GameManager(timer, state);
+        input.setTo(manager);
     }
 
     /**
@@ -78,6 +85,19 @@ public class Game {
 
     public void toggleMute() {
         audioPlayer.toggleMute();
+    }
+
+    public void reset() {
+        loadState(null);
+    }
+
+    public void load(GameState state) {
+        loadState(state);
+    }
+
+    public void showMenu() {
+        System.out.println("MENUUU");
+        gameGraphics.showMenu();
     }
     //TODO: add gamestate backup : public GameState getLastState()
 }

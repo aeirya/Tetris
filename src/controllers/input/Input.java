@@ -2,6 +2,8 @@ package controllers.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import app.Game;
 import models.tetrimino.Tetrimino;
 import util.file.GameSave;
 
@@ -12,6 +14,10 @@ public class Input implements KeyListener {
     private ICommandReceiver executer;
 
     public Input(ICommandReceiver ip) {
+        executer = ip;
+    }
+
+    public void setTo(ICommandReceiver ip) {
         executer = ip;
     }
     
@@ -38,6 +44,10 @@ public class Input implements KeyListener {
 
             case 'i':
             return (Tetrimino t) -> { GameSave.loadState(); };
+            case 'r':
+            return (Tetrimino t) -> { Game.getInstance().reset(); };
+            case 'm':
+            return (Tetrimino t) -> { Game.getInstance().showMenu(); };
         }
     }
 

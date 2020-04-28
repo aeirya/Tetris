@@ -31,4 +31,6 @@ public interface IGameGraphics {
     default void onDone() {
         GameTimer.getInstance().resume();
     }
+
+    void showMenu();
 }

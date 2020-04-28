@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.awt.Point;
+import java.awt.Container;
 
 public abstract class Panel implements IPanel {
 
@@ -30,16 +31,21 @@ public abstract class Panel implements IPanel {
         this.height = h;
     }
 
-    public void addToPanel(JPanel container) {
+    @Deprecated
+    public JPanel getPane() {
+        return this.pane;
+    }
+
+    public void addToPanel(Container container) {
         container.add(pane);
     }
 
 	@Override
-	public void addToPanel(JPanel container, Object constraints) {
+	public void addToPanel(Container container, Object constraints) {
         container.add(pane, constraints);
     }
 
-    public void addToPanel(JPanel container, Point location) {
+    public void addToPanel(Container container, Point location) {
         container.add(pane);
         pane.setLocation(location);
     }

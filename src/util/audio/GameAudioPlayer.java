@@ -35,6 +35,8 @@ public class GameAudioPlayer implements IGameAudioPlayer {
 
     public void pause() { player.pause(); }
 
+    public void reset() { player.reset(); }
+
     public boolean isMute() { return isMute; }
 
     private void audioError(Exception ex) {

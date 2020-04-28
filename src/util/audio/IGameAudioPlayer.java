@@ -7,4 +7,5 @@ public interface IGameAudioPlayer {
     void togglePlay();
     void toggleMute();
     boolean isMute();
+    void reset();
 }

@@ -68,7 +68,7 @@ public class GameManager implements ICommandReceiver {
 
     @Override
     public void receiveCommand(ICommand cmd) {
-        if (inputLock.isUnlocked() && fallLock.isUnlocked()){
+        if (inputLock.isUnlocked() && fallLock.isUnlocked()) {
             fallLock.unlock();
             cmd.act(current);
         }

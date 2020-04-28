@@ -18,7 +18,6 @@ public class SimpleAudioPlayer
 	{ 
         clip = AudioSystem.getClip(); 
 		resetAudioStream(filePath);
-		play();
 	}
 
 	public void play() { 
@@ -35,6 +34,12 @@ public class SimpleAudioPlayer
 		clip.close(); 
 	} 
 	
+	public void reset() {
+		pause();
+		clip.setFramePosition(0);
+		play();
+	}
+
     public void resetAudioStream(String filePath) 
         throws UnsupportedAudioFileException, IOException, LineUnavailableException 
 	{ 
