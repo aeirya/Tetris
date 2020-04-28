@@ -54,7 +54,6 @@ public class Game {
                 timer.queue(gameGraphics::redraw);
                 timer.flush();
                 timer.holdOn();
-                GameSave.saveState(state);
             }
             gameGraphics.update(state);
         } else {
