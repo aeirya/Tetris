@@ -2,6 +2,7 @@ package app;
 
 import controllers.GameManager;
 import controllers.GameState;
+import controllers.input.IMenuCommand;
 import controllers.input.Input;
 import ui.graphics.IGameGraphics;
 import ui.graphics.SwingGraphics;
@@ -123,4 +124,11 @@ public class Game {
         Tetris.quitGame();
     }
     //TODO: add gamestate backup : public GameState getLastState() : DONE!
+
+    /** returns true is the command is null */
+    public boolean receiveCommand(IMenuCommand cmd) {
+        if (cmd==null) return true;
+        cmd.act(this);
+        return false;
+    }
 }

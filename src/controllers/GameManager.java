@@ -37,6 +37,7 @@ public class GameManager implements ICommandReceiver {
             score = data.getScore();
         }
         this.timer = timer;
+        timer.resetSpeed();
     }
 
     /** @return next game state */
