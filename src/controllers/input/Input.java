@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 
 import app.Game;
 import models.tetrimino.Tetrimino;
-import util.file.GameSave;
 
 /** Responsible for getting keybaord input and passing it to its executer @see @ICommandReceiver */
 
@@ -23,14 +22,24 @@ public class Input implements KeyListener {
     
     @Override
     public void keyPressed(KeyEvent e) {
-        executer.receiveCommand( parse(e) );
+        parse(e);
     }
     
-    private ICommand parse(KeyEvent e) {
+    private void parse(KeyEvent e) {
+        if (
+            Game.getInstance()
+            .receiveCommand( parseMenuCommand(e) )
+        ) {
+            executer.receiveCommand( parseTetriminoCommand(e) );
+        }
+    }
+
+    private ICommand parseTetriminoCommand(KeyEvent e) {
         util.log.GameLogger.outdatedLog("keychar: "+e.getKeyChar()+" , keycode: "+e.getKeyCode());
+        
         if (e.getKeyCode()==32)  //space
             return Tetrimino::dash; 
-            
+        
         switch(e.getKeyChar()) {
             case 'a':
             return Tetrimino::moveLeft;
@@ -41,19 +50,41 @@ public class Input implements KeyListener {
             return Tetrimino::rotateLeft;
             case 's':
             return Tetrimino::rotateRight;
+        }
+    }
+    
+    private IMenuCommand parseMenuCommand(KeyEvent e) {
+        if (e.getKeyCode()==17) //shift
+            return Game::changeGameSpeed;
 
-            case 'i':
-            return (Tetrimino t) -> { GameSave.loadState(); };
+        switch(e.getKeyChar()) {
+            case 'l':
+            return Game::load;
             case 'r':
-            return (Tetrimino t) -> { Game.getInstance().reset(); };
+            return Game::reset;
             case 'm':
-            return (Tetrimino t) -> { Game.getInstance().toggleMenu(); };
+            return Game::toggleMenu;
+            case 'v':
+            return Game::save;
+            case 'y':
+            return Game::restore;
+            case 't':
+            return Game::quit;
+            case 'p':
+            return Game::togglePause;
+            case 'u':
+            return Game::toggleMute;
+            default:
+            return null;
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) { /* */ }
+    public void keyReleased(KeyEvent e) { /*_*/ 
+        if(e.getKeyCode()==17) //control
+            Game.getInstance().resetGameSpeed();
+    }
     
     @Override
-    public void keyTyped(KeyEvent e) { /* */ }
+    public void keyTyped(KeyEvent e) { /*v*/ }
 }
