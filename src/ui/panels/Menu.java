@@ -16,10 +16,10 @@ import javax.swing.JPanel;
 
 import app.Game;
 
-public class Menu extends Panel {
+public class Menu extends JPanel {
     
     private static final List<JButton> btnList = new ArrayList<>();
-    private static final 
+    private static final transient
         Map <String, ActionListener> btnMap = Map.of(
             "Sorry (y)",
             (ActionEvent e) ->
@@ -42,20 +42,18 @@ public class Menu extends Panel {
                 Game.getInstance().quit()
         );
 
-    public Menu(int w, int h) {
-        super(w, h);
-        // setLayout(new BorderLayout());
+    public Menu() {
         setBackground(new Color(130,150,130));
-        setLayout(new BoxLayout(this.pane, BoxLayout.LINE_AXIS));
-        setPreferredSize(w,h);
+        setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+        // setPreferredSize(w,h);
         initiateComponents();
     }
 
     public void initiateComponents() {
-        pane.add(Box.createGlue());
-        pane.add(buttonsBox());
-        pane.add(Box.createGlue());
-        pane.add(Box.createGlue());
+        add(Box.createGlue());
+        add(buttonsBox());
+        add(Box.createGlue());
+        add(Box.createGlue());
     }
 
     private boolean isVisible = false;
@@ -73,7 +71,6 @@ public class Menu extends Panel {
             );
         btnList.forEach(btn -> btn.setFocusable(false));
         btnList.forEach(box::add);
-        box.setPreferredSize(new Dimension(width , height));
         return box;
     }
     
