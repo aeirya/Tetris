@@ -21,8 +21,7 @@ public class UiManager {
         this.mainPanel = mainPanel;
         this.gamePanel = gamePanel;
         this.sidePanel = sidePanel;
-        menu = new Menu();
-        menu.setPreferredSize(new Dimension(frame.getWidth(), 35));
+        menu = new Menu(frame.getWidth(), 35);
     }
 
     private static final int MENU_HEIGHT = 35;

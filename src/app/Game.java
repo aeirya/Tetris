@@ -71,11 +71,15 @@ public class Game {
         }
     }
 
+    //game flow
+
     public void changeGameSpeed() {
         timer.goFaster();
     }
 
-    //game flow
+    public void resetGameSpeed(){
+        timer.resetSpeed();
+    }
 
     private void resume() {
         if (isPaused) togglePause();

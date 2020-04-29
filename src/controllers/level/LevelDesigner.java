@@ -18,20 +18,22 @@ import java.security.SecureRandom;
 
 public class LevelDesigner implements Drawable {
 
-    private static final int N_COL = Architect.SizeManager.getColumns();
-    private static final int N_ROW = Architect.SizeManager.getRows();
+    private static int n_col;
+    private static int n_row;
     private Architect arch = Architect.getInstance();
     private Random rand;
 
     private Drawable[] wall;
 
     public LevelDesigner() {
+        n_col = Architect.SizeManager.getColumns();
+        n_row = Architect.SizeManager.getRows();
         rand = random();
         wall = spawnWall();
     }
 
     public Box[][] create2DBoxList() {
-        return new Box[N_ROW-1][N_COL-2];
+        return new Box[n_row-1][n_col-2];
     }
 
     public Box[] generateBoxes(Box sample, List<Coordinate> cList) {
@@ -47,20 +49,20 @@ public class LevelDesigner implements Drawable {
     public Box[] spawnWall() {
         List<Coordinate> cList = new ArrayList<>();
         Box sample = arch.new Box(TColor.WALL_GREY, false);
-        for (int i = 0; i < N_ROW; i++) {
+        for (int i = 0; i < n_row; i++) {
             cList.add(new Coordinate(0,i));
-            cList.add(new Coordinate(N_COL-1, i));
+            cList.add(new Coordinate(n_col-1, i));
         }
-        for (int i = 1; i < N_COL-1; i++) {
-            cList.add(new Coordinate(i,N_ROW-1));
+        for (int i = 1; i < n_col-1; i++) {
+            cList.add(new Coordinate(i,n_row-1));
         }
         return generateBoxes(sample, cList);
     }
 
     public Box[] spawnBackgroundPixels() {
         List<Coordinate> list = new ArrayList<>();
-        for (int i = 1; i < N_COL-1; i++) {
-            for (int j=0; j< N_ROW-1; j++) {
+        for (int i = 1; i < n_col-1; i++) {
+            for (int j=0; j< n_row-1; j++) {
                 list.add(new Coordinate(i,j));
             }
         }
@@ -70,7 +72,7 @@ public class LevelDesigner implements Drawable {
     }
 
     public Tetrimino spawnTetrimino(Tetrimino tetrimino) {
-        int x = N_COL>=5 ? rand.nextInt(N_COL-4)+2 : 2;
+        int x = n_col>=5 ? rand.nextInt(n_col-4)+2 : 2;
         int y = -1;
         util.log.GameLogger.outdatedLog("Spawning at "+x+","+y);
         tetrimino = ((Tetrimino) tetrimino.copy());
