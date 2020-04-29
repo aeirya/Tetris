@@ -68,7 +68,7 @@ public class ControlPanel extends Panel {
 
     private JButton createPauseButton() {
         final JButton btn;
-        btn = new JButton("Pause");
+        btn = new JButton("(P)ause");
         btn.setFocusable(false);
         btn.addActionListener((ActionEvent e) -> {
             Game.getInstance().togglePause();
@@ -78,7 +78,7 @@ public class ControlPanel extends Panel {
 
     private JButton createMenuButton() {
         final JButton btn;
-        btn = new JButton("Menu");
+        btn = new JButton("(M)enu");
         btn.setFocusable(false);
         btn.addActionListener((ActionEvent e) -> Game.getInstance().toggleMenu());
         return btn;
@@ -140,7 +140,7 @@ public class ControlPanel extends Panel {
 
     private void toggleButtonText(boolean isPaused) {
         if (!isPaused) {
-            final String PAUSE = "Pause";
+            final String PAUSE = "(P)ause";
             pauseButton.setText(PAUSE);
         }
         else {

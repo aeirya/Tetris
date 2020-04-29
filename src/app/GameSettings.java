@@ -13,13 +13,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
+import models.Architect;
+
 public class GameSettings {
 
     private String pathToSettings;
-    private final String[] propertyNames = { "username", "screensize", "theme" };
+    private final String[] propertyNames = { "username", "screensize", "theme" , "boxes" };
     private List<String> propertyVariables = new LinkedList<>();
     private Properties properties = new Properties();
     private Dimension screenSize;
+    private Dimension boxes;
 
     public GameSettings( String settingsFilePath ) {
         this.pathToSettings = settingsFilePath;
@@ -31,8 +34,8 @@ public class GameSettings {
         applyGameSettings();
     }
 
-    private Dimension readScreenSize() {
-        final String[] size = properties.getProperty("screensize").split("x");
+    private Dimension readSize(String key) {
+        final String[] size = properties.getProperty(key).split("x");
         return new Dimension(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
     }
 
@@ -40,13 +43,19 @@ public class GameSettings {
         return this.screenSize;
     }
 
+    public Dimension getBoxes() {
+        return this.boxes;
+    }
+
     private void applyGameSettings() {
-        screenSize = readScreenSize();
+        screenSize = readSize("screensize");
+        boxes = readSize("boxes");
+        Architect.getInstance().boxesNumber(boxes);
         //read username, and background color
     }
 
     private String[] defaultValues() {
-        return new String[] { "Player", "700x850", "default" };
+        return new String[] { "Player", "700x850", "default", "12x21" };
     }
 
     private void loadGameSettings() {
