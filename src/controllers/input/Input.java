@@ -54,7 +54,7 @@ public class Input implements KeyListener {
     }
     
     private IMenuCommand parseMenuCommand(KeyEvent e) {
-        if (e.getKeyCode()==17) //shift
+        if (e.getKeyCode()==17) //control
             return Game::changeGameSpeed;
 
         switch(e.getKeyChar()) {
@@ -84,7 +84,7 @@ public class Input implements KeyListener {
         if(e.getKeyCode()==17) //control
             Game.getInstance().resetGameSpeed();
     }
-    
+   
     @Override
     public void keyTyped(KeyEvent e) { /*v*/ }
 }

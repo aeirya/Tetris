@@ -18,6 +18,8 @@ import app.Game;
 
 public class Menu extends JPanel {
     
+    private static final long serialVersionUID = 1L;
+    
     private static final List<JButton> btnList = new ArrayList<>();
     private static final transient
         Map <String, ActionListener> btnMap = Map.of(
@@ -65,8 +67,6 @@ public class Menu extends JPanel {
     
     private Box buttonsBox() {
         Box box = Box.createHorizontalBox();
-        // box.setPreferredSize(this.getPreferredSize());
-        // box.setSize(this.getPreferredSize());
         btnMap.forEach(
             (String text, ActionListener listener) -> 
                 btnList.add(makeButton(text, listener))
