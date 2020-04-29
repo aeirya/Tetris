@@ -37,7 +37,6 @@ public class SimpleAudioPlayer
 	public void reset() {
 		pause();
 		clip.setFramePosition(0);
-		play();
 	}
 
     public void resetAudioStream(String filePath) 

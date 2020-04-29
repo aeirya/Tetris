@@ -58,6 +58,7 @@ public class GameManager implements ICommandReceiver {
                 try{
                     event.call(GameEvent.END_ROUND);
                 } catch(Exception e) {
+                    firefighter.hold(null); //pushing the history
                     event.call(GameEvent.GAMEOVER);
                 }
             }
@@ -154,6 +155,7 @@ public class GameManager implements ICommandReceiver {
         }
 
         private void endRound() {
+            timer.resetSpeed();
             level.digest(current);
             this.call(GameEvent.LINE_REMOVE);
             current = null;
@@ -194,7 +196,6 @@ public class GameManager implements ICommandReceiver {
             current = spawnTetrimino();
             next = level.generateTetrimino();
             fallLock.unlock();
-            timer.resetSpeed();
             util.log.GameLogger.outdatedLog("spawn finished");
         }
     }

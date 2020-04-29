@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 
 public class Tetris {
     private static boolean quit = false;
-    //TODO: add pause
+    //TODO: add pause : DONE!
 
     public static void main(String[] args) {
         Game game = Game.getInstance();

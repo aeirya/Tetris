@@ -1,35 +1,29 @@
 package controllers;
 
+import util.file.GameSave;
+
 public class Backup {
 
-    private GameState inQueue;
-    private GameState currentSave;
-
+    private static final String FILE = "backup.ser";
+    private GameState pop;
     public Backup(GameState state) {
-        currentSave = state;
-        inQueue = state;
+        hold(state);
     }
     
     public void hold(GameState state) {
-        push();
-        queue(state);
+        pop();
+        push(state);
     }
     
-    private void queue(GameState state) {
-        inQueue = state.copy();
+    private void pop() {
+        pop = GameSave.loadState(FILE);
     }
 
-    private GameState push() {
-        GameState pop = currentSave;
-        currentSave = inQueue;
-        return pop;
+    private void push(GameState state) {
+        GameSave.saveState(state, FILE);
     }
 
     public GameState restore() {
-        GameState pop = push();
-        if (pop == null) util.log.GameLogger.log("pushing harder :))");
-        return (pop != null) ? pop : push();
+        return pop;
     }
-
-    
 }

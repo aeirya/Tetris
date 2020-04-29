@@ -36,11 +36,11 @@ public class Game {
     }
 
     private void loadState(GameState state) {
-        //Todo: actiave this
-        // audioPlayer.reset(); 
-        if (state!=null) System.out.println("loading state: " + state.toString());
+        audioPlayer.reset(); 
+        if (state!=null) util.log.GameLogger.debug("loading state: " + state.toString());
         manager = new GameManager(timer, state);
         input.setTo(manager);
+        resume();
     }
 
     /**
@@ -74,6 +74,16 @@ public class Game {
         timer.goFaster();
     }
 
+    //game flow
+
+    private void resume() {
+        if (isPaused) togglePause();
+    }
+
+    public boolean isPaused() {
+        return isPaused;
+    }
+
     //Menu options
 
     public void togglePause() {
@@ -84,6 +94,10 @@ public class Game {
         audioPlayer.togglePlay();
     }
 
+    public void toggleMenu() {
+        gameGraphics.toggleMenu();
+    }
+    
     public void toggleMute() {
         audioPlayer.toggleMute();
     }
@@ -104,13 +118,9 @@ public class Game {
         loadState(manager.restore());
     }
 
-    public void toggleMenu() {
-        gameGraphics.toggleMenu();
-    }
-
     public void quit() {
         this.save();
         Tetris.quitGame();
     }
-    //TODO: add gamestate backup : public GameState getLastState()
+    //TODO: add gamestate backup : public GameState getLastState() : DONE!
 }

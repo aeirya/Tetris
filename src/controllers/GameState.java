@@ -55,10 +55,6 @@ public class GameState implements java.io.Serializable {
         return new DrawList().add(next);
     }
 
-    public GameState copy() {
-        return new GameState(level, (Tetrimino) current.copy(), next, score);
-    }
-
     public String toString() {
         return
             "Printing game state" + 

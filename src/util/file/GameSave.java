@@ -16,7 +16,7 @@ public class GameSave {
 
     private GameSave() { }
 
-    public static GameState loadState() {
+    public static GameState loadState(String fileName) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(fileName)))) {
             return (GameState)ois.readObject();
         } catch(IOException|ClassNotFoundException ex) {
@@ -25,11 +25,19 @@ public class GameSave {
         }
     }
 
-    public static void saveState (GameState state) {
+    public static GameState loadState() {
+        return loadState(fileName);
+    }
+
+    public static void saveState (GameState state, String fileName) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(fileName)))) {
             oos.writeObject(state);
         } catch(IOException ex) {
             util.log.GameLogger.error(ex, GameSave.class);
         }
     }
+
+    public static void saveState(GameState state) {
+        saveState(state, fileName);
+    } 
 }

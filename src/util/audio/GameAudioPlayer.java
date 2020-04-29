@@ -35,7 +35,11 @@ public class GameAudioPlayer implements IGameAudioPlayer {
 
     public void pause() { player.pause(); }
 
-    public void reset() { player.reset(); }
+    public void reset() { 
+        SoundEffect.GAMEOVER.stop(); 
+        player.reset(); 
+        if (!isMute) player.play();
+    }
 
     public boolean isMute() { return isMute; }
 

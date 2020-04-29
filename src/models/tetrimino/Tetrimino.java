@@ -78,7 +78,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
 
     public IGameObject copy() {
-        return new Tetrimino(shape, body.copy());
+        return new Tetrimino(shape, body);
     }
     
     public void rotate(final int i) {

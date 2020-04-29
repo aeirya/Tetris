@@ -33,9 +33,6 @@ public class Shape implements IShape  {
         return result;
     }
 
-    public Shape copy() {
-        
-    }
 
     public String toString() {
         String classname = this.getClass().getName();
