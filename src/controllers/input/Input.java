@@ -54,6 +54,9 @@ public class Input implements KeyListener {
     }
     
     private IMenuCommand parseMenuCommand(KeyEvent e) {
+        if (e.getKeyCode()==17) //shift
+            return Game::changeGameSpeed;
+
         switch(e.getKeyChar()) {
             case 'l':
             return Game::load;
@@ -61,19 +64,26 @@ public class Input implements KeyListener {
             return Game::reset;
             case 'm':
             return Game::toggleMenu;
-            case 'k':
+            case 'v':
             return Game::save;
             case 'y':
             return Game::restore;
-            case 'p':
+            case 't':
             return Game::quit;
+            case 'p':
+            return Game::togglePause;
+            case 'u':
+            return Game::toggleMute;
             default:
             return null;
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) { /*_*/ }
+    public void keyReleased(KeyEvent e) { /*_*/ 
+        if(e.getKeyCode()==17) //control
+            Game.getInstance().resetGameSpeed();
+    }
     
     @Override
     public void keyTyped(KeyEvent e) { /*v*/ }

@@ -29,6 +29,10 @@ public class Architect implements java.io.Serializable {
     public void updateNumbers(Dimension size) {
         sizes.calculate(size.width, (int) (0.97 * size.height));
     }
+
+    public void boxesNumber(Dimension boxes) {
+        SizeManager.boxNumbers(boxes.width, boxes.height);
+    }
     
     public Box genBox(int x, int y) {
         return new Box(x,y); 
@@ -43,17 +47,22 @@ public class Architect implements java.io.Serializable {
         private static final long serialVersionUID = 1L;
         
         // TODO: these numbers should be custom
-        private static final int NCOLUMNS = 12;
-        private static final int NROWS = 21;
+        private static int columns = 12;
+        private static int rows = 21;
         private final Dimension boxDimension = new Dimension();
+
+        public static void boxNumbers(int c, int r) {
+            columns = c;
+            rows = r;
+        }
 
         public void calculate(int sw, int sh) {
             boxDimension.setSize(calculateBoxSize(sw, sh));
         }
 
         private Dimension calculateBoxSize(int sw, int sh) {
-            int w = sw/NCOLUMNS;
-            int h = sh/NROWS;
+            int w = sw/columns;
+            int h = sh/rows;
             return new Dimension(w,h);
         }
 
@@ -62,11 +71,11 @@ public class Architect implements java.io.Serializable {
         }
 
         public static int getRows() {
-            return NROWS;
+            return rows;
         }
 
         public static int getColumns() {
-            return NCOLUMNS;
+            return columns;
         }
     }
 

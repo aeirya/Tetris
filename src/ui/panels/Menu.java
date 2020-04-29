@@ -21,31 +21,31 @@ public class Menu extends JPanel {
     private static final List<JButton> btnList = new ArrayList<>();
     private static final transient
         Map <String, ActionListener> btnMap = Map.of(
-            "Sorry (y)",
+            "Sorr(y)",
             (ActionEvent e) ->
                 Game.getInstance().restore()
             ,
-            "Restart (r)",
+            "(R)estart",
             (ActionEvent e) -> 
                 Game.getInstance().reset()
             ,
-            "Load (l)",
+            "(L)oad",
             (ActionEvent e) -> 
                 Game.getInstance().load()
             ,
-            "Save (k)",
+            "Sa(v)e",
             (ActionEvent e) -> 
                 Game.getInstance().save()
             ,
-            "Quit (p)",
+            "Qui(t)",
             (ActionEvent e) -> 
                 Game.getInstance().quit()
         );
 
-    public Menu() {
+    public Menu(int w, int h) {
         setBackground(new Color(130,150,130));
         setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-        // setPreferredSize(w,h);
+        setPreferredSize(new Dimension(w,h));
         initiateComponents();
     }
 
@@ -65,6 +65,8 @@ public class Menu extends JPanel {
     
     private Box buttonsBox() {
         Box box = Box.createHorizontalBox();
+        // box.setPreferredSize(this.getPreferredSize());
+        // box.setSize(this.getPreferredSize());
         btnMap.forEach(
             (String text, ActionListener listener) -> 
                 btnList.add(makeButton(text, listener))
