@@ -39,7 +39,10 @@ public class DrawList implements Drawable {
     public void draw(Graphics g) {
         //creating a copy of the array first, skipping the concurrent modification exception
         for (Object obj : list.toArray()) { 
-            ((Drawable)obj).draw(g);
+            if (obj != null) {
+                ((Drawable)obj).draw(g);
+            }
         }
+        //DEBUG NOTE: places obj is empty: end_round
     }
 }

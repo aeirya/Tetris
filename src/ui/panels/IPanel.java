@@ -1,7 +1,5 @@
 package ui.panels;
 
-import javax.swing.JPanel;
-
 import controllers.GameState;
 import models.interfaces.Drawable;
 import java.awt.Graphics;

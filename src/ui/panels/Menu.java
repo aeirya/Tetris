@@ -2,7 +2,6 @@ package ui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -15,20 +14,18 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import app.Game;
-import app.Tetris;
 
 public class Menu extends JPanel {
 
     private static final long serialVersionUID = 1L;
     
     private static final List<JButton> btnList = new ArrayList<>();
-    private static final Game game = Game.getInstance();
     private static final transient 
         Map <String, ActionListener> btnMap = Map.of(
             "Sorry",
-            (ActionEvent e) -> {
-        
-            },
+            (ActionEvent e) ->
+                Game.getInstance().restore()
+            ,
             "Restart",
             (ActionEvent e) -> 
                 Game.getInstance().reset()
@@ -43,7 +40,7 @@ public class Menu extends JPanel {
             ,
             "Quit",
             (ActionEvent e) -> 
-                Tetris.quitGame()
+                Game.getInstance().quit()
         );
 
     public Menu() {

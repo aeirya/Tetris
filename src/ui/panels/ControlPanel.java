@@ -111,7 +111,6 @@ public class ControlPanel extends Panel {
         c.gridy = 0;
         pane.add(muteButton, c);
         c.gridheight = 1;
-        c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 0;
         pane.add(pauseButton, c);
@@ -121,7 +120,7 @@ public class ControlPanel extends Panel {
     }
 
     private void alternativeControlPanelBox(JButton muteButton, JButton pauseButton) {
-        util.log.GameLogger.log("alternative mute button");
+        util.log.GameLogger.log("alternative mute button (icon not found)");
         JButton btnMenu = createMenuButton();
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();

@@ -8,10 +8,19 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 public class TestMain {
+    static TestBackup t;
     public static void main(String[] args) {
-        new TestMain().c();
+        // t = new TestMain().new TestBackup(1);
+        // t.hold(2);
+        // pop();
+        // pop();
+        new TestMain().splitter();
     }
     
+    static void pop() {
+        System.out.println(t.restore());
+    }
+
     void a() {
         int[] a = new int[]{1,2,3};
         int[] b = a;
@@ -47,5 +56,44 @@ public class TestMain {
         lpane.add(panelBlue, null, 0);
         lpane.add(panelGreen, null, 0);
         return lpane;
+    }
+
+    void splitter() {
+        String s ="models.tetrimino.shapes.SShapedBox" ;
+        String[] list = s.split("\\."); 
+        System.out.println(list[list.length-1]); 
+    }
+
+
+    public class TestBackup {
+
+        private int inQueue;
+        private int currentSave;
+
+        public TestBackup(int state) {
+            currentSave = state;
+            inQueue = state;
+        }
+        
+        public void hold(int state) {
+            push();
+            queue(state);
+        }
+        
+        private void queue(int state) {
+            inQueue = state;
+        }
+
+        private int push() {
+            int pop = currentSave;
+            currentSave = inQueue;
+            return pop;
+        }
+
+        public int restore() {
+            int pop = push();
+            if (pop == 0) util.log.GameLogger.log("pushing harder :))");
+            return (pop != 0) ? pop : push();
+        }
     }
 }

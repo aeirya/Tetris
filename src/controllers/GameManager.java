@@ -1,7 +1,6 @@
 package controllers;
 
 import app.Game;
-import app.Tetris;
 import controllers.input.ICommandReceiver;
 import controllers.input.ICommand;
 import models.tetrimino.Tetrimino;
@@ -19,8 +18,10 @@ public class GameManager implements ICommandReceiver {
     private final GameTimer timer;
     private final GameScore score;
     private final GameEventHandler event;
+    private final Backup firefighter;
     
     public GameManager(GameTimer timer, GameState state) {
+        firefighter = new Backup(state);
         event = new GameEventHandler();
         if (state == null) {
             level = new Level();
@@ -41,7 +42,9 @@ public class GameManager implements ICommandReceiver {
     /** @return next game state */
     public GameState update(boolean isTick) {
         if (current == null) {
-            current = event.spawn();
+            util.log.GameLogger.outdatedLog("null current");
+            event.call(GameEvent.SPAWN);
+            backup();
         }
         if (level.checkCollision(current)) {
             event.collision();
@@ -62,6 +65,17 @@ public class GameManager implements ICommandReceiver {
         return updatedGameState(level, current, next, score );
     }
     
+    private void backup() {
+        util.log.GameLogger.outdatedLog("backing up");
+        firefighter.hold(
+            updatedGameState(level, current, next, score)
+        );
+    }
+
+    public GameState restore() {
+        return firefighter.restore();
+    }
+
     private GameState updatedGameState(Level level, Tetrimino current, Tetrimino next, GameScore score) {
         return new GameState(level, current, next, score);
     }
@@ -107,6 +121,7 @@ public class GameManager implements ICommandReceiver {
     private enum GameEvent {
         LINE_REMOVE,
         END_ROUND,
+        SPAWN,
         GAMEOVER;
     }
 
@@ -124,22 +139,24 @@ public class GameManager implements ICommandReceiver {
                 return this::lineRemove;
                 case END_ROUND:
                 return this::endRound;
+                case SPAWN:
+                return this::spawn;
                 default:
                 return () -> {};
             }
         }
 
+        //hard to say goodbye :D
         private void gameover() {
             util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
             SoundEffect.GAMEOVER.play();
             Game.getInstance().togglePause();
-            Tetris.quitGame();
         }
 
         private void endRound() {
             level.digest(current);
             this.call(GameEvent.LINE_REMOVE);
-            current = spawn();
+            current = null;
             score.nextLevel();
         }
         
@@ -149,23 +166,15 @@ public class GameManager implements ICommandReceiver {
             if (toRemove > 0) SoundEffect.EXPLOSION.play();
             score.removedLine( toRemove );
         }
-
-        private Tetrimino spawn() {
-            if (next == null) next = level.generateTetrimino();
-            Tetrimino spawned = level.spawnTetrimino(next);
-            next = level.generateTetrimino();
-            fallLock.unlock();
-            timer.resetSpeed();
-            return spawned;
-        }
-
+        
+        //physics :B
         private void collision() {
             util.log.GameLogger.outdatedLog("collision!");
             current.stopAnimation();
             inputLock.report();
             current.revert();
         }
-
+        
         private void applyGravity() {
             current.fall();
             if (level.checkCollision(current)) {
@@ -173,6 +182,20 @@ public class GameManager implements ICommandReceiver {
                 util.log.GameLogger.outdatedLog("fell!");
                 current.revert();
             }
+        }    
+
+        //spawning functions        
+        private Tetrimino spawnTetrimino() {
+            if (next == null) next = level.generateTetrimino();
+            return level.spawnTetrimino(next);
+        }
+
+        private void spawn() {
+            current = spawnTetrimino();
+            next = level.generateTetrimino();
+            fallLock.unlock();
+            timer.resetSpeed();
+            util.log.GameLogger.outdatedLog("spawn finished");
         }
     }
 }

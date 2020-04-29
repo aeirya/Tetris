@@ -33,8 +33,14 @@ public class Shape implements IShape  {
         return result;
     }
 
+    public Shape copy() {
+        
+    }
+
     public String toString() {
-        return this.getClass().getName();
+        String classname = this.getClass().getName();
+        String[] list = classname.split("\\.");
+        return list[list.length-1];
     }
 
     /** It has the ability to rotate, and has a method for Shape, getting coordinates at the same time */
