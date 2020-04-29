@@ -33,6 +33,10 @@ public class Shape implements IShape  {
         return result;
     }
 
+    public String toString() {
+        return this.getClass().getName();
+    }
+
     /** It has the ability to rotate, and has a method for Shape, getting coordinates at the same time */
     protected static class ShapeCoordinate extends Coordinate {
 

@@ -8,7 +8,7 @@ public class GameObject implements IGameObject {
     private static final long serialVersionUID = 1L;
 
     protected int x = 0;
-    protected int y=0;
+    protected int y = 0;
     private IGameObject kid = null;
     private transient Runnable revert = () -> move(0,0);
     
@@ -57,5 +57,9 @@ public class GameObject implements IGameObject {
 
     public void addTo(Map map) {
         map.set(x, y, this);
+    }
+
+    public String toString() {
+        return " at ("+x+","+y+")";
     }
 }

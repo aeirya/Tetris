@@ -37,7 +37,7 @@ public class DrawList implements Drawable {
     }
 
     public void draw(Graphics g) {
-        //creating a copy of the array first, ditching the concurrent modification exception
+        //creating a copy of the array first, skipping the concurrent modification exception
         for (Object obj : list.toArray()) { 
             ((Drawable)obj).draw(g);
         }

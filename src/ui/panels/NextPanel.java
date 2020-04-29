@@ -25,6 +25,9 @@ public class NextPanel extends Panel {
 
     @Override 
     public void draw(Graphics g) {
-        if (drawlist!=null) drawlist.draw(g);
+        if (drawlist!=null) {
+            drawlist.draw(g);
+        }
+        else util.log.GameLogger.outdatedLog("next panel is null :|");
     }
 }

@@ -58,7 +58,14 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
     
     public void draw(final Graphics g) {
-        if(leonardoDaVinci!=null) leonardoDaVinci.draw(g);
+        if(leonardoDaVinci!=null) {
+            leonardoDaVinci.draw(g);
+        }
+        else {
+            util.log.GameLogger.outdatedLog("sending our best ninjas to wake up duh vinci :p");
+            update(); 
+            this.draw(g);
+        }
     }
     
     public void revert() {
@@ -110,5 +117,9 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
         } catch(Exception ex) {
             util.log.GameLogger.debug("ok what animation to stop? no animator :|");
         }
+    }
+
+    public String toString() {
+        return shape.toString() + body.toString();
     }
 }

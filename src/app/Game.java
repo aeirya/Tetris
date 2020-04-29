@@ -2,7 +2,6 @@ package app;
 
 import controllers.GameManager;
 import controllers.GameState;
-import controllers.UiManager;
 import controllers.input.Input;
 import ui.graphics.IGameGraphics;
 import ui.graphics.SwingGraphics;
