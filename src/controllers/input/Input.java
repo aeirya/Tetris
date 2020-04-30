@@ -12,20 +12,20 @@ public class Input implements KeyListener {
 
     private ICommandReceiver executer;
 
-    public Input(ICommandReceiver ip) {
+    public Input(final ICommandReceiver ip) {
         executer = ip;
     }
 
-    public void setTo(ICommandReceiver ip) {
+    public void setTo(final ICommandReceiver ip) {
         executer = ip;
     }
     
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(final KeyEvent e) {
         parse(e);
     }
     
-    private void parse(KeyEvent e) {
+    private void parse(final KeyEvent e) {
         if (
             Game.getInstance()
             .receiveCommand( parseMenuCommand(e) )
@@ -34,9 +34,19 @@ public class Input implements KeyListener {
         }
     }
 
-    private ICommand parseTetriminoCommand(KeyEvent e) {
+    private ICommand parseTetriminoCommand(final KeyEvent e) {
         util.log.GameLogger.outdatedLog("keychar: "+e.getKeyChar()+" , keycode: "+e.getKeyCode());
         
+        //God mode! having fun with the mechanics :p 
+        if (Game.getInstance().isPaused()) {
+            char key = e.getKeyChar();
+            if(key == 'w') return Tetrimino::ascend;
+            if(key == 's') return Tetrimino::fall;
+            if(key == 'e') return Tetrimino::rotateRight;
+            if(key == 'q') return Tetrimino::rotateLeft;
+            if(key == 'f') return Tetrimino::toggleHidden;
+        }
+
         if (e.getKeyCode()==32)  //space
             return Tetrimino::dash; 
         
@@ -53,7 +63,7 @@ public class Input implements KeyListener {
         }
     }
     
-    private IMenuCommand parseMenuCommand(KeyEvent e) {
+    private IMenuCommand parseMenuCommand(final KeyEvent e) {
         if (e.getKeyCode()==17) //control
             return Game::changeGameSpeed;
 
@@ -80,11 +90,11 @@ public class Input implements KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) { /*_*/ 
+    public void keyReleased(final KeyEvent e) { /*_*/ 
         if(e.getKeyCode()==17) //control
             Game.getInstance().resetGameSpeed();
     }
    
     @Override
-    public void keyTyped(KeyEvent e) { /*v*/ }
+    public void keyTyped(final KeyEvent e) { /*v*/ }
 }

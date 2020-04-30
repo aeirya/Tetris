@@ -28,6 +28,10 @@ public interface IGameObject extends Serializable {
         move(0, 1);
     }
 
+    default void ascend() {
+        move(0, -1);
+    }
+
     void revert();
     void addTo(Map list);
     boolean collides(Map map);

@@ -13,6 +13,7 @@ import controllers.state.GameState;
 import controllers.score.TopScoreManager;
 import ui.ComponentGenerator;
 import ui.panels.Panel;
+import util.CustomListener;
 
 public class ScorePanel extends Panel {
 
@@ -54,7 +55,7 @@ public class ScorePanel extends Panel {
             );
         textField.setFont(textField.getFont().deriveFont((float)16));
         textField.setFocusable(false);
-        new TextFieldListener().setTo(textField);
+        new TextFieldListener(textField, 2000).start();
         return new JScrollPane(
             textField,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
@@ -77,28 +78,15 @@ public class ScorePanel extends Panel {
         );
     }
 
-    private class TextFieldListener {
+    private class TextFieldListener extends CustomListener<JTextArea> {
 
-        private JTextArea text;
-        private void setTo(JTextArea comp) {
-            text = comp;
-            new Thread(this::update).start();
-        }
-
-        private synchronized void update() {
-            while (!Thread.currentThread().isInterrupted()) {
-                try {
-                    updateText();
-                    wait(2000);
-                } catch (InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
-            }
-        }
-
-        private void updateText() {
-            text.setText(
-                TopScoreManager.getInstance().getText()
+        private TextFieldListener(JTextArea text, int waitTime) {
+            super(
+                text, 
+                waitTime,
+                t -> t.setText(
+                    TopScoreManager.getInstance().getText()
+                )
             );
         }
     }

@@ -6,6 +6,7 @@ import controllers.input.IMenuCommand;
 import controllers.input.Input;
 import ui.graphics.IGameGraphics;
 import ui.graphics.SwingGraphics;
+import util.CustomListener;
 import util.audio.GameAudioPlayer;
 import util.audio.IGameAudioPlayer;
 import util.file.save.GameSave;
@@ -30,6 +31,7 @@ public class Game {
         input = new Input(manager);
         final GameSettings settings = new GameSettings("settings.properties");
         gameGraphics.setup(settings, input);
+        new UiUpdater(gameGraphics).start();
     }
 
     public static Game getInstance() {
@@ -50,16 +52,24 @@ public class Game {
      */
     public void update() {
         if (!isPaused) {
-            state = manager.update(timer.isTickTime());
-            if (!timer.isLocked()) {
-                timer.queue(gameGraphics::redraw);
-                timer.flush();
-                timer.holdOn();
-            }
-            gameGraphics.update(state);
+            updateState();
+            updateGraphics();
         } else {
             doWait();
         }
+    }
+    
+    private void updateState() {
+        state = manager.update(timer.isTickTime());
+    }
+
+    private void updateGraphics() {
+        if (!timer.isLocked()) {
+            timer.queue(gameGraphics::redraw);
+            timer.flush();
+            timer.holdOn();
+        }
+        gameGraphics.update(state);
     }
 
     private void doWait() {
@@ -95,6 +105,7 @@ public class Game {
         isPaused = !isPaused;
         if (!isPaused) {
             audioPlayer.pause(); //resets its state
+            timer.isTickTime(); //reseting the ticktime
         }
         audioPlayer.togglePlay();
     }
@@ -105,6 +116,10 @@ public class Game {
     
     public void toggleMute() {
         audioPlayer.toggleMute();
+    }
+
+    public boolean isMute() {
+        return audioPlayer.isMute();
     }
 
     public void reset() {
@@ -133,5 +148,16 @@ public class Game {
         if (cmd==null) return true;
         cmd.act(this);
         return false;
+    }
+
+    //updates the game on pause state
+    private class UiUpdater extends CustomListener<IGameGraphics> {
+        private UiUpdater(IGameGraphics gameGraphics) {
+            super(
+                gameGraphics, 
+                200, 
+                g -> { if (Game.getInstance().isPaused()) g.paint(); }
+            );
+        }
     }
 }

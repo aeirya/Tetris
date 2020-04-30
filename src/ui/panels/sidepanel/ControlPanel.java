@@ -8,6 +8,7 @@ import java.io.File;
 import app.Game;
 import controllers.state.GameState;
 import ui.panels.Panel;
+import util.CustomListener;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,8 +19,6 @@ public class ControlPanel extends Panel {
 
     private final JButton pauseButton;
     private final JButton muteButton;
-
-    private boolean isMute = false;
 
     protected ControlPanel(int w, int h) {
         super(w, h);
@@ -56,12 +55,15 @@ public class ControlPanel extends Panel {
         }
         btn.setBackground(java.awt.Color.RED);
         btn.setFocusable(false);
-        btn.addActionListener((ActionEvent e) -> {
-            Game.getInstance().toggleMute();
-            isMute = !isMute;
-            toggleMute(isMute);
-        });
-        btn.setToolTipText("mute the background sound");
+        btn.addActionListener((ActionEvent e) -> 
+            Game.getInstance().toggleMute()
+        );
+        btn.setToolTipText("M(u)te the background sound");
+        new CustomListener<ControlPanel> (
+            this, 250, 
+            c -> c.toggleMute(
+                Game.getInstance().isMute()
+            )).start();  
         return btn;
     }
 
@@ -142,6 +144,9 @@ public class ControlPanel extends Panel {
     public void update(GameState state) {
         toggleButtonText(
             Game.getInstance().isPaused()
+        );
+        toggleMute(
+            Game.getInstance().isMute()
         );
     }
 }

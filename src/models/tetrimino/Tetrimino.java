@@ -26,6 +26,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     private transient CollidableDrawList leonardoDaVinci = null;
     
     private final transient Animator animator = new Animator();
+    private boolean isHidden = false;
 
     public Tetrimino(final IShape shape, final int x, final int y, final Color color) {
         this(shape, Architect.getInstance().new Box(x, y, color));
@@ -56,14 +57,20 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
         return shape.applyShape(body);
     }
     
+    public void toggleHidden() {
+        isHidden = !isHidden;
+    }
+
     public void draw(final Graphics g) {
-        if(leonardoDaVinci!=null) {
-            leonardoDaVinci.draw(g);
-        }
-        else {
-            util.log.GameLogger.outdatedLog("sending our best ninjas to wake up duh vinci :p");
-            update(); 
-            this.draw(g);
+        if (!isHidden) {
+            if(leonardoDaVinci!=null) {
+                leonardoDaVinci.draw(g);
+            }
+            else {
+                util.log.GameLogger.outdatedLog("sending our best ninjas to wake up duh vinci :p");
+                update(); 
+                this.draw(g);
+            }
         }
     }
     
