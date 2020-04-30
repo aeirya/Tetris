@@ -8,13 +8,19 @@ public class GameScore implements Serializable {
 
     private int linesRemoved = 0;
     private int level = 0;
+    private int penalty = 0;
 
     public int getScore() {
-        return level + 10 * linesRemoved;
+        return level + 10 * linesRemoved - 5 * penalty;
     }
 
     public void nextLevel() {
         level += 1;
+    }
+
+    public GameScore applyRevivePentaly() {
+        penalty += 1;
+        return this;
     }
 
     public int getRemovedLines() {

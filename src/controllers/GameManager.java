@@ -34,7 +34,7 @@ public class GameManager implements ICommandReceiver {
             level = data.getLevel();
             current = data.getCurrent();
             next = data.getNext();
-            score = data.getScore();
+            score = data.getScore().applyRevivePentaly();
         }
         this.timer = timer;
         timer.resetSpeed();
@@ -153,6 +153,7 @@ public class GameManager implements ICommandReceiver {
             util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
             SoundEffect.GAMEOVER.play();
             Game.getInstance().togglePause();
+            TopScoreManager.getInstance().addScore(score);
         }
 
         private void endRound() {
