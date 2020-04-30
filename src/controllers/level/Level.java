@@ -66,4 +66,7 @@ public class Level implements Drawable, java.io.Serializable {
         map.draw(g);
     }
 
+    public void refresh() {
+        map.refresh();
+    }
 }

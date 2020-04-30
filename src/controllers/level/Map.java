@@ -2,6 +2,7 @@ package controllers.level;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -75,6 +76,20 @@ public class Map implements Drawable, java.io.Serializable {
             getLine(i).show();
             if (!clearList.contains(i-1)) getLine(i-1).show();
         });
+    }
+
+    public void refresh() {
+        Arrays.asList(list)
+            .forEach(
+                (Box[] line) ->
+                    Arrays.asList(line)
+                        .forEach(
+                            (Box box) -> {
+                                if(box != null) 
+                                    box.show();
+                            }
+                        )
+                );
     }
 
     private class SangeSabur {

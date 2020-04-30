@@ -45,6 +45,7 @@ public class GameManager implements ICommandReceiver {
         this.timer = timer;
         timer.resetSpeed();
         event.call(GameEvent.LINE_REMOVE);
+        level.refresh();
     }
 
     /** @return next game state */
