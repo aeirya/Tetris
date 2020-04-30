@@ -4,10 +4,12 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import models.interfaces.Animate;
 import models.interfaces.Drawable;
 import models.tetrimino.Tetrimino;
 
-public class DrawList implements Drawable {
+public class DrawList implements Drawable, Animate {
 
     private List<Drawable> list;
 
@@ -44,5 +46,17 @@ public class DrawList implements Drawable {
             }
         }
         //DEBUG NOTE: places obj is empty: end_round
+    }
+
+    public void toggleHidden() {
+        for (Drawable d : list) {
+            ((Animate) d).toggleHidden();
+        }
+    }
+
+    public void show() {
+        for (Drawable d : list) {
+            ((Animate) d).show();
+        }
     }
 }

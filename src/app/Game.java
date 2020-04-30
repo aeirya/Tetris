@@ -155,7 +155,7 @@ public class Game {
         private UiUpdater(IGameGraphics gameGraphics) {
             super(
                 gameGraphics, 
-                200, 
+                120, 
                 g -> { if (Game.getInstance().isPaused()) g.paint(); }
             );
         }

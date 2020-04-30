@@ -3,6 +3,7 @@ package models;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import models.interfaces.Animate;
 import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
 import models.tetrimino.TetriminoGenerator.TColor;
@@ -78,7 +79,7 @@ public class Architect implements java.io.Serializable {
         }
     }
 
-    public class Box extends GameObject implements Drawable {
+    public class Box extends GameObject implements Drawable, Animate {
 
         private static final long serialVersionUID = 1L;
         
@@ -128,6 +129,7 @@ public class Architect implements java.io.Serializable {
         }
 
         public void draw(Graphics g) {
+            if (isHidden) return;
             int width = (int) sizes.getBoxDim().getWidth();
             int height = (int) sizes.getBoxDim().getHeight();
             int x = this.x*width;
@@ -181,6 +183,16 @@ public class Architect implements java.io.Serializable {
 
         public String toString() {
             return "Box at " +x + ","+y;
+        }
+
+        private boolean isHidden = false;
+        
+        public void toggleHidden() {
+            isHidden = !isHidden;
+        }
+
+        public void show() {
+            isHidden = false;
         }
     }
 }

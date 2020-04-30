@@ -14,7 +14,8 @@ public class TestMain {
         // t.hold(2);
         // pop();
         // pop();
-        new TestMain().splitter();
+        // new TestMain().splitter();
+        g();
     }
     
     static void pop() {
@@ -64,6 +65,11 @@ public class TestMain {
         System.out.println(list[list.length-1]); 
     }
 
+    static void g() {
+
+        
+
+    }
 
     public class TestBackup {
 

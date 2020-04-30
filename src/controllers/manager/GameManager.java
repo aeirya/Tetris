@@ -44,6 +44,7 @@ public class GameManager implements ICommandReceiver {
         }
         this.timer = timer;
         timer.resetSpeed();
+        event.call(GameEvent.LINE_REMOVE);
     }
 
     /** @return next game state */
@@ -96,7 +97,7 @@ public class GameManager implements ICommandReceiver {
         }
     }
 
-    private static class Lock {
+    public static class Lock {
         
         private int counter = 0;
         private final int limit;
@@ -166,8 +167,9 @@ public class GameManager implements ICommandReceiver {
             timer.resetSpeed();
             level.digest(current);
             this.call(GameEvent.LINE_REMOVE);
-            current = null;
             score.nextLevel();
+            current.setAnimation(AnimationType.BLINK);
+            current = null;
         }
         
         private void lineRemove() {
@@ -202,7 +204,6 @@ public class GameManager implements ICommandReceiver {
 
         private void spawn() {
             current = spawnTetrimino();
-            // current.setAnimation(AnimationType.BLINK);
             next = level.generateTetrimino();
             fallLock.unlock();
             util.log.GameLogger.outdatedLog("spawn finished");

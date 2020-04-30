@@ -3,6 +3,7 @@ package models.tetrimino;
 import ui.drawlist.CollidableDrawList;
 import util.audio.SoundEffect;
 import models.GameObject;
+import models.interfaces.Animate;
 import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
 import models.interfaces.IShape;
@@ -14,7 +15,7 @@ import controllers.level.Map;
 import models.Architect;
 import java.awt.Color;
 
-public class Tetrimino implements IGameObject, IShape, Drawable {
+public class Tetrimino implements IGameObject, IShape, Drawable, Animate {
 
     private static final long serialVersionUID = 1L;
     
@@ -24,7 +25,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     private boolean isLastActionMove = true;
     private transient CollidableDrawList leonardoDaVinci = null;
     
-    private final transient Animator animator = new Animator();
+    private transient Animator animator = new Animator();
     private boolean isHidden = false;
 
     public Tetrimino(final IShape shape, final int x, final int y, final Color color) {
@@ -57,7 +58,11 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
     
     public void toggleHidden() {
-        isHidden = !isHidden;
+        leonardoDaVinci.toggleHidden();
+    }
+
+    public void show() {
+        util.log.GameLogger.log("Tetrimino show() not implemented");
     }
 
     public void draw(final Graphics g) {
@@ -108,11 +113,11 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
 
     public void addTo(final Map map) {
-        // stopAnimation();
         leonardoDaVinci.addTo(map);
     }
 
     public void setAnimation(final Animation animation) {
+        if (animator == null) animator = new Animator();
         animator.setAnimation(animation);
         animator.playAnimation(this);
     }

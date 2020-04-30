@@ -1,26 +1,33 @@
 package models.tetrimino;
 
-import controllers.input.ICommand;
+import models.interfaces.Animate;
 
-public abstract class Animation implements ICommand {
+public abstract class Animation {
     
-    public abstract void play(Tetrimino t);
-    
-    public void act(Tetrimino t) { 
-        play(t); 
-    }
-   
+    protected long waitTime;
+
+    public abstract void play(Animate t);
+    public abstract void reset();
+
     public boolean isDone() { 
         return false; 
     }
 
-    public abstract void reset();
+    public void doWait() throws InterruptedException {
+        Thread.sleep(waitTime);
+    }
+    
 
     public static class Blink extends Animation {
+        
         private static final int REPEATS = 4;
         private int i = 0;
-        
-        public void play(Tetrimino t) {
+
+        public Blink() {
+            this.waitTime = 250L;
+        }
+
+        public void play(Animate t) {
             t.toggleHidden();
             i += 1;
             System.out.println("played");
