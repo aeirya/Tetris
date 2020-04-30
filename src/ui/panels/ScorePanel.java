@@ -1,16 +1,16 @@
 package ui.panels;
 
+import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-
 import controllers.GameScore;
 import controllers.GameState;
+import controllers.TopScoreManager;
 import ui.ComponentGenerator;
 
 public class ScorePanel extends Panel {
@@ -23,6 +23,7 @@ public class ScorePanel extends Panel {
     /** TODO: panel sizing should be dynamic */
     public ScorePanel(final int w, final int h) {
         super(w, h);
+        setBackground(ComponentGenerator.getBaseColor().brighter().brighter());
         c = new ComponentGenerator(w, h);
         //initiate
         final JComponent myScorePanel = scoresPanel();
@@ -36,9 +37,9 @@ public class ScorePanel extends Panel {
     private JComponent scoresPanel() {
         final Box box = Box.createVerticalBox();
         box.add(c.verticalFiller(0.05, 0.05, 0.1));
-        box.add(c.board(score.getScore(), "Score: "));
+        box.add(c.board(score.getScore(), "SCORE"));
         box.add(c.verticalFiller(0.05, 0.05, 0.1));
-        box.add(c.vSandwich(c.board(1 , "Lines removed")));
+        box.add(c.vSandwich(c.board(1 , "LINES REMOVED")));
         box.add(top10List());
         box.add(c.verticalFiller(0.01, 0.5, 0.5));
         return box;
@@ -46,17 +47,19 @@ public class ScorePanel extends Panel {
 
     private JComponent top10List() {
         final JTextArea textField = new JTextArea();
-        final String text = "Top Scores:\n1.10\n2.20";
-        textField.setText(text);
+        textField.setBackground(ComponentGenerator.getBaseColor());
+        textField.setForeground(new Color(230,230,230));
         textField.setPreferredSize(
             new Dimension(width, (int) (height * 0.25))
             );
         textField.setFont(textField.getFont().deriveFont((float)16));
         textField.setFocusable(false);
-        final JScrollPane pane = new JScrollPane(textField);
-        pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        return pane;
+        new TextFieldListener().setTo(textField);
+        return new JScrollPane(
+            textField,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER
+        );
     }
 
     @Override
@@ -72,5 +75,31 @@ public class ScorePanel extends Panel {
         linesRemovedLabel.setText(
             String.valueOf(score.getRemovedLines())
         );
+    }
+
+    private class TextFieldListener {
+
+        private JTextArea text;
+        private void setTo(JTextArea comp) {
+            text = comp;
+            new Thread(this::update).start();
+        }
+
+        private synchronized void update() {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    updateText();
+                    wait(2000);
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+
+        private void updateText() {
+            text.setText(
+                TopScoreManager.getInstance().getText()
+            );
+        }
     }
 }
