@@ -46,7 +46,6 @@ public class Architect implements java.io.Serializable {
         
         private static final long serialVersionUID = 1L;
         
-        // TODO: these numbers should be custom
         private static int columns = 12;
         private static int rows = 21;
         private final Dimension boxDimension = new Dimension();
@@ -125,7 +124,7 @@ public class Architect implements java.io.Serializable {
         private int calcStrokeWidth(int width, int height) {
             int a = 2+height/38;
             int b = 2+width/50;
-            return a > b ? a : b;
+            return Math.max(a,b);
         }
 
         public void draw(Graphics g) {

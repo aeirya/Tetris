@@ -1,4 +1,4 @@
-package ui.panels;
+package ui.panels.sidepanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,10 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import controllers.GameScore;
-import controllers.GameState;
-import controllers.TopScoreManager;
+import controllers.score.GameScore;
+import controllers.state.GameState;
+import controllers.score.TopScoreManager;
 import ui.ComponentGenerator;
+import ui.panels.Panel;
 
 public class ScorePanel extends Panel {
 
@@ -20,7 +21,6 @@ public class ScorePanel extends Panel {
     private final JLabel linesRemovedLabel;
     private GameScore score = new GameScore();
 
-    /** TODO: panel sizing should be dynamic */
     public ScorePanel(final int w, final int h) {
         super(w, h);
         setBackground(ComponentGenerator.getBaseColor().brighter().brighter());

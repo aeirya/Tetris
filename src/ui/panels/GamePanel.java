@@ -2,7 +2,7 @@ package ui.panels;
 
 import java.awt.Graphics;
 
-import controllers.GameState;
+import controllers.state.GameState;
 import ui.drawlist.DrawList;
 
 public class GamePanel extends Panel {

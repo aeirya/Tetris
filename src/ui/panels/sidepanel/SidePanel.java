@@ -1,8 +1,9 @@
-package ui.panels;
+package ui.panels.sidepanel;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import controllers.GameState;
+import controllers.state.GameState;
+import ui.panels.Panel;
 
 public class SidePanel extends Panel {
 

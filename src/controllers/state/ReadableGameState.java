@@ -1,6 +1,7 @@
-package controllers;
+package controllers.state;
 
 import controllers.level.Level;
+import controllers.score.GameScore;
 import models.tetrimino.Tetrimino;
 
 public class ReadableGameState extends GameState {

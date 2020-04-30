@@ -1,6 +1,6 @@
-package util.file;
+package util.file.save;
 
-import controllers.GameState;
+import controllers.state.GameState;
 
 public class GameSave {
 

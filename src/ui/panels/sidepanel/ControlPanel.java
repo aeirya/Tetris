@@ -1,14 +1,13 @@
-package ui.panels;
+package ui.panels.sidepanel;
 
 import java.awt.event.ActionEvent;
-import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import java.io.File;
 import app.Game;
-import controllers.GameState;
+import controllers.state.GameState;
+import ui.panels.Panel;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -70,9 +69,9 @@ public class ControlPanel extends Panel {
         final JButton btn;
         btn = new JButton("(P)ause");
         btn.setFocusable(false);
-        btn.addActionListener((ActionEvent e) -> {
-            Game.getInstance().togglePause();
-        });
+        btn.addActionListener((ActionEvent e) ->
+            Game.getInstance().togglePause()
+        );
         return btn;
     }
 
@@ -82,20 +81,6 @@ public class ControlPanel extends Panel {
         btn.setFocusable(false);
         btn.addActionListener((ActionEvent e) -> Game.getInstance().toggleMenu());
         return btn;
-    }
-
-    /**
-     @deprecated
-     */
-    @Deprecated(since = "")
-    private JComponent controlPanelBox(JButton muteButton, JButton pauseButton) {
-        Box b = Box.createHorizontalBox();
-        b.add(muteButton);
-        Box v = Box.createVerticalBox();
-        v.add(pauseButton);
-        v.add(createMenuButton());
-        b.add(v);
-        return b;
     }
 
     private void controlPanelGridBag(JButton muteButton, JButton pauseButton) {

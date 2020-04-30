@@ -5,11 +5,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import controllers.GameState;
-import controllers.UiManager;
+import controllers.state.GameState;
+import controllers.manager.UiManager;
 import models.Architect;
 import ui.panels.GamePanel;
-import ui.panels.SidePanel;
+import ui.panels.sidepanel.SidePanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,7 +22,7 @@ public class SwingGraphics implements IGameGraphics {
     private final JPanel mainPanel = new JPanel();
     private GamePanel gamePanel;
     private SidePanel sidePanel;
-    private final UiManager uiManager = new UiManager(frame, mainPanel, gamePanel, sidePanel);
+    private final UiManager uiManager = new UiManager(frame);
     
     public void start() {
         frame.setVisible(true);

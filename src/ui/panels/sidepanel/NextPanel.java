@@ -1,11 +1,12 @@
-package ui.panels;
+package ui.panels.sidepanel;
 
 import java.awt.Graphics;
 import java.awt.Color;
-import controllers.GameState;
+import controllers.state.GameState;
 import java.awt.Dimension;
 import models.interfaces.Drawable;
 import ui.ComponentGenerator;
+import ui.panels.Panel;
 
 public class NextPanel extends Panel {
 

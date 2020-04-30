@@ -1,6 +1,6 @@
 package ui.panels;
 
-import controllers.GameState;
+import controllers.state.GameState;
 import models.interfaces.Drawable;
 import java.awt.Graphics;
 import java.awt.Container;

@@ -1,4 +1,4 @@
-package util.file;
+package util.file.save;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +17,7 @@ public class Save {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(fileName)))) {
             return ois.readObject();
         } catch(IOException|ClassNotFoundException ex) {
-            util.log.GameLogger.error(ex, Save.class);
+            util.log.GameLogger.error(ex, fileName);
             return null;
         }
     }

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.score;
 
 import java.util.LinkedList;
 

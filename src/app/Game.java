@@ -1,14 +1,14 @@
 package app;
 
-import controllers.GameManager;
-import controllers.GameState;
+import controllers.manager.GameManager;
+import controllers.state.GameState;
 import controllers.input.IMenuCommand;
 import controllers.input.Input;
 import ui.graphics.IGameGraphics;
 import ui.graphics.SwingGraphics;
 import util.audio.GameAudioPlayer;
 import util.audio.IGameAudioPlayer;
-import util.file.GameSave;
+import util.file.save.GameSave;
 import util.time.GameTimer;
 
 /**
@@ -127,7 +127,6 @@ public class Game {
         this.save();
         Tetris.quitGame();
     }
-    //TODO: add gamestate backup : public GameState getLastState() : DONE!
 
     /** returns true is the command is null */
     public boolean receiveCommand(IMenuCommand cmd) {

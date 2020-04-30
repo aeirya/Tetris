@@ -1,11 +1,12 @@
 package app;
 
+import controllers.state.Backup;
+
 import java.awt.EventQueue;
 
 
 public class Tetris {
     private static boolean quit = false;
-    //TODO: add pause : DONE!
 
     public static void main(String[] args) {
         Game game = Game.getInstance();
@@ -22,6 +23,6 @@ public class Tetris {
     }
 
     private static void cleanFiles() {
-        controllers.Backup.clear();
+        Backup.clear();
     }
 }

@@ -1,13 +1,15 @@
-package controllers;
+package controllers.state;
 
+import controllers.manager.GameManager;
 import controllers.level.Level;
+import controllers.score.GameScore;
 import models.tetrimino.Tetrimino;
 import ui.drawlist.DrawList;
-import ui.panels.ControlPanel;
+import ui.panels.sidepanel.ControlPanel;
 import ui.panels.GamePanel;
-import ui.panels.NextPanel;
-import ui.panels.ScorePanel;
-import ui.panels.SidePanel;
+import ui.panels.sidepanel.NextPanel;
+import ui.panels.sidepanel.ScorePanel;
+import ui.panels.sidepanel.SidePanel;
 
 public class GameState implements java.io.Serializable {
 
@@ -41,7 +43,7 @@ public class GameState implements java.io.Serializable {
         if (receiver.getClass()==ControlPanel.class) {
             return null;
         }
-        if (receiver.getClass()==GameManager.class) {
+        if (receiver.getClass()== GameManager.class) {
             return new ReadableGameState(level, current, next, score);
         }
         return null;

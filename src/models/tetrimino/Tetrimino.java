@@ -10,7 +10,6 @@ import java.awt.Graphics;
 import java.util.List;
 
 import app.Game;
-import controllers.Animator;
 import controllers.input.ICommand;
 import controllers.level.Map;
 import models.Architect;

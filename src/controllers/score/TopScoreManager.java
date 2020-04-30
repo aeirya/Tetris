@@ -1,10 +1,10 @@
-package controllers;
+package controllers.score;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import util.file.Save;
+import util.file.save.Save;
 
 public class TopScoreManager {
 

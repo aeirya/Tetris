@@ -1,8 +1,13 @@
-package controllers;
+package controllers.manager;
 
 import app.Game;
 import controllers.input.ICommandReceiver;
 import controllers.input.ICommand;
+import controllers.state.Backup;
+import controllers.score.GameScore;
+import controllers.score.TopScoreManager;
+import controllers.state.GameState;
+import controllers.state.ReadableGameState;
 import models.tetrimino.Tetrimino;
 import util.audio.SoundEffect;
 import util.time.GameTimer;
@@ -93,7 +98,7 @@ public class GameManager implements ICommandReceiver {
     private static class Lock {
         
         private int counter = 0;
-        private int limit = 1;
+        private final int limit;
 
         private Runnable onLock;
 
@@ -124,7 +129,7 @@ public class GameManager implements ICommandReceiver {
         LINE_REMOVE,
         END_ROUND,
         SPAWN,
-        GAMEOVER;
+        GAMEOVER
     }
 
     private class GameEventHandler {
@@ -136,7 +141,7 @@ public class GameManager implements ICommandReceiver {
         private Runnable get(GameEvent event) {
             switch(event) {
                 case GAMEOVER:
-                return this::gameover;
+                return this::gameOver;
                 case LINE_REMOVE:
                 return this::lineRemove;
                 case END_ROUND:
@@ -149,7 +154,7 @@ public class GameManager implements ICommandReceiver {
         }
 
         //hard to say goodbye :D
-        private void gameover() {
+        private void gameOver() {
             util.log.GameLogger.log("\u001B[31m"+"game over?"+"\u001B[0m");
             SoundEffect.GAMEOVER.play();
             Game.getInstance().togglePause();

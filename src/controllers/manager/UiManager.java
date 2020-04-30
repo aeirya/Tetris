@@ -1,26 +1,17 @@
-package controllers;
+package controllers.manager;
 
-import java.awt.Dimension;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import ui.panels.Menu;
-import ui.panels.Panel;
 import java.awt.BorderLayout;
 
 public class UiManager {
 
     private final JFrame frame;
-    private final JPanel mainPanel;
-    private final Panel gamePanel;
-    private final Panel sidePanel;
     
     private final Menu menu;
 
-    public UiManager(JFrame frame, JPanel mainPanel, Panel gamePanel, Panel sidePanel) {
+    public UiManager(JFrame frame) {
         this.frame = frame;
-        this.mainPanel = mainPanel;
-        this.gamePanel = gamePanel;
-        this.sidePanel = sidePanel;
         menu = new Menu(frame.getWidth(), 35);
     }
 

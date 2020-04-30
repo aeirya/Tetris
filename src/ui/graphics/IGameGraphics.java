@@ -1,7 +1,7 @@
 package ui.graphics;
 
 import app.GameSettings;
-import controllers.GameState;
+import controllers.state.GameState;
 import java.awt.Dimension;
 import util.time.GameTimer;
 import java.awt.event.KeyListener;

@@ -1,4 +1,4 @@
-package controllers;
+package models.tetrimino;
 
 import controllers.input.ICommand;
 import models.tetrimino.Tetrimino;
