@@ -12,7 +12,7 @@ public class Shape implements IShape  {
     private static final long serialVersionUID = 1L;
 
     protected ShapeCoordinate[] coordinates;
-    private transient Runnable revert = () -> {};
+    private transient Runnable revert = () -> rotate(0);
 
     public void rotate(int i) {
         for (ShapeCoordinate c : coordinates) {

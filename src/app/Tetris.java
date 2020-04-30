@@ -17,6 +17,11 @@ public class Tetris {
 
     public static void quitGame() {
         Tetris.quit = true;
+        cleanFiles();
         System.exit(0);
+    }
+
+    private static void cleanFiles() {
+        controllers.Backup.clear();
     }
 }
