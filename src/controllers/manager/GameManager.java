@@ -8,6 +8,7 @@ import controllers.score.GameScore;
 import controllers.score.TopScoreManager;
 import controllers.state.GameState;
 import controllers.state.ReadableGameState;
+import models.tetrimino.AnimationType;
 import models.tetrimino.Tetrimino;
 import util.audio.SoundEffect;
 import util.time.GameTimer;
@@ -201,6 +202,7 @@ public class GameManager implements ICommandReceiver {
 
         private void spawn() {
             current = spawnTetrimino();
+            // current.setAnimation(AnimationType.BLINK);
             next = level.generateTetrimino();
             fallLock.unlock();
             util.log.GameLogger.outdatedLog("spawn finished");

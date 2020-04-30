@@ -10,7 +10,6 @@ import java.awt.Graphics;
 import java.util.List;
 
 import app.Game;
-import controllers.input.ICommand;
 import controllers.level.Map;
 import models.Architect;
 import java.awt.Color;
@@ -109,10 +108,11 @@ public class Tetrimino implements IGameObject, IShape, Drawable {
     }
 
     public void addTo(final Map map) {
+        // stopAnimation();
         leonardoDaVinci.addTo(map);
     }
 
-    public void setAnimation(final ICommand animation) {
+    public void setAnimation(final Animation animation) {
         animator.setAnimation(animation);
         animator.playAnimation(this);
     }

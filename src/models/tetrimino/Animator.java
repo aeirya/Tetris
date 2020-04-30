@@ -1,27 +1,27 @@
 package models.tetrimino;
 
-import controllers.input.ICommand;
-import models.tetrimino.Tetrimino;
-
 public class Animator {
 
-    private ICommand animation = null;
+    private Animation animation = null;
     private boolean isPlayAnimation = false;
-    private static final int INTERVAL = 300;
+    private static final long INTERVAL = 500L;
 
-    public void setAnimation(ICommand animation) {
-        util.log.GameLogger.log("Setting the animation");
+    public void setAnimation(Animation animation) {
+        util.log.GameLogger.outdatedLog("Setting the animation");
         this.animation = animation;
     }
 
-    public void playAnimation(Tetrimino t) {
+    public synchronized void playAnimation(Tetrimino t) {
         if (animation != null) {
-            util.log.GameLogger.outdatedLog("Invoked playing animation");
+            util.log.GameLogger.log("Invoked playing animation");
             new Thread(
                 () -> {
                 isPlayAnimation = true;
                 while (isPlayAnimation) {
-                    animation.act(t);
+                    animation.play(t);
+                    if (animation.isDone()) {
+                        stopAnimation();
+                    }
                     try {
                         Thread.sleep(INTERVAL);
                     } catch (InterruptedException e) {
@@ -35,6 +35,6 @@ public class Animator {
 
     public void stopAnimation() {
         isPlayAnimation = false;
-        animation = null;
+        animation.reset();
     }
 }
