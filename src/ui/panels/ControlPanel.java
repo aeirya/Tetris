@@ -50,7 +50,7 @@ public class ControlPanel extends Panel {
     private JButton createMuteButton() {
         final JButton btn;
         if (!muteIconPathExists())
-            btn = new JButton("Mute");
+            btn = new JButton("M(u)te");
         else {
             Icon muteIcon = new ImageIcon(MUTE_ICON_PATH);
             btn = new JButton(muteIcon);

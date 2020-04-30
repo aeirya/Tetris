@@ -25,7 +25,7 @@ public class ComponentGenerator {
         Box box = Box.createVerticalBox();
         JComponent label = label(text);
         box.add(label);
-        box.add(coloredLabel(String.valueOf(number), Color.GRAY.darker()));
+        box.add(coloredLabel(String.valueOf(number), getBaseColor().darker()));
         return sandwich(box);
     }
     
@@ -37,7 +37,9 @@ public class ComponentGenerator {
     
     public JComponent coloredLabel(String text, Color color) {
         JPanel panel = new JPanel();
-        panel.add(new JLabel(text));
+        JLabel label = new JLabel(text);
+        label.setForeground(new Color(230,230,230));
+        panel.add(label);
         panel.setBackground(color);
         return panel;
     }
@@ -102,5 +104,13 @@ public class ComponentGenerator {
             new Dimension(boxWidth, (int) (p * height)),
             new Dimension(boxWidth, (int) (M * height))
         );
+    }
+
+    private static final Color backupColor = new Color(40,40,50);
+    private static final boolean IS_BACKUP_COLOR = false;
+    
+    public static Color getBaseColor() {
+        if (IS_BACKUP_COLOR) return backupColor;
+        return new Color(20,25,30);
     }
 }

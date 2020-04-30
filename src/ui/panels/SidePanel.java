@@ -13,9 +13,8 @@ public class SidePanel extends Panel {
     
     public SidePanel(int w, int h) {
         super(w, h);
-        setBackground(40, 40, 45);
         setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-        nextPanel = new NextPanel((int)(width*0.75), (int)(height*0.45));
+        nextPanel = new NextPanel(w,h);
         scorePanel = new ScorePanel(w, h);
         controlPanel = new ControlPanel(w, h);
         initiate();
