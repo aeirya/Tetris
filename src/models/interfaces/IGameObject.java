@@ -2,7 +2,7 @@ package models.interfaces;
 
 import java.io.Serializable;
 
-import controllers.level.Map;
+import controllers.level.map.Map;
 import models.Coordinate;
 
 public interface IGameObject extends Serializable {

@@ -3,7 +3,7 @@ package ui.drawlist;
 import java.util.ArrayList;
 import java.util.List;
 import models.interfaces.IGameObject;
-import controllers.level.Map;
+import controllers.level.map.Map;
 
 public class CollidableDrawList extends DrawList {
 

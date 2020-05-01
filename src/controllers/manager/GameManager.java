@@ -43,7 +43,10 @@ public class GameManager implements ICommandReceiver {
             score = data.getScore().applyRevivePentaly();
         }
         this.timer = timer;
-        timer.resetSpeed();
+        this.getReady();
+    }
+    
+    private void getReady() {
         event.call(GameEvent.LINE_REMOVE);
         level.refresh();
     }

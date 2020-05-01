@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import controllers.level.map.Map;
 import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
 import models.tetrimino.Tetrimino;
