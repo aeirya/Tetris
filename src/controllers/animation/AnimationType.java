@@ -1,4 +1,4 @@
-package models.tetrimino;
+package controllers.animation;
 
 public class AnimationType {
     private AnimationType() { }

@@ -8,7 +8,7 @@ import controllers.score.GameScore;
 import controllers.score.TopScoreManager;
 import controllers.state.GameState;
 import controllers.state.ReadableGameState;
-import models.tetrimino.AnimationType;
+import controllers.animation.AnimationType;
 import models.tetrimino.Tetrimino;
 import util.audio.SoundEffect;
 import util.time.GameTimer;
@@ -183,9 +183,12 @@ public class GameManager implements ICommandReceiver {
         //physics :B
         private void collision() {
             util.log.GameLogger.outdatedLog("collision!");
-            current.stopAnimation();
             inputLock.report();
-            current.revert();
+            try {
+                current.revert();
+            } catch(Exception ex) {
+                Game.getInstance().restore();
+            }
         }
         
         private void applyGravity() {

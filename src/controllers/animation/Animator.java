@@ -1,4 +1,4 @@
-package models.tetrimino;
+package controllers.animation;
 
 import models.interfaces.Animate;
 
@@ -58,7 +58,7 @@ public class Animator {
     }
 
     public void onDone() {
-        util.log.GameLogger.log("toggle hidden");
+        util.log.GameLogger.log("animation done");
         onDone.run();
     }
 }

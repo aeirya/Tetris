@@ -1,5 +1,7 @@
 package models.tetrimino;
 
+import controllers.animation.Animation;
+import controllers.animation.Animator;
 import ui.drawlist.CollidableDrawList;
 import util.audio.SoundEffect;
 import models.GameObject;
@@ -62,7 +64,7 @@ public class Tetrimino implements IGameObject, IShape, Drawable, Animate {
     }
 
     public void show() {
-        util.log.GameLogger.log("Tetrimino show() not implemented");
+        leonardoDaVinci.show();
     }
 
     public void draw(final Graphics g) {

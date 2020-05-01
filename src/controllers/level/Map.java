@@ -9,8 +9,8 @@ import java.util.Objects;
 import models.interfaces.Animate;
 import models.interfaces.Drawable;
 import models.interfaces.IGameObject;
-import models.tetrimino.AnimationType;
-import models.tetrimino.Animator;
+import controllers.animation.AnimationType;
+import controllers.animation.Animator;
 import models.Architect.Box;
 
 public class Map implements Drawable, java.io.Serializable {
@@ -42,6 +42,15 @@ public class Map implements Drawable, java.io.Serializable {
     public void digest(IGameObject go) {
         go.addTo(this);
     }
+
+    public void draw(Graphics g) {
+        for (int i=0; i<getWidth(); i++) {
+            for (int j=0; j<getHeight(); j++) {
+                Box box = list[j][i];
+                if (box != null) box.draw(g);
+            }
+        }
+	}
 
     public int checkLines() {
         SangeSabur thePatientWiseMan = new SangeSabur();
@@ -192,13 +201,4 @@ public class Map implements Drawable, java.io.Serializable {
     interface Condition {
         boolean check(Box box);
     }
-
-	public void draw(Graphics g) {
-        for (int i=0; i<getWidth(); i++) {
-            for (int j=0; j<getHeight(); j++) {
-                Box box = list[j][i];
-                if (box != null) box.draw(g);
-            }
-        }
-	}
 }
