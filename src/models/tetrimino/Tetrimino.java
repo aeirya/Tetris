@@ -13,7 +13,7 @@ import java.awt.Graphics;
 import java.util.List;
 
 import app.Game;
-import controllers.level.Map;
+import controllers.level.map.Map;
 import models.Architect;
 import java.awt.Color;
 
