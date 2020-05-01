@@ -139,7 +139,6 @@ public class Game {
     }
 
     public void quit() {
-        this.save();
         Tetris.quitGame();
     }
 

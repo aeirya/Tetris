@@ -1,4 +1,4 @@
-package models.tetrimino;
+package controllers.animation;
 
 import models.interfaces.Animate;
 
@@ -30,12 +30,17 @@ public abstract class Animation {
         public void play(Animate t) {
             t.toggleHidden();
             i += 1;
-            System.out.println("played");
+            util.log.GameLogger.debug("animation frame played");
+            if (isDone()) onDone(t);
         }  
         
         @Override
         public boolean isDone() {
             return i >= REPEATS;
+        }
+
+        private void onDone(Animate t) {
+            t.show();   
         }
 
         public void reset() {

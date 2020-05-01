@@ -48,7 +48,9 @@ public class Level implements Drawable, java.io.Serializable {
     }
 
     public Tetrimino spawnTetrimino(Tetrimino tetrimino) {
-        return builder.spawnTetrimino(tetrimino);
+        Tetrimino t = builder.spawnTetrimino(tetrimino);
+        if (t.collides(map)) t = builder.spawnTetrimino(tetrimino);
+        return t;
     }
 
     public void digest(IGameObject go) {

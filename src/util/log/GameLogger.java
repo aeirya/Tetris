@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 public class GameLogger {
     
     static final Logger logger = Logger.getLogger(GameLogger.class.getName());
-    private static final boolean DEBUG_MODE = false;
+    private static final boolean DEBUG_MODE = true;
     private GameLogger(){}
 
     private static void resetColor() {
@@ -31,7 +31,6 @@ public class GameLogger {
     }
 
     public static void error(Exception ex, Object from) {
-        // ex.printStackTrace();
         warning(ex.toString() + " from " + from.getClass().getName());
     }
 

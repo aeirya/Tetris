@@ -7,7 +7,7 @@ import models.Coordinate;
 import models.interfaces.IGameObject;
 import models.interfaces.IShape;
 
-public class Shape implements IShape  {
+public abstract class Shape implements IShape  {
 
     private static final long serialVersionUID = 1L;
 
