@@ -12,7 +12,7 @@ repositories {
         mavenCentral()
 }
 
-mainClassName='app.Tetris'
+mainClassName='com.bubble.tetris.app.Tetris'
 
 
 sourceSets {
@@ -30,7 +30,7 @@ jar {
   manifest {
     attributes(
       'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-      'Main-Class': 'app.Tetris'
+      'Main-Class': 'com.bubble.tetris.app.Tetris'
     )
   }
 }

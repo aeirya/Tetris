@@ -28,7 +28,7 @@ http://www.learn4master.com/design-pattern/java-singleton-pattern
 
 waiting:
 https://stackoverflow.com/questions/4912165/whats-the-best-alternative-to-wait-notify-for-low-level-synchronization
-https://howtodoinjava.com/java/multi-threading/how-to-use-locks-in-java-java-util-concurrent-locks-lock-tutorial-and-example/
+https://howtodoinjava.com/java/multi-threading/how-to-use-locks-in-java-java-com.bubble.tetris.util-concurrent-locks-lock-tutorial-and-example/
 http://tutorials.jenkov.com/java-concurrency/locks.htm
 l
 swing worker:
