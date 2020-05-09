@@ -1,21 +1,20 @@
 package com.bubble.tetris.ui.panels.sidepanel;
 
-import java.awt.event.ActionEvent;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.io.File;
 import com.bubble.tetris.app.Game;
 import com.bubble.tetris.models.state.GameState;
 import com.bubble.tetris.ui.panels.Panel;
 import com.bubble.tetris.util.CustomListener;
-
+import java.awt.event.ActionEvent;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.net.URL;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class ControlPanel extends Panel {
 
-    private static final String MUTE_ICON_PATH = "resources/icons8-mute-48.png";
+    private static final String MUTE_ICON_PATH = "icons8-mute-48.png";
 
     private final JButton pauseButton;
     private final JButton muteButton;
@@ -32,27 +31,27 @@ public class ControlPanel extends Panel {
         setSize(w);
     }
 
+    private boolean muteHasIcon() {
+        return muteButton.getIcon() != null;
+    }
+
     private void setSize(int w) {
         final int h = (muteButton.getIcon() == null) ? 50 : (int) (1.5 * muteButton.getIcon().getIconHeight());
         setPreferredSize(w, h);
     }
-
-    private boolean muteHasIcon() {
-        return (muteButton.getIcon() != null);
+    
+    private Icon loadMuteIcon(URL url) {
+        return new ImageIcon(url);
     }
-
-    private boolean muteIconPathExists() {
-        return new File(MUTE_ICON_PATH).exists();
-    }
-
+    
     private JButton createMuteButton() {
         final JButton btn;
-        if (!muteIconPathExists())
+        URL url = this.getClass().getResource(MUTE_ICON_PATH);
+        if (url == null)
             btn = new JButton("M(u)te");
-        else {
-            Icon muteIcon = new ImageIcon(MUTE_ICON_PATH);
-            btn = new JButton(muteIcon);
-        }
+        else
+            btn = new JButton(loadMuteIcon(url));
+
         btn.setBackground(java.awt.Color.RED);
         btn.setFocusable(false);
         btn.addActionListener((ActionEvent e) -> 

@@ -30,7 +30,7 @@ public abstract class Animation {
         public void play(Animate t) {
             t.toggleHidden();
             i += 1;
-            com.bubble.tetris.util.log.GameLogger.debug("animation frame played");
+            // com.bubble.tetris.util.log.GameLogger.debug("animation frame played");
             if (isDone()) onDone(t);
         }  
         

@@ -19,7 +19,7 @@ public class Animator {
     }
 
     public Animator setAnimation(Animation animation) {
-        com.bubble.tetris.util.log.GameLogger.outdatedLog("Setting the animation");
+        // com.bubble.tetris.util.log.GameLogger.outdatedLog("Setting the animation");
         this.animation = animation;
         return this;
     }
@@ -31,7 +31,7 @@ public class Animator {
 
     public synchronized void playAnimation(Animate t) {
         if (animation != null) {
-            com.bubble.tetris.util.log.GameLogger.log("Invoked playing animation");
+            // com.bubble.tetris.util.log.GameLogger.log("Invoked playing animation");
             new Thread(
                 () -> {
                 isPlayAnimation = true;
@@ -58,7 +58,7 @@ public class Animator {
     }
 
     public void onDone() {
-        com.bubble.tetris.util.log.GameLogger.log("animation done");
+        // com.bubble.tetris.util.log.GameLogger.log("animation done");
         onDone.run();
     }
 }

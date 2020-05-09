@@ -1,6 +1,5 @@
 package com.bubble.tetris.util.audio;
 
-import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioInputStream; 
 import javax.sound.sampled.AudioSystem; 
@@ -44,7 +43,8 @@ public class SimpleAudioPlayer
 	{ 
         final AudioInputStream audioInputStream; 
 		audioInputStream = AudioSystem.getAudioInputStream(
-			new File(filePath).getAbsoluteFile()
+			// new File(filePath).getAbsoluteFile()
+			this.getClass().getResource(filePath)
         ); 
 		clip.open(audioInputStream);
 	}

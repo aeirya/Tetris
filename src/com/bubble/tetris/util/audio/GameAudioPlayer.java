@@ -10,7 +10,7 @@ public class GameAudioPlayer implements IGameAudioPlayer {
     }
 
     private SimpleAudioPlayer initiatePlayer() {
-        final String DEFAULT_FILE_PATH = "resources/funny_clip_1.wav";
+        final String DEFAULT_FILE_PATH = "funny_clip_1.wav";
         try {
             return new SimpleAudioPlayer(DEFAULT_FILE_PATH);
         } catch (Exception ex) {
