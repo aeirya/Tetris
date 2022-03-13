@@ -5,6 +5,10 @@
 
 ---
 
+### How to
+
+1. [How to run](#how-to-run)
+1. [How to play](#how-to-play)
 ### Resources
 
 1. [External Libraries](#External-Libraries-Used)
@@ -27,6 +31,16 @@
 Before running the game I suggest checking the [build version](#Build-Version) of your libraries
 
 ---
+
+## How to Run
+```
+gradle run
+```
+## How to Play
+move: a/d
+rotate: q/e/w/s/arrows
+drop: space
+
 
 ## External Libraries Used
 
