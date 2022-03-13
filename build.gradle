@@ -29,11 +29,11 @@ sourceSets {
     }
 }
 
-jar {
-  manifest {
-    attributes(
-      'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-      'Main-Class': 'com.bubble.tetris.app.Tetris'
-    )
-  }
-}
+// jar {
+//   manifest {
+//     attributes(
+//       'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+//       'Main-Class': 'com.bubble.tetris.app.Tetris'
+//     )
+//   }
+// }
