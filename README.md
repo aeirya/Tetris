@@ -1,6 +1,8 @@
 
 # Another Tetris Game
 
+A game developed as a homework assignment for the Advanced Programming course at Sharif University of Technology.
+
 ## Table of contents
 
 ---
