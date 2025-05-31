@@ -3,6 +3,8 @@
 
 A game developed as a homework assignment for the Advanced Programming course at Sharif University of Technology.
 
+<img src="tetris_gameplay.jpeg" alt="Tetris Gameplay" width="350" />
+
 ## Table of contents
 
 ---
